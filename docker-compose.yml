@@ -12,7 +12,7 @@ services:
       - "5173:5173"
     depends_on:
       - mysql
-    command: sh -c "php artisan serve --host=0.0.0.0 --port=8000"
+    command: sh -c "php artisan serve --host=0.0.0.0 --port=8000 & npm run dev"
 
   mysql:
     image: mysql:8.0
@@ -27,14 +27,6 @@ services:
       - "3306:3306"
     volumes:
       - dbdata:/var/lib/mysql
-
-  composer:
-    image: composer:2
-    container_name: portfolio-composer
-    working_dir: /var/www/src
-    volumes:
-      - ./src:/var/www/src
-    entrypoint: ["composer"]
 
 volumes:
   dbdata:
