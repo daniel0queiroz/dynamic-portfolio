@@ -79,9 +79,10 @@ class HeroController extends Controller
         ]);
 
         // dd($request->all());
+
+        $hero = Hero::first();
         
         if($request->hasFile('image')) {
-            $hero = Hero::first();
             if($hero && File::exists(public_path($hero->image))) {
                 File::delete(public_path($hero->image));
             }
@@ -99,7 +100,7 @@ class HeroController extends Controller
                 'sub_title' => $request->sub_title,
                 'btn_text' => $request->btn_text,
                 'btn_url' => $request->btn_url,
-                'image' => isset($imagePath) ? $imagePath : '',
+                'image' => isset($imagePath) ? $imagePath : $hero->image,
             ]
             );
 
