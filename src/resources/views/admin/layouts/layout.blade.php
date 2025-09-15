@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/plugins/bootstrap-timepicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/plugins/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/plugins/select2.min.css') }}">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 
   <!-- Template CSS -->
@@ -68,6 +69,16 @@
   <script src="{{asset('assets/js/page/features-post-create.js')}}"></script>
   <!-- Page Specific JS File -->
   <script src="{{asset('assets/js/page/forms-advanced-forms.js')}}"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+  <!-- Show dynamic validation errors -->
+  <script>
+      @if (!empty($errors->all()))
+        @foreach ($errors->all() as $error)
+            toastr.error("{{$error}}")
+        @endforeach
+      @endif
+  </script>
 </body>
 </html>
 

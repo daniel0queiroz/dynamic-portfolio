@@ -17,36 +17,38 @@
                     <h4>Update Hero Section</h4>
                   </div>
                   <div class="card-body">
-                    <form action="">
+                    <form action="{{route('admin.hero.update', 1)}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
                         <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control">
+                            <input type="text" name="title" class="form-control">
                         </div>
                         </div>
                         <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Subtitle</label>
                         <div class="col-sm-12 col-md-7">
-                            <textarea name="" id="" class="form-control" style="height: 100px"></textarea>
+                            <textarea name="sub_title" id="" class="form-control" style="height: 100px"></textarea>
                         </div>
                         </div>
                         <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Button Text</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control">
+                            <input type="text" name="btn_text" class="form-control">
                         </div>
                         </div>
                         <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Button Url</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control">
+                            <input type="text" name="btn_url" class="form-control">
                         </div>
                         </div>
                         <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Background Image</label>
                         <div class="col-sm-12 col-md-7">
                             <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile">
+                            <input type="file" name="image" class="custom-file-input" id="customFile">
                             <label class="custom-file-label" for="customFile">Choose file</label>
                             </div>
                         </div>
