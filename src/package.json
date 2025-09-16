@@ -9,6 +9,7 @@
         "alpinejs": "^3.4.2",
         "autoprefixer": "^10.4.2",
         "axios": "^1.1.2",
+        "laravel-datatables-vite": "^0.6.2",
         "laravel-vite-plugin": "^1.3.0",
         "lodash": "^4.17.19",
         "postcss": "^8.4.6",
