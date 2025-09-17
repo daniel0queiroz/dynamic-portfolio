@@ -24,7 +24,7 @@ class TyperTitleDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function($query) {
-                return '<a href="'.route('admin.typer-title.edit', $query->id).'" class="btn btn-primary">edit</a><a href="'.route('admin.typer-title.destroy', $query->id).'" class="btn btn-danger delete-item">delete</a>';
+                return '<a href="'.route('admin.typer-title.edit', $query->id).'" class="btn btn-primary"><i class="fas fa-edit"></i></a><a href="'.route('admin.typer-title.destroy', $query->id).'" class="btn btn-danger delete-item"><i class="fas fa-trash"></i></a>';
             })
             ->setRowId('id');
     }
