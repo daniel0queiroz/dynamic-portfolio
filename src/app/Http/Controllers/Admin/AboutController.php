@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\About;
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
@@ -69,7 +70,30 @@ class AboutController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => ['required', 'max:200'],
+            'description' => [ 'required', 'max:1000'],
+            'image' => ['required', 'image'],
+            'resume' => ['mimes:pdf,csv,txt', 'max:10000']
+        ]);
+
+        $about = About::first();
+        $imagePath = handleUpload('image', $about);
+        $resumePath = handleUpload('resume', $about);
+
+        About::updateOrCreate(
+            ['id' => $id],
+            [ 
+                'title' => $request->title,
+                'description' => $request->description,
+                'image' => (!empty($imagePath) ? $imagePath : $about->image),
+                'resume' => (!empty($resumePath) ? $resumePath : $about->resume)
+            ]
+        );
+
+        toastr()->success('Updated Successfully', 'Congrats');
+        return redirect()->back();
+        
     }
 
     /**

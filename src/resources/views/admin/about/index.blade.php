@@ -17,7 +17,7 @@
                     <h4>Update About Section</h4>
                   </div>
                   <div class="card-body">
-                    <form action="{{route('admin.hero.update', 1)}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('admin.about.update', 1)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -41,7 +41,7 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
                             <div class="col-sm-12 col-md-7">
-                                <textarea class="summernote"></textarea>
+                                <textarea name="description" class="summernote"></textarea>
                             </div>
                         </div>
 
@@ -49,7 +49,7 @@
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Resume</label>
                             <div class="col-sm-12 col-md-7">
                                 <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile">
+                                <input name="resume" type="file" class="custom-file-input" id="customFile">
                                 <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
                             </div>
