@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TyperTitleController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -47,4 +48,7 @@ require __DIR__.'/auth.php';
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function() {
     Route::resource('hero', HeroController::class);
     Route::resource('typer-title', TyperTitleController::class);
+    
+    /** Service Route */
+    Route::resource('service', ServiceController::class);
 });
