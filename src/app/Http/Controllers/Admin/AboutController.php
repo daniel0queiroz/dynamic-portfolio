@@ -15,7 +15,8 @@ class AboutController extends Controller
      */
     public function index()
     {
-        return view('admin.about.index');
+        $about = About::first();
+        return view('admin.about.index', compact('about'));
     }
 
     /**
@@ -72,8 +73,8 @@ class AboutController extends Controller
     {
         $request->validate([
             'title' => ['required', 'max:200'],
-            'description' => [ 'required', 'max:1000'],
-            'image' => ['required', 'image'],
+            'description' => [ 'required', 'max:5000'],
+            'image' => ['image', 'max:5000'],
             'resume' => ['mimes:pdf,csv,txt', 'max:10000']
         ]);
 
