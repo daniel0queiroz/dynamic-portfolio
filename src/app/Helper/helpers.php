@@ -2,7 +2,7 @@
 
 
 
-/** Handle file upload */
+/** Handle File Upload */
 
 function handleUpload($inputName, $model=null){
     try {
@@ -19,6 +19,20 @@ function handleUpload($inputName, $model=null){
 
                     return $filePath;
             }
+    } catch(\Exception $e) {
+        throw $e;
+    }
+    
+}
+
+/** Delete File */
+
+function deleteFileIfExist($filePath){
+
+    try {
+        if(\File::exists(public_path($filePath))){
+            \File::delete(public_path($filePath));
+        }
     } catch(\Exception $e) {
         throw $e;
     }
