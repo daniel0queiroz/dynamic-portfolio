@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Hero;
+use App\Models\PortfolioSectionSetting;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
-class HeroController extends Controller
+class PortfolioSectionSettingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class HeroController extends Controller
      */
     public function index()
     {
-        $hero = Hero::first();
-        return view('admin.hero.index', compact('hero'));
+        $portfolio = PortfolioSectionSetting::first();
+        return view('admin.portfolio-setting.index', compact('portfolio'));
     }
 
     /**
@@ -74,38 +73,20 @@ class HeroController extends Controller
     {
         $request->validate([
             'title' => ['required', 'max:200'],
-            'sub_title' => ['required', 'max:500'],
-            'image' => ['max:3000', 'image'],
+            'sub_title' => ['required', 'max:500']
+        ]);
+        
+
+        PortfolioSectionSetting::updateOrCreate(
+        ['id' => $id],
+        [
+            'title' => $request->title,
+            'sub_title' => $request->sub_title,
         ]);
 
-        // dd($request->all());
+        toastr()->success('Updated Successfully', 'Congrats');
 
-        $hero = Hero::first();
-        
-        if($request->hasFile('image')) {
-            if($hero && File::exists(public_path($hero->image))) {
-                File::delete(public_path($hero->image));
-            }
-            $image = $request->file('image');
-            $imageName = rand().$image->getClientOriginalName();
-            $image->move(public_path('/uploads'), $imageName);
-
-            $imagePath = "/uploads/".$imageName;
-        }
-
-        Hero::updateOrCreate(
-            ['id' => $id],
-            [ 
-                'title' => $request->title,
-                'sub_title' => $request->sub_title,
-                'btn_text' => $request->btn_text,
-                'btn_url' => $request->btn_url,
-                'image' => isset($imagePath) ? $imagePath : $hero->image,
-            ]
-        );
-
-            toastr()->success('Updated Successfully', 'Congrats');
-            return redirect()->back();
+        return redirect()->back();
     }
 
     /**
