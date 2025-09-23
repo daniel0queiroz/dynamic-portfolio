@@ -109,27 +109,33 @@
         confirmButtonText: "Yes, delete it!"
       }).then((result) => {
         if (result.isConfirmed) {
-
           $.ajax({
             type: 'DELETE',
             url: deleteUrl,
             success: function(data){
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-              });
-              window.location.reload();
+              if(data.status === 'error'){
+                Swal.fire({
+                  title: "You can not delete!",
+                  text: "This category contains items that can’t be deleted!",
+                  icon: "error"
+                });
+              } else {
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "Your file has been deleted.",
+                  icon: "success",
+                  confirmButtonText: "OK"
+                }).then(() => {
+                  window.location.reload();
+                });
+              }
             },
             error: function(xhr, status, error){
               console.log(error);
             }
           })
-
-
         }
       });
-
       })
     })
   </script>

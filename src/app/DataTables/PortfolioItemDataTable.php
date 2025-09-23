@@ -30,7 +30,7 @@ class PortfolioItemDataTable extends DataTable
                 return date('d-m-Y', strtotime($query->created_at));
             })
             ->addColumn('category', function($query){
-                return $query->category?->name;
+                return $query->category->name;
             })
             ->addColumn('action', function($query){
                 return '<a href="'.route('admin.portfolio-item.edit', $query->id).'" class="btn btn-primary"><i class="fas fa-edit"></i></a><a href="'.route('admin.portfolio-item.destroy', $query->id).'" class="btn btn-danger delete-item"><i class="fas fa-trash"></i></a>';
