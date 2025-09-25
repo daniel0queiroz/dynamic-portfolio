@@ -17,7 +17,7 @@
                     <h4>Update Experience Section</h4>
                   </div>
                   <div class="card-body">
-                    <form action="{{route('admin.about.update', 1)}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('admin.experience.update', 1)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -34,28 +34,28 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                             <div class="col-sm-12 col-md-7">
-                                <input type="text" name="title" class="form-control" value="">
+                                <input type="text" name="title" class="form-control" value="{{$experience->title}}">
                             </div>
                         </div>
 
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
                             <div class="col-sm-12 col-md-7">
-                                <textarea name="description" class="summernote"></textarea>
+                                <textarea name="description" class="summernote">{!!$experience->description!!}</textarea>
                             </div>
                         </div>
 
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Phone</label>
                             <div class="col-sm-12 col-md-7">
-                                <input type="text" name="phone" class="form-control" value="">
+                                <input type="text" name="phone" class="form-control" value="{{$experience->phone}}">
                             </div>
                         </div>
 
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
                             <div class="col-sm-12 col-md-7">
-                                <input type="text" name="email" class="form-control" value="">
+                                <input type="text" name="email" class="form-control" value="{{$experience->email}}">
                             </div>
                         </div>
                         
@@ -78,7 +78,7 @@
     <script>
         $(document).ready(function(){
             $('#image-preview').css({
-                'background-image': 'url("")',
+                'background-image': 'url("{{asset($experience->image)}}")',
                 'background-size': 'cover',
                ' background-position': 'center center'
             })
