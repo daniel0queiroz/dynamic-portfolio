@@ -71,7 +71,8 @@ class SkillItemController extends Controller
      */
     public function edit($id)
     {
-        //
+        $skill = SkillItem::findOrFail($id);
+        return view('admin.skill-item.edit', compact('skill'));
     }
 
     /**
@@ -83,7 +84,19 @@ class SkillItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:100'],
+            'percent' => ['required', 'numeric', 'max:100'],
+        ]);
+
+        $skill = SkillItem::findOrFail($id);
+        $skill->name = $request->name;
+        $skill->percent = $request->percent;
+        $skill->save();
+
+        toastr('Updated Successfully!', 'success');
+
+        return redirect()->route('admin.skill-item.index');
     }
 
     /**
@@ -94,6 +107,7 @@ class SkillItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $skill = SkillItem::findOrFail($id);
+        $skill->delete();
     }
 }
