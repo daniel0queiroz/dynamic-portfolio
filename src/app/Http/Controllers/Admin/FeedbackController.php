@@ -73,7 +73,8 @@ class FeedbackController extends Controller
      */
     public function edit($id)
     {
-        //
+        $feedback = Feedback::findOrFail($id);
+        return view('admin.feedback.edit', compact('feedback'));
     }
 
     /**
@@ -85,7 +86,21 @@ class FeedbackController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:50'],
+            'position' => ['required', 'max:100'],
+            'description' => ['required', 'max:1000'],
+        ]);
+
+        $feedback = Feedback::findOrFail($id);
+        $feedback->name = $request->name;
+        $feedback->position = $request->position;
+        $feedback->description = $request->description;
+        $feedback->save();
+
+        toastr('Updated successfully!', 'success');
+
+        return redirect()->route('admin.feedback.index');
     }
 
     /**
@@ -96,6 +111,7 @@ class FeedbackController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $feedback = Feedback::findOrFail($id);
+        $feedback->delete();
     }
 }
