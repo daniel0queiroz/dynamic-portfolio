@@ -72,9 +72,9 @@ class FeedbackDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
-            Column::make('name'),
-            Column::make('position'),
+            Column::make('id')->width('100'),
+            Column::make('name')->width('300'),
+            Column::make('position')->width('300'),
             Column::make('description'),
             Column::computed('action')
                   ->exportable(false)
