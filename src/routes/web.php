@@ -4,9 +4,9 @@ use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ExperienceController;
+use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\PortfolioItemController;
-use App\Http\Controllers\Admin\PortfolioSectionSetting;
 use App\Http\Controllers\Admin\PortfolioSectionSettingController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -79,4 +79,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
     /** Experience Items Route */
     Route::resource('experience', ExperienceController::class);
+
+    /** Feedback Route */
+    Route::resource('feedback', FeedbackController::class);
 });
