@@ -71,7 +71,8 @@ class BlogCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = BlogCategory::findOrFail($id);
+        return view('admin.blog-category.edit', compact('category'));
     }
 
     /**
@@ -83,7 +84,18 @@ class BlogCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:200']
+        ]);
+
+        $category = BlogCategory::findOrFail($id);
+        $category->name = $request->name;
+        $category->slug = Str::slug($request->name);
+        $category->save();
+
+        toastr('Updated Successfully!', 'success');
+
+        return redirect()->route('admin.blog-category.index');
     }
 
     /**
@@ -94,6 +106,7 @@ class BlogCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = BlogCategory::findOrFail($id);
+        $category->delete();
     }
 }
