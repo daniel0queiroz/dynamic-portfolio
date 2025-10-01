@@ -66,4 +66,10 @@ class HomeController extends Controller
         $nextPost = Blog::where('id', '>', $blog->id)->orderBy('id', 'asc')->first();
         return view('frontend.blog-details', compact('blog', 'previousPost', 'nextPost'));
     }
+
+    public function blog()
+    {
+        $blogs = Blog::latest()->paginate(9);
+        return view('frontend.blog', compact('blogs'));
+    }
 }
