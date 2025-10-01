@@ -79,7 +79,9 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories = BlogCategory::all();
+        $blog = Blog::findOrFail($id);
+        return view('admin.blog.edit', compact('categories', 'blog'));
     }
 
     /**
@@ -91,7 +93,25 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'image' => ['max:5000', 'image'],
+            'title' => ['required', 'max:200'],
+            'description' => ['required'],
+            'category' => ['required', 'numeric']
+        ]);
+
+        $blog = Blog::findOrFail($id);
+        $imagePath = handleUpload('image', $blog);
+
+        $blog->image = (!empty($imagePath) ? $imagePath : $blog->image);
+        $blog->title = $request->title;
+        $blog->description = $request->description;
+        $blog->category = $request->category;
+        $blog->save();
+
+        toastr('Updated Successfully!', 'success');
+
+        return redirect()->route('admin.blog.index');
     }
 
     /**
@@ -102,6 +122,8 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $blog = Blog::findOrFail($id);
+        deleteFileIfExist($blog->image);
+        $blog->delete();
     }
 }
