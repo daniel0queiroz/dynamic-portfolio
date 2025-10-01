@@ -20,7 +20,8 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index() {
+    public function index() 
+    {
         $hero = Hero::first();
         $typerTitles = TyperTitle::all();
         $services = Service::all();
@@ -52,8 +53,17 @@ class HomeController extends Controller
             ));
     }
 
-    public function showPortfolio($id){
+    public function showPortfolio($id)
+    {
         $portfolio = PortfolioItem::findOrFail($id);
         return view('frontend.portfolio-details', compact('portfolio'));
+    }
+
+    public function showBlog($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $previousPost = Blog::where('id', '<', $blog->id)->orderBy('id', 'desc')->first();
+        $nextPost = Blog::where('id', '>', $blog->id)->orderBy('id', 'asc')->first();
+        return view('frontend.blog-details', compact('blog', 'previousPost', 'nextPost'));
     }
 }
