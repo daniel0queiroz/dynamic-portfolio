@@ -75,4 +75,9 @@ class HomeController extends Controller
         $blogs = Blog::latest()->paginate(9);
         return view('frontend.blog', compact('blogs'));
     }
+
+    public function contact(Request $request)
+    {
+        dd($request->all());
+    }
 }
