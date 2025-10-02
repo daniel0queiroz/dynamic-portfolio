@@ -82,18 +82,25 @@
                     $('#submit_btn').text('Loading...')
                 },
                 success: function(response){
-                    console.log(response)
+                    console.log(response);
+                    if(response.status == 'success'){
+                        toastr.success(response.message);
+                        $('#submit_btn').prop("disabled", false);
+                        $('#submit_btn').text('Send Now');
+                        $('#contact-form').trigger('reset');
+                    }
                 },
                 error: function(response){
                     if(response.status == 422){
                         let errorsMessage = $.parseJSON(response.responseText);
                         
                         $.each(errorsMessage.errors, function(key, val){
+                            console.log(val[0]);
                             toastr.error(val[0])
                         })
 
                         $('#submit_btn').prop("disabled", false);
-                        $('#submit_btn').text('Send Now')
+                        $('#submit_btn').text('Send Now');
                     }
                 }
             })
