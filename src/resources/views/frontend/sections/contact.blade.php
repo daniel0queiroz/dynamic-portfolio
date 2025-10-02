@@ -50,7 +50,7 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-box">
-                                <button class="button-primary mouse-dir" type="submit">Send Now <span
+                                <button class="button-primary mouse-dir" type="submit" id="submit_btn">Send Now <span
                                         class="dir-part"></span></button>
                             </div>
                         </div>
@@ -77,8 +77,24 @@
                 type: "POST",
                 url: "{{route('contact')}}",
                 data: $(this).serialize(),
+                beforeSend: function(){
+                    $('#submit_btn').prop("disabled", true);
+                    $('#submit_btn').text('Loading...')
+                },
                 success: function(response){
                     console.log(response)
+                },
+                error: function(response){
+                    if(response.status == 422){
+                        let errorsMessage = $.parseJSON(response.responseText);
+                        
+                        $.each(errorsMessage.errors, function(key, val){
+                            toastr.error(val[0])
+                        })
+
+                        $('#submit_btn').prop("disabled", false);
+                        $('#submit_btn').text('Send Now')
+                    }
                 }
             })
         })
