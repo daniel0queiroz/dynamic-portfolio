@@ -3,11 +3,9 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3 text-center">
                 <div class="section-title">
-                    <h3 class="title">Lets Work Together</h3>
+                    <h3 class="title">{{$contactTitle->title}}</h3>
                     <div class="desc">
-                        <p>Earum quos animi numquam excepturi eveniet explicabo repellendus rem esse.
-                            Quae quasi
-                            odio enim.</p>
+                        <p>{{$contactTitle->sub_title}}</p>
                     </div>
                 </div>
             </div>
