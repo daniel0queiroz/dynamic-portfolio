@@ -71,7 +71,8 @@ class FooterSocialLinkController extends Controller
      */
     public function edit($id)
     {
-        //
+        $social = FooterSocialLink::findOrFail($id);
+        return view('admin.footer-social-link.edit', compact('social'));
     }
 
     /**
@@ -83,7 +84,19 @@ class FooterSocialLinkController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'icon' => ['required'],
+            'url' => ['required', 'url']
+        ]);
+
+        $social = FooterSocialLink::findOrFail($id);
+        $social->icon = $request->icon;
+        $social->url = $request->url;
+        $social->save();
+
+        toastr('Updated Successfully!', 'success');
+
+        return redirect()->route('admin.footer-social.index');
     }
 
     /**
@@ -94,6 +107,7 @@ class FooterSocialLinkController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $social = FooterSocialLink::findOrFail($id);
+        $social->delete();
     }
 }

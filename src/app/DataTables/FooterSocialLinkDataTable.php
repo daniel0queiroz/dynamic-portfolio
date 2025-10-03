@@ -27,7 +27,7 @@ class FooterSocialLinkDataTable extends DataTable
                 return '<i class="'.$query->icon.'" style="font-size:20px"></i>';
             })
             ->addColumn('action', function($query){
-                return '<a href="'.route('admin.footer-social.update', $query->id).'" class="btn btn-primary"><i class="fas fa-edit"></i></a><a href="'.route('admin.footer-social.destroy', $query->id).'" class="btn btn-danger delete-item"><i class="fas fa-trash"></i></a>';
+                return '<a href="'.route('admin.footer-social.edit', $query->id).'" class="btn btn-primary"><i class="fas fa-edit"></i></a><a href="'.route('admin.footer-social.destroy', $query->id).'" class="btn btn-danger delete-item"><i class="fas fa-trash"></i></a>';
             })
             ->rawColumns(['icon', 'action'])
             ->setRowId('id');
