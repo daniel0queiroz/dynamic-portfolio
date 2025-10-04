@@ -71,7 +71,8 @@ class FooterUsefulLinkController extends Controller
      */
     public function edit($id)
     {
-        //
+        $link = FooterUsefulLink::findOrFail($id);
+        return view('admin.footer-useful-link.edit', compact('link'));
     }
 
     /**
@@ -83,7 +84,19 @@ class FooterUsefulLinkController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:200'],
+            'url' => ['required']
+        ]);
+
+        $link = FooterUsefulLink::findOrFail($id);
+        $link->name = $request->name;
+        $link->url = $request->url;
+        $link->save();
+
+        toastr('Updated Successfully!', 'success');
+
+        return redirect()->route('admin.footer-useful-links.index');
     }
 
     /**
@@ -94,6 +107,7 @@ class FooterUsefulLinkController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $link = FooterUsefulLink::findOrFail($id);
+        $link->delete();
     }
 }
