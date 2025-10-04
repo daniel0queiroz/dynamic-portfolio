@@ -106,6 +106,7 @@
                   <li><a class="nav-link" href="{{route('admin.footer-social.index')}}">Social Links</a></li>
                   <li><a class="nav-link" href="{{route('admin.footer-info.index')}}">Footer Information</a></li>
                   <li><a class="nav-link" href="{{route('admin.footer-contact-info.index')}}">Footer Contact Info</a></li>
+                  <li><a class="nav-link" href="{{route('admin.footer-useful-links.index')}}">Footer Useful Links</a></li>
                 </ul>
               </li>
 
