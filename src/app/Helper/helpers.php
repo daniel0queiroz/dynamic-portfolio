@@ -4,7 +4,8 @@
 
 /** Handle File Upload */
 
-function handleUpload($inputName, $model=null){
+function handleUpload($inputName, $model=null)
+{
     try {
         if(request()->hasFile($inputName)) {
                     if($model && \File::exists(public_path($model->{$inputName}))) {
@@ -27,7 +28,8 @@ function handleUpload($inputName, $model=null){
 
 /** Delete File */
 
-function deleteFileIfExist($filePath){
+function deleteFileIfExist($filePath)
+{
 
     try {
         if(\File::exists(public_path($filePath))){
@@ -41,8 +43,22 @@ function deleteFileIfExist($filePath){
 
 /** Get Dynamic Colors */
 
-function getColor($index){
+function getColor($index)
+{
     $colors = ['#558bff', '#fecc90', '#ff885e', '#282828', '#190844', '#9dd3ff'];
 
     return $colors[$index % count($colors)];
+}
+
+/** Set Sidebar Active */
+
+function setSidebarActive($route)
+{
+    if(is_array($route)){
+        foreach ($route as $r) {
+            if(request()->routeIs($r)){
+                return 'active';
+            }
+        }
+    }
 }
