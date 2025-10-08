@@ -51,6 +51,9 @@ Route::get('/blog-details', function () {
 });
 
 Route::get('/dashboard',[DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('resume/download', [AboutController::class, 'resumeDownload'])->name('resume.download');
+
+/** Admin Routes */
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -65,9 +68,9 @@ Route::get('portfolio-details/{id}', [HomeController::class, 'showPortfolio'])->
 Route::get('blog-details/{id}', [HomeController::class, 'showBlog'])->name('show.blog');
 Route::post('contact', [HomeController::class, 'contact'])->name('contact');
 
-/** Admin Routes */
-
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function() {
+
+    /** Hero Route */
     Route::resource('hero', HeroController::class);
     Route::resource('typer-title', TyperTitleController::class);
     
@@ -75,7 +78,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('service', ServiceController::class);
 
     /** About Route */
-    Route::get('resume/download', [AboutController::class, 'resumeDownload'])->name('resume.download');
     Route::resource('about', AboutController::class);
 
     /** Portfolio Category Route */
