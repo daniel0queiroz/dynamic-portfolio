@@ -20,49 +20,6 @@ class GeneralSettingController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -72,9 +29,9 @@ class GeneralSettingController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'logo' => ['required', 'max:5000', 'image'],
-            'footer_logo' => ['required', 'max:5000', 'image'],
-            'favicon' => ['required', 'max:5000', 'image'],
+            'logo' => ['max:5000', 'image'],
+            'footer_logo' => ['max:5000', 'image'],
+            'favicon' => ['max:5000', 'image'],
         ]);
 
         $setting = GeneralSetting::first();
@@ -82,7 +39,7 @@ class GeneralSettingController extends Controller
         $footer_logo = handleUpload('footer_logo', $setting);
         $favicon = handleUpload('favicon', $setting);
 
-        $generalSetting = new GeneralSetting();
+        $generalSetting = GeneralSetting::first();
         $generalSetting->logo = (!empty($logo)) ? $logo : $setting->logo;
         $generalSetting->footer_logo = (!empty($footer_logo)) ? $footer_logo : $setting->footer_logo;
         $generalSetting->favicon = (!empty($favicon)) ? $favicon : $setting->favicon;
