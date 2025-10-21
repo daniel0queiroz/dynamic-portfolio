@@ -102,7 +102,6 @@
     .copyright,
     .copyright.text-right {
         text-align: center !important;
-
     }
 
     .copyright.text-right {
@@ -160,8 +159,6 @@
         border-radius: 3px;
     }
 }
-
-
 
 @media (min-width: 992px) and (max-width: 1199.99px) {
     .mainmenu-area .menu-right {
@@ -283,8 +280,6 @@
     }
 }
 
-
-
 @media only screen and (max-width: 767.99px) {
     .full-wrapper {
         margin: 0px;
@@ -293,7 +288,7 @@
     .slide-inner,
     .header-area {
         padding-top: 190px;
-        padding-bottom: 120px
+        padding-bottom: 120px;
     }
 
     .header-text .title {
@@ -336,7 +331,7 @@
     }
 
     .site-header {
-        background-image: url('../images/site-header.jpg');
+        background-image: url("../images/site-header.jpg");
         background-repeat: no-repeat;
         background-attachment: scroll;
         background-position: center center;

@@ -45,7 +45,7 @@ class PortfolioItemController extends Controller
             'description' => ['required'],
             'category_id' => ['required', 'numeric'],
             'client' => ['max:200'],
-            'website' => ['url'],
+            'website' => ['nullable', 'url'],
         ]);
 
         $imagePath = handleUpload('image');
@@ -56,7 +56,7 @@ class PortfolioItemController extends Controller
         $portfolioItem->description = $request->description;
         $portfolioItem->category_id = $request->category_id;
         $portfolioItem->client = $request->client;
-        $portfolioItem->website = $request->website;
+    $portfolioItem->website = $request->filled('website') ? $request->website : null;
         $portfolioItem->save();
 
         toastr()->success('Profile Item Created Successfully!', 'Success');
@@ -104,7 +104,7 @@ class PortfolioItemController extends Controller
             'description' => ['required'],
             'category_id' => ['required', 'numeric'],
             'client' => ['max:200'],
-            'website' => ['url'],
+            'website' => ['nullable', 'url'],
         ]);
 
         $portfolioItem = PortfolioItem::findOrFail($id);
@@ -116,7 +116,7 @@ class PortfolioItemController extends Controller
         $portfolioItem->description = $request->description;
         $portfolioItem->category_id = $request->category_id;
         $portfolioItem->client = $request->client;
-        $portfolioItem->website = $request->website;
+        $portfolioItem->website = $request->filled('website') ? $request->website : null;
         $portfolioItem->save();
 
         toastr()->success('Profile Item Updated Successfully!', 'Success');

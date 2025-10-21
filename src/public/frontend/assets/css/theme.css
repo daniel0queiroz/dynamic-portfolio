@@ -39,7 +39,6 @@ body {
 
 .img-fix {
     width: 100%;
-    height: 700px;
     object-fit: cover;
 }
 
@@ -478,10 +477,18 @@ Button-Styles
     z-index: 1;
     margin-bottom: 30px;
     border-radius: 10px;
+    height: 230px;
+    border: 1px solid #190844;
 }
 
 .single-portfolio img {
-    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
 }
 
 .single-portfolio .portfolio-content {
@@ -712,7 +719,6 @@ blockquote {
 .icon-info {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -1204,7 +1210,7 @@ Footer-Area
 13. Portfolio-Page
 -------------------------- */
 .site-header {
-    background-image: url("../images/site-header.jpg");
+    background-image: url("../images/bg-blue.png");
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
@@ -1377,8 +1383,8 @@ Footer-Area
     height: 50px;
     text-align: center;
     line-height: 50px;
-    color: #fff;
-    background-color: #ff885e;
+    color: #ff885e;
+    /* background-color: #ff885e; */
     margin: 15px;
     font-size: 22px;
     transition: 0.3s;
@@ -1390,8 +1396,8 @@ Footer-Area
 }
 
 .single-navigation .nav-link:hover .icon {
-    background-color: #ff885e;
-    color: #ffffff;
+    /* background-color: #ff885e; */
+    color: #190844;
 }
 
 .single-navigation .nav-link .text {

@@ -23,7 +23,7 @@
                             <h6 class="position">{{$feedback->position}}</h6>
                         </div>
                         <div class="content">
-                            <p>{!! $feedback->description !!}</p>
+                            {!! $feedback->description !!}
                         </div>
                     </div>
                     @endforeach

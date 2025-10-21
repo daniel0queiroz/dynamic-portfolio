@@ -24,7 +24,7 @@
 						</div>
 					</div>
 					<div class="col-md-4 col-lg-2 offset-lg-1 widget">
-						<h3 class="widget-title">Useful Link</h3>
+						<h3 class="widget-title">Useful Links</h3>
 						<ul class="nav-menu">
 							@foreach ($footerUsefulLinks as $usefulLink)
 								<li><a href="{{$usefulLink->url}}">{{$usefulLink->name}}</a></li>
