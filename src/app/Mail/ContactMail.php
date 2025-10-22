@@ -32,11 +32,13 @@ class ContactMail extends Mailable
      */
     public function envelope()
     {
-        return new Envelope(
-            subject: $this->mailData['subject'],
-            to: env('MAIL_FROM_ADDRESS'),
-            from: $this->mailData['email']
-        );
+        // Keep the actual 'from' as the application's verified MAIL_FROM_ADDRESS.
+        // Put the sender's email in Reply-To so replies go to them and SMTP providers
+        // (e.g. Gmail) don't rewrite the From address.
+        return (new Envelope(subject: $this->mailData['subject']))
+            ->to(env('MAIL_FROM_ADDRESS'))
+            ->from(env('MAIL_FROM_ADDRESS'))
+            ->replyTo($this->mailData['email']);
     }
 
     /**
