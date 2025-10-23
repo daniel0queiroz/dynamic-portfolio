@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\GeneralSettingController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\PortfolioItemController;
 use App\Http\Controllers\Admin\PortfolioSectionSettingController;
+use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SeoSettingController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -67,6 +68,7 @@ require __DIR__.'/auth.php';
 Route::get('portfolio-details/{id}', [HomeController::class, 'showPortfolio'])->name('show.portfolio');
 Route::get('blog-details/{id}', [HomeController::class, 'showBlog'])->name('show.blog');
 Route::post('contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('privacy-policy', [HomeController::class, 'showPrivacyPolicy'])->name('privacy-policy');
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function() {
 
@@ -115,6 +117,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
     /** Contact Section Setting Route */
     Route::resource('contact-section-setting', ContactSectionSettingController::class);
+
+    /** Privacy Policy */
+    Route::resource('privacy-policy', PrivacyPolicyController::class);
 
     /** Footer Social Route */
     Route::resource('footer-social', FooterSocialLinkController::class);

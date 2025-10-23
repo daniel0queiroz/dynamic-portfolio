@@ -96,6 +96,7 @@
           <li class="{{ setSidebarActive(['admin.contact-section-setting.*']) }}"><a class="nav-link" href="{{route('admin.contact-section-setting.index')}}">Section Setting</a></li>
         </ul>
       </li>
+      <li class="{{ setSidebarActive(['admin.service.*']) }}"><a class="nav-link" href="{{route('admin.privacy-policy.index')}}"><i class="fas fa-file-contract"></i></i></i><span>Privacy Policy</span></a></li>
 
       <li class="nav-item dropdown {{ setSidebarActive([
         'admin.footer-social.*', 

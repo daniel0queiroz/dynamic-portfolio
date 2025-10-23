@@ -15,6 +15,7 @@ use App\Models\FeedbackSectionSetting;
 use App\Models\Hero;
 use App\Models\PortfolioItem;
 use App\Models\PortfolioSectionSetting;
+use App\Models\PrivacyPolicy;
 use App\Models\Service;
 use App\Models\SkillItem;
 use App\Models\SkillSectionSetting;
@@ -79,6 +80,17 @@ class HomeController extends Controller
     {
         $blogs = Blog::latest()->paginate(9);
         return view('frontend.blog', compact('blogs'));
+    }
+
+    public function showPrivacyPolicy()
+    {
+        $privacyPolicy = PrivacyPolicy::latest()->first();
+        
+        if (! $privacyPolicy) {
+            abort(404);
+        }
+
+        return view('frontend.privacy-policy', compact('privacyPolicy'));
     }
 
     public function contact(Request $request)
