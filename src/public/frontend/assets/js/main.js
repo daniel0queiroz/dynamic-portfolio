@@ -452,10 +452,11 @@
     });
 
     var $el = $(".parallax-bg");
-    $(window).on("scroll", function () {
+    $(window).on("scroll resize", function () {
         var scroll = $(document).scrollTop();
+        var horizBase = $(window).width() <= 2000 ? "75%" : "50%";
         $el.css({
-            "background-position": "50% " + +0.4 * scroll + "px",
+            "background-position": horizBase + " " + 0.4 * scroll + "px",
         });
     });
 })(jQuery);

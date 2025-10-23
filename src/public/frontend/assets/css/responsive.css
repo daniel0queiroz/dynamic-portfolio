@@ -367,3 +367,11 @@
         min-width: 60px;
     }
 }
+
+/* Ensure hero background is centered on viewports 2000px or less */
+@media (max-width: 2000px) {
+    .header-area.parallax-bg {
+        background-position: 75% center;
+        background-size: cover;
+    }
+}
