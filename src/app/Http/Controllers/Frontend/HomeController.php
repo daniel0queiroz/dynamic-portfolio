@@ -33,7 +33,7 @@ class HomeController extends Controller
         $about = About::first();
         $portfolioTitle = PortfolioSectionSetting::first();
         $portfolioCategories = Category::all();
-        $portfolioItems = PortfolioItem::all();
+        $portfolioItems = PortfolioItem::latest()->get();
         $skill = SkillSectionSetting::first();
         $skillItems = SkillItem::all();
         $experience = Experience::first();
