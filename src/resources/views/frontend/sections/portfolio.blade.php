@@ -23,7 +23,7 @@
         </div>
         <div class="portfolio-wrapper">
             <div class="row portfolios">
-                @foreach ($portfolioItems as $item)
+                @foreach ($portfolioItems->take(9) as $item)
                     <div data-wow-delay="0.3s" class="col-md-6 col-lg-4 filter-item {{$item->category->slug}}">
                     <div class="single-portfolio">
                         <figure class="portfolio-image">
