@@ -47,6 +47,8 @@ Route::get('/blog', function () {
     return view('frontend.blog');
 });
 
+Route::get('/portfolio', [HomeController::class, 'portfolio'])->name('portfolio');
+
 Route::get('/blog-details', function () {
     return view('frontend.blog-details');
 });

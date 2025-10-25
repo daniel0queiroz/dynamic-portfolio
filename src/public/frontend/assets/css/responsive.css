@@ -12,7 +12,7 @@
         padding-bottom: 120px;
     }
 
-    .single-blog .title {
+    .single-card .title {
         font-size: 22px;
     }
 
@@ -118,7 +118,7 @@
         padding: 20px;
     }
 
-    .blog-content {
+    .card-content {
         padding: 20px;
     }
 
@@ -130,7 +130,7 @@
         padding: 45px 30px;
     }
 
-    .full-width .single-blog .blog-content {
+    .full-width .single-card .card-content {
         width: 100%;
     }
 
@@ -302,7 +302,7 @@
         line-height: 38px;
     }
 
-    .single-blog .title {
+    .single-card .title {
         font-size: 22px;
         line-height: 32px;
     }
@@ -326,7 +326,7 @@
         margin: 0 10px;
     }
 
-    .blog-area {
+    .card-area {
         padding-top: 85px;
     }
 

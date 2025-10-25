@@ -5,13 +5,13 @@
             <div class="container">
                 <div class="row d-flex align-items-center">
                     <div class="col-sm-7">
-                        <h2 class="title">Blog</h2>
+                        <h2 class="title">Portfolio</h2>
                     </div>
                     <div class="col-sm-5">
                         <div class="breadcrumbs">
                             <ul>
                                 <li><a href="#">Home</a></li>
-                                <li>Blog</li>
+                                <li>Projects</li>
                             </ul>
                         </div>
                     </div>
@@ -23,18 +23,18 @@
         <section class="card-area section-padding">
             <div class="container">
                 <div class="row">
-                    @foreach ($blogs as $blog)
+                    @foreach ($portfolios as $portfolio)
                         <div class="col-xl-4 col-md-6">
                             <div class="single-card">
                                 <figure class="card-image">
-                                    <img src="{{asset($blog->image)}}" alt="">
+                                    <img src="{{asset($portfolio->image)}}" alt="">
                                 </figure>
                                 <div class="card-content">
-                                    <h3 class="title"><a href="{{route('show.blog', $blog->id)}}">{{$blog->title}}</a></h3>
+                                    <h3 class="title"><a href="{{route('show.portfolio', $portfolio->id)}}">{{$portfolio->title}}</a></h3>
                                     <div class="desc">
-                                        <p>{!! Str::limit($blog->description, 150, '...') !!}</p>
+                                        <p>{!! Str::limit(strip_tags($portfolio->description), 150, '...') !!}</p>
                                     </div>
-                                    <a href="{{route('show.blog', $blog->id)}}" class="button-primary-trans mouse-dir">Read More <span
+                                    <a href="{{route('show.portfolio', $portfolio->id)}}" class="button-primary-trans mouse-dir">View Project <span
                                             class="dir-part"></span> <i class="fal fa-arrow-right"></i></a>
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
                     <div class="col-sm-12 text-center">
                         <nav class="navigation pagination">
                             <div class="nav-links d-flex justify-content-center">
-                                {{$blogs->links()}}
+                                {{$portfolios->links()}}
                             </div>
                         </nav>
                     </div>

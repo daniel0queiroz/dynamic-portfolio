@@ -11,7 +11,7 @@
                         <div class="breadcrumbs">
                             <ul>
                                 <li><a href="#">Home</a></li>
-                                <li>Portfolio</li>
+                                <li>Blogs</li>
                             </ul>
                         </div>
                     </div>

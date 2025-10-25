@@ -62,6 +62,12 @@ class HomeController extends Controller
             ));
     }
 
+    public function portfolio()
+    {
+        $portfolios = PortfolioItem::latest()->paginate(9);
+        return view('frontend.portfolio', compact('portfolios'));
+    }
+
     public function showPortfolio($id)
     {
         $portfolio = PortfolioItem::findOrFail($id);

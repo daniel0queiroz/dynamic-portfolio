@@ -41,6 +41,14 @@
                 </div>
                 @endforeach
             </div>
+            <div class="row">
+                <div class="text-center">
+                <a href="{{route('portfolio')}}" class="button-primary-trans mouse-dir">
+                    View More <span class="dir-part"></span> 
+                    <i class="fal fa-arrow-right"></i>
+                </a>
+                   </div>
+            </div>
         </div>
     </div>
 </section>

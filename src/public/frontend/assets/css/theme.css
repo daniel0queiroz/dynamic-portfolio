@@ -911,7 +911,7 @@ blockquote {
     margin-right: -15px;
 }
 
-.blog-slider .single-blog {
+.blog-slider .single-card {
     margin-right: 15px;
     margin-left: 15px;
     margin-top: 10px;
@@ -919,12 +919,12 @@ blockquote {
     border-radius: 10px;
 }
 
-.single-blog {
+.single-card {
     background: #f3f7ff;
     margin: 25px 0px 0px 0px;
 }
 
-.single-blog .title {
+.single-card .title {
     font-size: 25px;
     line-height: 38px;
     font-weight: 600;
@@ -934,26 +934,26 @@ blockquote {
     overflow: hidden;
 }
 
-.single-blog .title a {
+.single-card .title a {
     color: #190844;
     padding: 10px 0px;
 }
 
-.single-blog .title a:hover {
+.single-card .title a:hover {
     color: #ff885e;
 }
 
-.single-blog .blog-image {
+.single-card .card-image {
     margin-bottom: 26px;
     border-radius: 10px;
     overflow: hidden;
 }
 
-.single-blog .desc {
+.single-card .desc {
     margin-bottom: 30px;
 }
 
-.single-blog .button-primary-trans i {
+.single-card .button-primary-trans i {
     margin-left: 5px;
 }
 
@@ -961,11 +961,11 @@ blockquote {
     margin-bottom: -40px;
 }
 
-.blog-lists .single-blog {
+.blog-lists .single-card {
     margin-bottom: 50px;
 }
 
-.full-width .single-blog .blog-content {
+.full-width .single-card .card-content {
     width: calc(100% - 100px);
     margin: auto;
 }
@@ -1473,12 +1473,12 @@ Footer-Area
     margin: 5px 2px 0 2px;
 }
 
-.blog-content {
+.card-content {
     padding: 30px;
     padding-top: 0;
 }
 
-.blog-content a {
+.card-content a {
     padding: 10px 25px;
 }
 
