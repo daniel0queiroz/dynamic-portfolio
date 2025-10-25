@@ -244,6 +244,11 @@
 
     .main_menu .container {
         padding: 3px 12px;
+        /* ensure header children (logo, toggler, nav) are vertically centered and spaced on small screens */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
     }
 
     .main_menu .navbar-nav li a {
