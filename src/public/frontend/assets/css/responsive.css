@@ -378,5 +378,6 @@
     .header-area.parallax-bg {
         background-position: 75% center;
         background-size: cover;
+        transition: background-position-x 0.8s linear;
     }
 }
