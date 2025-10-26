@@ -39,7 +39,7 @@ class FeedbackController extends Controller
     {
         $request->validate([
             'name' => ['required', 'max:50'],
-            'position' => ['required', 'max:100'],
+            'position' => ['nullable', 'max:100'],
             'description' => ['required', 'max:1000'],
         ]);
 
