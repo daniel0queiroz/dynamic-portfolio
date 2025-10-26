@@ -58,6 +58,14 @@
                         </a>
                     </li>
                 @endif
+
+                @if ($routeName == 'privacy-policy')
+                    <li class="nav-item">
+                        <a class="nav-link {{ $routeName == 'privacy-policy' ? 'active' : '' }}" href="{{ route('privacy-policy') }}">
+                            Privacy Policy
+                        </a>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>

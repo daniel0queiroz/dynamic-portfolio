@@ -56,7 +56,7 @@ class PrivacyPolicyController extends Controller
     {
         $request->validate([
             'title' => ['nullable', 'max:200'],
-            'description' => ['nullable', 'max:2000'],
+            'description' => ['nullable', 'max:10000'],
         ]);
 
         PrivacyPolicy::updateOrCreate(
