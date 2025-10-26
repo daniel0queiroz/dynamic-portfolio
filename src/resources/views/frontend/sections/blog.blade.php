@@ -31,5 +31,13 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+                <div class="text-center mt-4">
+                <a href="{{route('blog')}}" class="button-primary-trans mouse-dir">
+                    View More <span class="dir-part"></span> 
+                    <i class="fal fa-arrow-right"></i>
+                </a>
+                </div>
+        </div>
     </div>
 </section>

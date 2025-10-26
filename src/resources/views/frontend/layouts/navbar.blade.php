@@ -33,6 +33,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#skills-page">Skills</a>
                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#blog-page">Blogs</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact-page">Contact</a>
                     </li>
