@@ -105,7 +105,8 @@ class HomeController extends Controller
             'name' => ['required', 'max:200'],
             'subject' => ['required', 'max:300'],
             'email' => ['required', 'email'],
-            'message' => ['required', 'max:2000']
+            'message' => ['required', 'max:2000'],
+            'g-recaptcha-response' => 'required|recaptcha',
         ]);
 
         Mail::send(new ContactMail($request->all()));
