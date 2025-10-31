@@ -4,27 +4,39 @@
 
 /** Handle File Upload */
 
-function handleUpload($inputName, $model=null)
+function handleUpload($inputName, $model = null)
 {
     try {
-        if(request()->hasFile($inputName)) {
-                    if($model && \File::exists(public_path($model->{$inputName}))) {
-                        \File::delete(public_path($model->{$inputName}));
-                    }
+        if (request()->hasFile($inputName)) {
 
-                    $file = request()->file($inputName);
-                    $fileName = rand().$file->getClientOriginalName();
-                    $file->move(public_path('/uploads'), $fileName);
-
-                    $filePath = "/uploads/".$fileName;
-
-                    return $filePath;
+            if ($model && \File::exists(public_path($model->{$inputName}))) {
+                \File::delete(public_path($model->{$inputName}));
             }
-    } catch(\Exception $e) {
+
+            $file = request()->file($inputName);
+            $fileName = rand() . '_' . $file->getClientOriginalName();
+
+            // Detecta automaticamente o caminho correto
+            $publicPath = is_dir(base_path('public_html'))
+                ? base_path('public_html/uploads')  // produção
+                : public_path('uploads');           // local
+
+            if (!\File::exists($publicPath)) {
+                \File::makeDirectory($publicPath, 0755, true);
+            }
+
+            $file->move($publicPath, $fileName);
+
+            // Caminho acessível pela URL
+            $filePath = '/uploads/' . $fileName;
+
+            return $filePath;
+        }
+    } catch (\Exception $e) {
         throw $e;
     }
-    
 }
+
 
 /** Delete File */
 
