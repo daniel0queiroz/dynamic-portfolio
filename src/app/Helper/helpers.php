@@ -4,38 +4,40 @@
 
 /** Handle File Upload */
 
-function handleUpload($inputName, $model = null)
+function handleUpload($inputName, $model=null)
 {
     try {
-        if (request()->hasFile($inputName)) {
+        if(request()->hasFile($inputName)) {
 
-            if ($model && \File::exists(public_path($model->{$inputName}))) {
+            if($model && \File::exists(public_path($model->{$inputName}))) {
                 \File::delete(public_path($model->{$inputName}));
             }
 
             $file = request()->file($inputName);
-            $fileName = rand() . '_' . $file->getClientOriginalName();
+            $fileName = rand().$file->getClientOriginalName();
 
-            // Detecta automaticamente o caminho correto
-            $publicPath = is_dir(base_path('public_html'))
-                ? base_path('public_html/uploads')  // produção
-                : public_path('uploads');           // local
-
-            if (!\File::exists($publicPath)) {
-                \File::makeDirectory($publicPath, 0755, true);
+            // Define o caminho correto para uploads, dependendo do ambiente
+            if(app()->environment('production')){
+                // caminho absoluto da pasta public_html no servidor
+                $uploadPath = '/home/storage/7/66/ec/danqueiroz1/public_html/uploads';
+            } else {
+                // caminho local padrão (laravel/public)
+                $uploadPath = public_path('uploads');
             }
 
-            $file->move($publicPath, $fileName);
+            if(!file_exists($uploadPath)){
+                mkdir($uploadPath, 0755, true);
+            }
 
-            // Caminho acessível pela URL
-            $filePath = '/uploads/' . $fileName;
+            $file->move($uploadPath, $fileName);
 
-            return $filePath;
+            return "/uploads/".$fileName;
         }
-    } catch (\Exception $e) {
+    } catch(\Exception $e) {
         throw $e;
     }
 }
+
 
 
 /** Delete File */
