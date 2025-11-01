@@ -1,58 +1,45 @@
 <?php
 
-
+use Illuminate\Support\Facades\Storage;
 
 /** Handle File Upload */
 
-function handleUpload($inputName, $model=null)
+
+function handleUpload($inputName, $model = null)
 {
     try {
-        if(request()->hasFile($inputName)) {
+        if (request()->hasFile($inputName)) {
 
-            if($model && \File::exists(public_path($model->{$inputName}))) {
-                \File::delete(public_path($model->{$inputName}));
+            if ($model && $model->{$inputName}) {
+                Storage::disk('uploads')->delete($model->{$inputName});
             }
 
             $file = request()->file($inputName);
-            $fileName = rand().$file->getClientOriginalName();
+            $fileName = rand() . $file->getClientOriginalName();
 
-            // Define o caminho correto para uploads, dependendo do ambiente
-            if(app()->environment('production')){
-                // caminho absoluto da pasta public_html no servidor
-                $uploadPath = '/home/storage/7/66/ec/danqueiroz1/public_html/uploads';
-            } else {
-                // caminho local padrão (laravel/public)
-                $uploadPath = public_path('uploads');
-            }
+            Storage::disk('uploads')->putFileAs('', $file, $fileName);
 
-            if(!file_exists($uploadPath)){
-                mkdir($uploadPath, 0755, true);
-            }
-
-            $file->move($uploadPath, $fileName);
-
-            return "/uploads/".$fileName;
+            $appUrl = rtrim(env('APP_URL'), '/');
+            return $appUrl . '/uploads/' . $fileName;
         }
-    } catch(\Exception $e) {
+    } catch (\Exception $e) {
         throw $e;
     }
 }
 
 
 
+
+
 /** Delete File */
 
-function deleteFileIfExist($filePath)
+function deleteFileIfExist($fileName)
 {
-
     try {
-        if(\File::exists(public_path($filePath))){
-            \File::delete(public_path($filePath));
-        }
-    } catch(\Exception $e) {
+        Storage::disk('uploads')->delete($fileName);
+    } catch (\Exception $e) {
         throw $e;
     }
-    
 }
 
 /** Get Dynamic Colors */

@@ -55,6 +55,7 @@ Route::get('/blog-details', function () {
 
 Route::get('/dashboard',[DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('resume/download', [AboutController::class, 'resumeDownload'])->name('resume.download');
+Route::get('blogs', [HomeController::class, 'blog'])->name('blog');
 
 /** Admin Routes */
 
@@ -62,7 +63,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('blogs', [HomeController::class, 'blog'])->name('blog');
 });
 
 require __DIR__.'/auth.php';

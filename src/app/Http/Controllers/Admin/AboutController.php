@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\About;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AboutController extends Controller
 {
@@ -100,8 +101,26 @@ class AboutController extends Controller
     public function resumeDownload()
     {
         $about = About::first();
-        return response()->download(public_path($about->resume));
+
+        if (!$about || !$about->resume) {
+            abort(404, 'File not found');
+        }
+
+        $resume = $about->resume;
+
+        $fileName = basename($resume);
+
+        $filePath = Storage::disk('uploads')->path($fileName);
+
+        if (!file_exists($filePath)) {
+            abort(404, 'File not found: ' . $filePath);
+        }
+
+        return response()->download($filePath);
     }
+
+
+
 
     /**
      * Remove the specified resource from storage.
