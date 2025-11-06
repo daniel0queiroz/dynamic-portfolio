@@ -35,30 +35,37 @@ use Illuminate\Support\Facades\Route;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| Here is where you can register web routes for your application.
+| These routes are loaded by the RouteServiceProvider and all of them
+| will be assigned to the "web" middleware group.
 |
 */
 
+// ==============================
+// Frontend Routes
+// ==============================
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-Route::get('/blog', function () {
-    return view('frontend.blog');
-});
-
+Route::get('/blog', fn() => view('frontend.blog'));
 Route::get('/portfolio', [HomeController::class, 'portfolio'])->name('portfolio');
+Route::get('/blog-details', fn() => view('frontend.blog-details'));
 
-Route::get('/blog-details', function () {
-    return view('frontend.blog-details');
-});
-
-Route::get('/dashboard',[DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('resume/download', [AboutController::class, 'resumeDownload'])->name('resume.download');
 Route::get('blogs', [HomeController::class, 'blog'])->name('blog');
+Route::get('portfolio-details/{id}', [HomeController::class, 'showPortfolio'])->name('show.portfolio');
+Route::get('blog-details/{id}', [HomeController::class, 'showBlog'])->name('show.blog');
+Route::post('contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('privacy-policy', [HomeController::class, 'showPrivacyPolicy'])->name('privacy-policy');
 
-/** Admin Routes */
+// ==============================
+// Dashboard Route
+// ==============================
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
+// ==============================
+// Authenticated User Routes
+// ==============================
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -67,54 +74,44 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('portfolio-details/{id}', [HomeController::class, 'showPortfolio'])->name('show.portfolio');
-Route::get('blog-details/{id}', [HomeController::class, 'showBlog'])->name('show.blog');
-Route::post('contact', [HomeController::class, 'contact'])->name('contact');
-Route::get('privacy-policy', [HomeController::class, 'showPrivacyPolicy'])->name('privacy-policy');
-
-Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function() {
+// ==============================
+// Admin Routes
+// ==============================
+Route::group([
+    'middleware' => ['auth'],
+    'prefix' => 'admin',
+    'as' => 'admin.'
+], function () {
 
     /** Hero Route */
     Route::resource('hero', HeroController::class);
     Route::resource('typer-title', TyperTitleController::class);
-    
+
     /** Service Route */
     Route::resource('service', ServiceController::class);
 
     /** About Route */
     Route::resource('about', AboutController::class);
 
-    /** Portfolio Category Route */
+    /** Portfolio Routes */
     Route::resource('category', CategoryController::class);
-
-    /** Portfolio Item Route */
     Route::resource('portfolio-item', PortfolioItemController::class);
-
-    /** Portfolio Section Setting Route */
     Route::resource('portfolio-section-setting', PortfolioSectionSettingController::class);
 
-    /** Skill Section Setting Route */
+    /** Skill Routes */
     Route::resource('skill-section-setting', SkillSectionSettingController::class);
-
-    /** Skill Items Route */
     Route::resource('skill-item', SkillItemController::class);
 
-    /** Experience Items Route */
+    /** Experience Route */
     Route::resource('experience', ExperienceController::class);
 
-    /** Feedback Route */
+    /** Feedback Routes */
     Route::resource('feedback', FeedbackController::class);
-
-    /** Feedback Section Setting Route */
     Route::resource('feedback-section-setting', FeedbackSectionSettingController::class);
 
-    /** Blog Category Route */
+    /** Blog Routes */
     Route::resource('blog-category', BlogCategoryController::class);
-
-    /** Blog Route */
     Route::resource('blog', BlogController::class);
-
-    /** Blog Section Setting Route */
     Route::resource('blog-section-setting', BlogSectionSettingController::class);
 
     /** Contact Section Setting Route */
@@ -123,27 +120,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     /** Privacy Policy */
     Route::resource('privacy-policy', PrivacyPolicyController::class);
 
-    /** Footer Social Route */
+    /** Footer Routes */
     Route::resource('footer-social', FooterSocialLinkController::class);
-
-    /** Footer Info Route */
     Route::resource('footer-info', FooterInfoController::class);
-
-    /** Footer Contact Info Route */
     Route::resource('footer-contact-info', FooterContactInfoController::class);
-
-    /** Footer Useful Links Route */
     Route::resource('footer-useful-links', FooterUsefulLinkController::class);
-
-    /** Footer Help Links Route */
     Route::resource('footer-help-links', FooterHelpLinkController::class);
 
-    /** Settings Route */
+    /** Settings Routes */
     Route::get('settings', SettingController::class)->name('settings.index');
-
-    /** General Setting Route */
     Route::resource('general-setting', GeneralSettingController::class);
-
-    /** Seo Setting Route */
     Route::resource('seo-setting', SeoSettingController::class);
 });
