@@ -13,9 +13,9 @@
 					<div class="col-md-12 col-lg-3 widget">
 						<div class="text-box">
 							<figure class="footer-logo">
-								<img src="{{asset($generalSetting->footer_logo)}}" alt="">
+								<img src="{{asset($generalSetting?->footer_logo)}}" alt="">
 							</figure>
-							<p>{{$footerInfo->info}}</p>
+							<p>{{$footerInfo?->info}}</p>
 							<ul class="d-flex flex-wrap">
 								@foreach ($footerIcons as $icon)
 									<li><a href="{{$icon->url}}" target="_blank"><i class="{{$icon->icon}}"></i></a></li>
@@ -34,9 +34,9 @@
 					<div class="col-md-4 col-lg-3 widget">
 						<h3 class="widget-title">Contact Info</h3>
 						<ul>
-							<li>{{$footerContact->address}}</li>
-							<li><a href="#">{{$footerContact->phone}}</a></li>
-							<li><a href="#">{{$footerContact->email}}</a></li>
+							<li>{{$footerContact?->address}}</li>
+							<li><a href="#">{{$footerContact?->phone}}</a></li>
+							<li><a href="#">{{$footerContact?->email}}</a></li>
 						</ul>
 					</div>
 					<div class="col-md-4 col-lg-3 widget">
@@ -54,8 +54,8 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="copyright">
-								<p>{{$footerInfo->copy_right}}</p>
-								<p>{{$footerInfo->powered_by}}</p>
+								<p>{{$footerInfo?->copy_right}}</p>
+								<p>{{$footerInfo?->powered_by}}</p>
 							</div>
 						</div>
 					</div>

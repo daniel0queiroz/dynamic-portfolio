@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3 text-center">
                 <div class="section-title">
-                    <h3 class="title">{{ $contactTitle?->title }}</h3>
+                    <h3 class="title"><?php echo e($contactTitle?->title); ?></h3>
                     <div class="desc">
-                        <p>{{ $contactTitle?->sub_title }}</p>
+                        <p><?php echo e($contactTitle?->sub_title); ?></p>
                     </div>
                 </div>
             </div>
@@ -55,9 +55,10 @@
     </div>
 </section>
 
-@push('scripts')
-    {{-- Load reCAPTCHA script --}}
-    {!! htmlScriptTagJsApi() !!}
+<?php $__env->startPush('scripts'); ?>
+    
+    <?php echo htmlScriptTagJsApi(); ?>
+
 
     <script>
         $(document).ready(function () {
@@ -72,7 +73,7 @@
         e.preventDefault();
 
         grecaptcha.ready(function () {
-            grecaptcha.execute('{{ config('recaptcha.api_site_key') }}', { action: 'contact' }).then(function (token) {
+            grecaptcha.execute('<?php echo e(config('recaptcha.api_site_key')); ?>', { action: 'contact' }).then(function (token) {
 
                 // remove previous token if any
                 $('#contact-form').find('input[name="g-recaptcha-response"]').remove();
@@ -90,7 +91,7 @@
                 // send AJAX request
                 $.ajax({
                     type: "POST",
-                    url: "{{ route('contact') }}", // make sure your route exists
+                    url: "<?php echo e(route('contact')); ?>", // make sure your route exists
                     data: $('#contact-form').serialize(),
                     beforeSend: function () {
                         $('#submit_btn').prop("disabled", true).text('Loading...');
@@ -121,4 +122,5 @@
 });
 
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+<?php /**PATH /var/www/src/resources/views/frontend/sections/contact.blade.php ENDPATH**/ ?>

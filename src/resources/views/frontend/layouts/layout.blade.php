@@ -14,7 +14,7 @@
 	<meta name="description" content="{{@$seoSetting->description}}">
 	<meta name="keywords" content="{{@$seoSetting->keywords}}">
 	<title>{{@$seoSetting->title}}</title>
-	<link rel="shortcut icon" type="image/ico" href="{{asset($generalSetting->favicon)}}" />
+	<link rel="shortcut icon" type="image/ico" href="{{asset($generalSetting?->favicon)}}" />
 	<link rel="stylesheet" href="{{asset('frontend/assets/css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{asset('frontend/assets/css/normalize.css')}}">
 	<link rel="stylesheet" href="{{asset('frontend/assets/css/style-plugin-collection.css')}}">

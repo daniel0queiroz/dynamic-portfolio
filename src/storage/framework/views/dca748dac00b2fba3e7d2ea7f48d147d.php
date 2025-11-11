@@ -1,11 +1,11 @@
-@php
+<?php
     $routeName = Route::currentRouteName();
-@endphp
+?>
 
 <nav class="navbar navbar-expand-lg main_menu" id="main_menu_area">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{ asset($generalSetting?->logo) }}" alt="">
+        <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
+            <img src="<?php echo e(asset($generalSetting?->logo)); ?>" alt="">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -17,13 +17,13 @@
             <ul class="navbar-nav ms-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link {{ $routeName == 'home' ? 'active' : '' }}"
-                        href="{{ $routeName == 'home' ? '#home-page' : url('/') }}">
+                    <a class="nav-link <?php echo e($routeName == 'home' ? 'active' : ''); ?>"
+                        href="<?php echo e($routeName == 'home' ? '#home-page' : url('/')); ?>">
                         Home
                     </a>
                 </li>
 
-                @if ($routeName == 'home')
+                <?php if($routeName == 'home'): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="#about-page">About</a>
                     </li>
@@ -39,34 +39,35 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#contact-page">Contact</a>
                     </li>
-                @endif
+                <?php endif; ?>
 
-                @if ($routeName == 'portfolio' || $routeName == 'show.portfolio')
+                <?php if($routeName == 'portfolio' || $routeName == 'show.portfolio'): ?>
                     <li class="nav-item">
-                        <a class="nav-link {{ $routeName == 'portfolio' || $routeName == 'show.portfolio' ? 'active' : '' }}"
-                            href="{{ route('portfolio') }}">
+                        <a class="nav-link <?php echo e($routeName == 'portfolio' || $routeName == 'show.portfolio' ? 'active' : ''); ?>"
+                            href="<?php echo e(route('portfolio')); ?>">
                             Portfolio
                         </a>
                     </li>
-                @endif
+                <?php endif; ?>
 
-                @if ($routeName == 'blog' || $routeName == 'show.blog')
+                <?php if($routeName == 'blog' || $routeName == 'show.blog'): ?>
                     <li class="nav-item">
-                        <a class="nav-link {{ $routeName == 'blog' || $routeName == 'show.blog' ? 'active' : '' }}"
-                            href="{{ route('blog') }}">
+                        <a class="nav-link <?php echo e($routeName == 'blog' || $routeName == 'show.blog' ? 'active' : ''); ?>"
+                            href="<?php echo e(route('blog')); ?>">
                             Blogs
                         </a>
                     </li>
-                @endif
+                <?php endif; ?>
 
-                @if ($routeName == 'privacy-policy')
+                <?php if($routeName == 'privacy-policy'): ?>
                     <li class="nav-item">
-                        <a class="nav-link {{ $routeName == 'privacy-policy' ? 'active' : '' }}" href="{{ route('privacy-policy') }}">
+                        <a class="nav-link <?php echo e($routeName == 'privacy-policy' ? 'active' : ''); ?>" href="<?php echo e(route('privacy-policy')); ?>">
                             Privacy Policy
                         </a>
                     </li>
-                @endif
+                <?php endif; ?>
             </ul>
         </div>
     </div>
 </nav>
+<?php /**PATH /var/www/src/resources/views/frontend/layouts/navbar.blade.php ENDPATH**/ ?>
