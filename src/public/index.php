@@ -7,6 +7,18 @@ define('LARAVEL_START', microtime(true));
 
 /*
 |--------------------------------------------------------------------------
+| Detect Base Path According to Environment
+|--------------------------------------------------------------------------
+|
+| In local Docker, Laravel lives in /var/www/src
+| In production, Laravel lives in /home/.../laravel
+|
+*/
+
+$basePath = realpath(__DIR__ . '/../laravel') ?: realpath(__DIR__ . '/..');
+
+/*
+|--------------------------------------------------------------------------
 | Check If The Application Is Under Maintenance
 |--------------------------------------------------------------------------
 |
@@ -16,7 +28,7 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-if (file_exists($maintenance = __DIR__.'/../laravel/storage/framework/maintenance.php')) {
+if (file_exists($maintenance = $basePath . '/storage/framework/maintenance.php')) {
     require $maintenance;
 }
 
@@ -31,7 +43,7 @@ if (file_exists($maintenance = __DIR__.'/../laravel/storage/framework/maintenanc
 |
 */
 
-require __DIR__.'/../laravel/vendor/autoload.php';
+require $basePath . '/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +56,7 @@ require __DIR__.'/../laravel/vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../laravel/bootstrap/app.php';
+$app = require_once $basePath . '/bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
 

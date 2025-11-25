@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3 text-center">
                 <div class="section-title">
-                    <h3 class="title">{{$portfolioTitle->title}}</h3>
+                    <h3 class="title">{{$portfolioTitle?->title}}</h3>
                     <div class="desc">
-                        {!! $portfolioTitle->sub_title !!}
+                        {!! $portfolioTitle?->sub_title !!}
                     </div>
                 </div>
             </div>
