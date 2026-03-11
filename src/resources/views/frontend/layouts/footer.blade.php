@@ -54,6 +54,7 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="copyright">
+								testinng
 								<p>{{$footerInfo?->copy_right}}</p>
 								<p>{{$footerInfo?->powered_by}}</p>
 							</div>
