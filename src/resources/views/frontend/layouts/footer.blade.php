@@ -1,9 +1,9 @@
 @php
-	$footerInfo = \App\Models\FooterInfo::first();
-	$footerIcons = \App\Models\FooterSocialLink::all();
-	$footerUsefulLinks =  \App\Models\FooterUsefulLink::all();
-	$footerContact = \App\Models\FooterContactInfo::first();
-	$footerHelpLinks = \App\Models\FooterHelpLink::all();
+	$footerInfo = cache()->remember('footer_info', 3600, fn() => \App\Models\FooterInfo::first());
+	$footerIcons = cache()->remember('footer_icons', 3600, fn() => \App\Models\FooterSocialLink::all());
+	$footerUsefulLinks = cache()->remember('footer_useful_links', 3600, fn() => \App\Models\FooterUsefulLink::all());
+	$footerContact = cache()->remember('footer_contact', 3600, fn() => \App\Models\FooterContactInfo::first());
+	$footerHelpLinks = cache()->remember('footer_help_links', 3600, fn() => \App\Models\FooterHelpLink::all());
 @endphp
 
 <!-- Footer-Area-Start -->

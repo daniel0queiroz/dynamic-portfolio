@@ -21,27 +21,28 @@ use App\Models\SkillItem;
 use App\Models\SkillSectionSetting;
 use App\Models\TyperTitle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
     public function index() 
     {
-        $hero = Hero::first();
-        $typerTitles = TyperTitle::all();
-        $services = Service::all();
-        $about = About::first();
-        $portfolioTitle = PortfolioSectionSetting::first();
-        $portfolioCategories = Category::all();
-        $portfolioItems = PortfolioItem::latest()->get();
-        $skill = SkillSectionSetting::first();
-        $skillItems = SkillItem::all();
-        $experience = Experience::first();
-        $feedbacks = Feedback::all();
-        $feedbackTitle = FeedbackSectionSetting::first();
-        $blogs = Blog::latest()->take(5)->get();
-        $blogTitle = BlogSectionSetting::first();
-        $contactTitle = ContactSectionSetting::first();
+        $hero = Cache::remember('hero', 3600, fn() => Hero::first());
+        $typerTitles = Cache::remember('typer_titles', 3600, fn() => TyperTitle::all());
+        $services = Cache::remember('services', 3600, fn() => Service::all());
+        $about = Cache::remember('about', 3600, fn() => About::first());
+        $portfolioTitle = Cache::remember('portfolio_title', 3600, fn() => PortfolioSectionSetting::first());
+        $portfolioCategories = Cache::remember('portfolio_categories', 3600, fn() => Category::all());
+        $portfolioItems = Cache::remember('portfolio_items_home', 3600, fn() => PortfolioItem::with('category')->latest()->get());
+        $skill = Cache::remember('skill_section', 3600, fn() => SkillSectionSetting::first());
+        $skillItems = Cache::remember('skill_items', 3600, fn() => SkillItem::all());
+        $experience = Cache::remember('experience', 3600, fn() => Experience::first());
+        $feedbacks = Cache::remember('feedbacks', 3600, fn() => Feedback::all());
+        $feedbackTitle = Cache::remember('feedback_title', 3600, fn() => FeedbackSectionSetting::first());
+        $blogs = Cache::remember('blogs_home', 3600, fn() => Blog::latest()->take(5)->get());
+        $blogTitle = Cache::remember('blog_title', 3600, fn() => BlogSectionSetting::first());
+        $contactTitle = Cache::remember('contact_title', 3600, fn() => ContactSectionSetting::first());
         return view('frontend.home', 
             compact(
                 'hero', 

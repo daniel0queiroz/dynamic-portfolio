@@ -1,6 +1,6 @@
 @php
-	$generalSetting = \App\Models\GeneralSetting::first();
-	$seoSetting = \App\Models\SeoSetting::first();
+	$generalSetting = cache()->remember('general_setting', 3600, fn() => \App\Models\GeneralSetting::first());
+	$seoSetting = cache()->remember('seo_setting', 3600, fn() => \App\Models\SeoSetting::first());
 @endphp
 
 <!doctype html>
