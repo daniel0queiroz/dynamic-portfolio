@@ -23,6 +23,7 @@ class SkillItemDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->editColumn('name', fn($row) => $row->getTranslation('name', 'en', false))
             ->addColumn('action', function($query){
                 return '<a href="'.route('admin.skill-item.edit', $query->id).'" class="btn btn-primary"><i class="fas fa-edit"></i></a><a href="'.route('admin.skill-item.destroy', $query->id).'" class="btn btn-danger delete-item"><i class="fas fa-trash"></i></a>';
             })

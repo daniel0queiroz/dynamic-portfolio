@@ -72,17 +72,17 @@ class FooterInfoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'info' => ['max:200'],
-            'copy_right' => ['max:200'],
-            'powered_by' => ['max:200'],
+            'info.en' => ['nullable', 'max:200'],
+            'copy_right.en' => ['nullable', 'max:200'],
+            'powered_by' => ['nullable', 'max:200'],
         ]);
 
         FooterInfo::updateOrCreate(
             ['id' => $id],
-            [ 
-              'info' => $request->info,
-              'copy_right' => $request->copy_right,
-              'powered_by' => $request->powered_by
+            [
+                'info' => $request->input('info'),
+                'copy_right' => $request->input('copy_right'),
+                'powered_by' => $request->powered_by,
             ]
         );
 

@@ -72,18 +72,19 @@ class SeoSettingController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => ['required', 'max:200'],
-            'description' => ['required', 'max:500'],
-            'keywords' => ['required', 'max:300'],
+            'title.en' => ['required', 'max:200'],
+            'description.en' => ['required', 'max:500'],
+            'keywords.en' => ['required', 'max:300'],
         ]);
 
         SeoSetting::updateOrCreate(
-        ['id' => $id],
-        [
-            'title' => $request->title,
-            'description' => $request->description,
-            'keywords' => $request->keywords,
-        ]);
+            ['id' => $id],
+            [
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'keywords' => $request->input('keywords'),
+            ]
+        );
 
         toastr()->success('Updated Successfully', 'Congrats');
 

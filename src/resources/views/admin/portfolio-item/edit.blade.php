@@ -4,7 +4,7 @@
     <section class="section">
           <div class="section-header">
             <div class="section-header-back">
-              <a href="features-posts.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+              <a href="javascript:history.back()" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
             <h1>Portfolio Item</h1>
           </div>
@@ -34,7 +34,12 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                             <div class="col-sm-12 col-md-7">
-                                <input type="text" name="title" class="form-control" value="{{$portfolioItem->title}}">
+                                <small class="text-muted">English <span class="text-danger">*</span></small>
+                                <input type="text" name="title[en]" class="form-control mb-2" value="{{$portfolioItem->getTranslation('title','en',false)}}">
+                                <small class="text-muted">Español</small>
+                                <input type="text" name="title[es]" class="form-control mb-2" value="{{$portfolioItem->getTranslation('title','es',false)}}">
+                                <small class="text-muted">Português</small>
+                                <input type="text" name="title[pt]" class="form-control" value="{{$portfolioItem->getTranslation('title','pt',false)}}">
                             </div>
                         </div>
 
@@ -53,14 +58,24 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
                             <div class="col-sm-12 col-md-7">
-                                <textarea name="description" class="summernote">{!! $portfolioItem->description !!}</textarea>
+                                <small class="text-muted">English <span class="text-danger">*</span></small>
+                                <textarea name="description[en]" class="summernote mb-3">{!! $portfolioItem->getTranslation('description','en',false) !!}</textarea>
+                                <small class="text-muted">Español</small>
+                                <textarea name="description[es]" class="summernote mb-3">{!! $portfolioItem->getTranslation('description','es',false) !!}</textarea>
+                                <small class="text-muted">Português</small>
+                                <textarea name="description[pt]" class="summernote">{!! $portfolioItem->getTranslation('description','pt',false) !!}</textarea>
                             </div>
                         </div>
 
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Client</label>
                             <div class="col-sm-12 col-md-7">
-                                <input type="text" name="client" class="form-control" value="{{$portfolioItem->client}}">
+                                <small class="text-muted">English</small>
+                                <input type="text" name="client[en]" class="form-control mb-2" value="{{$portfolioItem->getTranslation('client','en',false)}}">
+                                <small class="text-muted">Español</small>
+                                <input type="text" name="client[es]" class="form-control mb-2" value="{{$portfolioItem->getTranslation('client','es',false)}}">
+                                <small class="text-muted">Português</small>
+                                <input type="text" name="client[pt]" class="form-control" value="{{$portfolioItem->getTranslation('client','pt',false)}}">
                             </div>
                         </div>
 

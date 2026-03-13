@@ -4,16 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Experience extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
-    protected $fillable = [
-        'title',
-        'description',
-        'image',
-        'phone',
-        'email'
-    ];
+    public array $translatable = ['title', 'description'];
+
+    protected $fillable = ['title', 'description', 'image', 'phone', 'email'];
 }

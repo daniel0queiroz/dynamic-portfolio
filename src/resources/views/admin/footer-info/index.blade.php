@@ -4,7 +4,7 @@
     <section class="section">
           <div class="section-header">
             <div class="section-header-back">
-              <a href="features-posts.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+              <a href="javascript:history.back()" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
             <h1>Footer Information</h1>
           </div>
@@ -23,14 +23,24 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Info</label>
                             <div class="col-sm-12 col-md-7">
-                                <textarea name="info" id="" class="form-control" style="height: 100px">{{$footerInfo?->info}}</textarea>
+                                <small class="text-muted">English <span class="text-danger">*</span></small>
+                                <textarea name="info[en]" class="form-control mb-2" style="height: 80px">{{$footerInfo?->getTranslation('info','en',false)}}</textarea>
+                                <small class="text-muted">Español</small>
+                                <textarea name="info[es]" class="form-control mb-2" style="height: 80px">{{$footerInfo?->getTranslation('info','es',false)}}</textarea>
+                                <small class="text-muted">Português</small>
+                                <textarea name="info[pt]" class="form-control" style="height: 80px">{{$footerInfo?->getTranslation('info','pt',false)}}</textarea>
                             </div>
                         </div>
 
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Copy Right</label>
                             <div class="col-sm-12 col-md-7">
-                                <input type="text" name="copy_right" class="form-control" value="{{$footerInfo?->copy_right}}">
+                                <small class="text-muted">English <span class="text-danger">*</span></small>
+                                <input type="text" name="copy_right[en]" class="form-control mb-2" value="{{$footerInfo?->getTranslation('copy_right','en',false)}}">
+                                <small class="text-muted">Español</small>
+                                <input type="text" name="copy_right[es]" class="form-control mb-2" value="{{$footerInfo?->getTranslation('copy_right','es',false)}}">
+                                <small class="text-muted">Português</small>
+                                <input type="text" name="copy_right[pt]" class="form-control" value="{{$footerInfo?->getTranslation('copy_right','pt',false)}}">
                             </div>
                         </div>
 

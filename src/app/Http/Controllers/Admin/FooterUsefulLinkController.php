@@ -38,12 +38,12 @@ class FooterUsefulLinkController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'max:200'],
-            'url' => ['required']
+            'name.en' => ['required', 'max:200'],
+            'url' => ['required'],
         ]);
 
         $link = new FooterUsefulLink();
-        $link->name = $request->name;
+        $link->name = $request->input('name');
         $link->url = $request->url;
         $link->save();
 
@@ -85,12 +85,12 @@ class FooterUsefulLinkController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => ['required', 'max:200'],
-            'url' => ['required']
+            'name.en' => ['required', 'max:200'],
+            'url' => ['required'],
         ]);
 
         $link = FooterUsefulLink::findOrFail($id);
-        $link->name = $request->name;
+        $link->name = $request->input('name');
         $link->url = $request->url;
         $link->save();
 

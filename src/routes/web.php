@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\SkillItemController;
 use App\Http\Controllers\Admin\SkillSectionSettingController;
 use App\Http\Controllers\Admin\TyperTitleController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,11 @@ use Illuminate\Support\Facades\Route;
 | will be assigned to the "web" middleware group.
 |
 */
+
+// ==============================
+// Language Switcher
+// ==============================
+Route::get('/lang/{locale}', [LanguageController::class, 'switch'])->name('lang.switch');
 
 // ==============================
 // Frontend Routes
@@ -78,7 +84,7 @@ require __DIR__.'/auth.php';
 // Admin Routes
 // ==============================
 Route::group([
-    'middleware' => ['auth'],
+    'middleware' => ['auth', \App\Http\Middleware\ClearCacheAfterWrite::class],
     'prefix' => 'admin',
     'as' => 'admin.'
 ], function () {

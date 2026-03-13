@@ -41,10 +41,10 @@ class PortfolioItemController extends Controller
     {
         $request->validate([
             'image' => ['required', 'image', 'max:5000'],
-            'title' => ['required', 'max:200'],
-            'description' => ['required'],
+            'title.en' => ['required', 'max:200'],
+            'description.en' => ['required'],
             'category_id' => ['required', 'numeric'],
-            'client' => ['max:200'],
+            'client.en' => ['nullable', 'max:200'],
             'website' => ['nullable', 'url'],
         ]);
 
@@ -52,11 +52,11 @@ class PortfolioItemController extends Controller
 
         $portfolioItem = new PortfolioItem();
         $portfolioItem->image = $imagePath;
-        $portfolioItem->title = $request->title;
-        $portfolioItem->description = $request->description;
+        $portfolioItem->title = $request->input('title');
+        $portfolioItem->description = $request->input('description');
         $portfolioItem->category_id = $request->category_id;
-        $portfolioItem->client = $request->client;
-    $portfolioItem->website = $request->filled('website') ? $request->website : null;
+        $portfolioItem->client = $request->input('client');
+        $portfolioItem->website = $request->filled('website') ? $request->website : null;
         $portfolioItem->save();
 
         toastr()->success('Profile Item Created Successfully!', 'Success');
@@ -100,10 +100,10 @@ class PortfolioItemController extends Controller
     {
         $request->validate([
             'image' => ['image', 'max:5000'],
-            'title' => ['required', 'max:200'],
-            'description' => ['required'],
+            'title.en' => ['required', 'max:200'],
+            'description.en' => ['required'],
             'category_id' => ['required', 'numeric'],
-            'client' => ['max:200'],
+            'client.en' => ['nullable', 'max:200'],
             'website' => ['nullable', 'url'],
         ]);
 
@@ -112,10 +112,10 @@ class PortfolioItemController extends Controller
         $imagePath = handleUpload('image', $portfolioItem);
 
         $portfolioItem->image = (!empty($imagePath) ? $imagePath : $portfolioItem->image);
-        $portfolioItem->title = $request->title;
-        $portfolioItem->description = $request->description;
+        $portfolioItem->title = $request->input('title');
+        $portfolioItem->description = $request->input('description');
         $portfolioItem->category_id = $request->category_id;
-        $portfolioItem->client = $request->client;
+        $portfolioItem->client = $request->input('client');
         $portfolioItem->website = $request->filled('website') ? $request->website : null;
         $portfolioItem->save();
 

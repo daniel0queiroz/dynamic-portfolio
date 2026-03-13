@@ -72,17 +72,17 @@ class PortfolioSectionSettingController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => ['required', 'max:200'],
-            'sub_title' => ['required', 'max:500']
+            'title.en' => ['required', 'max:200'],
+            'sub_title.en' => ['required', 'max:500'],
         ]);
-        
 
         PortfolioSectionSetting::updateOrCreate(
-        ['id' => $id],
-        [
-            'title' => $request->title,
-            'sub_title' => $request->sub_title,
-        ]);
+            ['id' => $id],
+            [
+                'title' => $request->input('title'),
+                'sub_title' => $request->input('sub_title'),
+            ]
+        );
 
         toastr()->success('Updated Successfully', 'Congrats');
 

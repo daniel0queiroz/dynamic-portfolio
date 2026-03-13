@@ -4,7 +4,7 @@
     <section class="section">
           <div class="section-header">
             <div class="section-header-back">
-              <a href="features-posts.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+              <a href="javascript:history.back()" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
             <h1>SEO Setting</h1>
           </div>
@@ -24,21 +24,36 @@
                         <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">SEO Title</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" name="title" class="form-control" value="{{$seo->title}}">
+                            <small class="text-muted">English <span class="text-danger">*</span></small>
+                            <input type="text" name="title[en]" class="form-control mb-2" value="{{$seo->getTranslation('title','en',false)}}">
+                            <small class="text-muted">Español</small>
+                            <input type="text" name="title[es]" class="form-control mb-2" value="{{$seo->getTranslation('title','es',false)}}">
+                            <small class="text-muted">Português</small>
+                            <input type="text" name="title[pt]" class="form-control" value="{{$seo->getTranslation('title','pt',false)}}">
                         </div>
                         </div>
 
                         <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">SEO Description</label>
                         <div class="col-sm-12 col-md-7">
-                            <textarea name="description" id="" class="form-control" style="height: 100px">{{$seo->description}}</textarea>
+                            <small class="text-muted">English <span class="text-danger">*</span></small>
+                            <textarea name="description[en]" class="form-control mb-2" style="height: 80px">{{$seo->getTranslation('description','en',false)}}</textarea>
+                            <small class="text-muted">Español</small>
+                            <textarea name="description[es]" class="form-control mb-2" style="height: 80px">{{$seo->getTranslation('description','es',false)}}</textarea>
+                            <small class="text-muted">Português</small>
+                            <textarea name="description[pt]" class="form-control" style="height: 80px">{{$seo->getTranslation('description','pt',false)}}</textarea>
                         </div>
                         </div>
 
                         <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">SEO Keywords</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" name="keywords" class="form-control" value="{{$seo->keywords}}">
+                            <small class="text-muted">English <span class="text-danger">*</span></small>
+                            <input type="text" name="keywords[en]" class="form-control mb-2" value="{{$seo->getTranslation('keywords','en',false)}}">
+                            <small class="text-muted">Español</small>
+                            <input type="text" name="keywords[es]" class="form-control mb-2" value="{{$seo->getTranslation('keywords','es',false)}}">
+                            <small class="text-muted">Português</small>
+                            <input type="text" name="keywords[pt]" class="form-control" value="{{$seo->getTranslation('keywords','pt',false)}}">
                             <code>Keywords will be comma separated!</code>
                         </div>
                         </div>
