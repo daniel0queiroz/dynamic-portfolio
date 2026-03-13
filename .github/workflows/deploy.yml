@@ -14,7 +14,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install composer dependencies
-        run: cd src && composer install --no-dev --optimize-autoloader --no-interaction
+        run: |
+          cd src
+          mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views storage/logs
+          composer install --no-dev --optimize-autoloader --no-interaction
 
       - name: Deploy Laravel app files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
