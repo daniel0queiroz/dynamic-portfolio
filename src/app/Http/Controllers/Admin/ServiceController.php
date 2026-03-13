@@ -38,13 +38,13 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'max:200'],
-            'description' => ['required', 'max:500']
+            'name.en' => ['required', 'max:200'],
+            'description.en' => ['required', 'max:500'],
         ]);
 
         $service = new Service();
-        $service->name = $request->name;
-        $service->description = $request->description;
+        $service->name = $request->input('name');
+        $service->description = $request->input('description');
         $service->save();
 
         toastr()->success('Created Successfully', 'Congrats');
@@ -84,14 +84,14 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $request->validate([
-            'name' => ['required', 'max:200'],
-            'description' => ['required', 'max:500']
+        $request->validate([
+            'name.en' => ['required', 'max:200'],
+            'description.en' => ['required', 'max:500'],
         ]);
 
         $service = Service::findOrFail($id);
-        $service->name = $request->name;
-        $service->description = $request->description;
+        $service->name = $request->input('name');
+        $service->description = $request->input('description');
         $service->save();
 
         toastr()->success('Updated Successfully', 'Congrats');

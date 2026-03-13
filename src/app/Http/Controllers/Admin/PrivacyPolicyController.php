@@ -55,15 +55,15 @@ class PrivacyPolicyController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'title' => ['nullable', 'max:200'],
-            'description' => ['nullable', 'max:10000'],
+            'title.en' => ['nullable', 'max:200'],
+            'description.en' => ['nullable', 'max:10000'],
         ]);
 
         PrivacyPolicy::updateOrCreate(
             ['id' => $id],
             [
-                'title' => $request->title,
-                'description' => $request->description
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
             ]
         );
 

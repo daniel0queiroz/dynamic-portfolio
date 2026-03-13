@@ -73,23 +73,29 @@ class AboutController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => ['required', 'max:200'],
-            'description' => [ 'required', 'max:5000'],
+            'title.en' => ['required', 'max:200'],
+            'description.en' => ['required', 'max:5000'],
             'image' => ['image', 'max:5000'],
-            'resume' => ['mimes:pdf,csv,txt', 'max:10000']
+            'resume' => ['nullable', 'mimes:pdf,csv,txt', 'max:10000'],
+            'resume_es' => ['nullable', 'mimes:pdf,csv,txt', 'max:10000'],
+            'resume_pt' => ['nullable', 'mimes:pdf,csv,txt', 'max:10000'],
         ]);
 
         $about = About::first();
         $imagePath = handleUpload('image', $about);
-        $resumePath = handleUpload('resume', $about);
+        $resumeEn = handleUpload('resume', $about);
+        $resumeEs = handleUpload('resume_es', $about);
+        $resumePt = handleUpload('resume_pt', $about);
 
         About::updateOrCreate(
             ['id' => $id],
-            [ 
-                'title' => $request->title,
-                'description' => $request->description,
+            [
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
                 'image' => (!empty($imagePath) ? $imagePath : $about->image),
-                'resume' => (!empty($resumePath) ? $resumePath : $about->resume)
+                'resume' => (!empty($resumeEn) ? $resumeEn : $about->resume),
+                'resume_es' => (!empty($resumeEs) ? $resumeEs : $about->resume_es),
+                'resume_pt' => (!empty($resumePt) ? $resumePt : $about->resume_pt),
             ]
         );
 
@@ -102,18 +108,25 @@ class AboutController extends Controller
     {
         $about = About::first();
 
-        if (!$about || !$about->resume) {
+        if (!$about) {
             abort(404, 'File not found');
         }
 
-        $resume = $about->resume;
+        $locale = app()->getLocale();
+        $resume = match($locale) {
+            'es' => $about->resume_es ?: $about->resume,
+            'pt' => $about->resume_pt ?: $about->resume,
+            default => $about->resume,
+        };
 
-        $fileName = basename($resume);
+        if (!$resume) {
+            abort(404, 'File not found');
+        }
 
-        $filePath = Storage::disk('uploads')->path($fileName);
+        $filePath = Storage::disk('uploads')->path(basename($resume));
 
         if (!file_exists($filePath)) {
-            abort(404, 'File not found: ' . $filePath);
+            abort(404, 'File not found');
         }
 
         return response()->download($filePath);

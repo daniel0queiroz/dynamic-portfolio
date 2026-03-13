@@ -72,9 +72,9 @@ class SkillSectionSettingController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => ['required', 'max:200'],
-            'sub_title' => ['required', 'max:1000'],
-            'image' => ['image', 'max:5000']
+            'title.en' => ['required', 'max:200'],
+            'sub_title.en' => ['required', 'max:1000'],
+            'image' => ['image', 'max:5000'],
         ]);
 
         $skill = SkillSectionSetting::first();
@@ -82,10 +82,10 @@ class SkillSectionSettingController extends Controller
 
         SkillSectionSetting::updateOrCreate(
             ['id' => $id],
-            [ 
-                'title' => $request->title,
-                'sub_title' => $request->sub_title,
-                'image' => (!empty($imagePath) ? $imagePath : $skill->image)
+            [
+                'title' => $request->input('title'),
+                'sub_title' => $request->input('sub_title'),
+                'image' => (!empty($imagePath) ? $imagePath : $skill->image),
             ]
         );
 

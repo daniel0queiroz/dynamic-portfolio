@@ -4,15 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class About extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
-    protected $fillable = [
-        'title',
-        'description',
-        'image',
-        'resume'
-    ];
+    public array $translatable = ['title', 'description'];
+
+    protected $fillable = ['title', 'description', 'image', 'resume', 'resume_es', 'resume_pt'];
 }

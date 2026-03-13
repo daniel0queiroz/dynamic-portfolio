@@ -72,15 +72,15 @@ class FeedbackSectionSettingController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => ['required', 'max:100'],
-            'sub_title' => ['required', 'max:500'],
+            'title.en' => ['required', 'max:100'],
+            'sub_title.en' => ['required', 'max:500'],
         ]);
 
         FeedbackSectionSetting::updateOrCreate(
             ['id' => $id],
-            [ 
-                'title' => $request->title,
-                'sub_title' => $request->sub_title,
+            [
+                'title' => $request->input('title'),
+                'sub_title' => $request->input('sub_title'),
             ]
         );
 

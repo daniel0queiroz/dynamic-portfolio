@@ -73,8 +73,8 @@ class HeroController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => ['required', 'max:200'],
-            'sub_title' => ['required', 'max:500'],
+            'title.en' => ['required', 'max:200'],
+            'sub_title.en' => ['required', 'max:500'],
             'image' => ['max:3000', 'image'],
         ]);
 
@@ -95,10 +95,10 @@ class HeroController extends Controller
 
         Hero::updateOrCreate(
             ['id' => $id],
-            [ 
-                'title' => $request->title,
-                'sub_title' => $request->sub_title,
-                'btn_text' => $request->btn_text,
+            [
+                'title' => $request->input('title'),
+                'sub_title' => $request->input('sub_title'),
+                'btn_text' => $request->input('btn_text'),
                 'btn_url' => $request->btn_url,
                 'image' => isset($imagePath) ? $imagePath : $hero->image,
             ]

@@ -41,17 +41,17 @@ class BlogController extends Controller
     {
         $request->validate([
             'image' => ['required', 'max:5000', 'image'],
-            'title' => ['required', 'max:200'],
-            'description' => ['required'],
-            'category' => ['required', 'numeric']
+            'title.en' => ['required', 'max:200'],
+            'description.en' => ['required'],
+            'category' => ['required', 'numeric'],
         ]);
 
         $imagePath = handleUpload('image');
 
         $blog = new Blog();
         $blog->image = $imagePath;
-        $blog->title = $request->title;
-        $blog->description = $request->description;
+        $blog->title = $request->input('title');
+        $blog->description = $request->input('description');
         $blog->category = $request->category;
         $blog->save();
 
@@ -95,17 +95,17 @@ class BlogController extends Controller
     {
         $request->validate([
             'image' => ['max:5000', 'image'],
-            'title' => ['required', 'max:200'],
-            'description' => ['required'],
-            'category' => ['required', 'numeric']
+            'title.en' => ['required', 'max:200'],
+            'description.en' => ['required'],
+            'category' => ['required', 'numeric'],
         ]);
 
         $blog = Blog::findOrFail($id);
         $imagePath = handleUpload('image', $blog);
 
         $blog->image = (!empty($imagePath) ? $imagePath : $blog->image);
-        $blog->title = $request->title;
-        $blog->description = $request->description;
+        $blog->title = $request->input('title');
+        $blog->description = $request->input('description');
         $blog->category = $request->category;
         $blog->save();
 

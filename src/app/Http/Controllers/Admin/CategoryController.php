@@ -39,12 +39,12 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'max:200']
+            'name.en' => ['required', 'max:200'],
         ]);
 
         $category = new Category();
-        $category->name = $request->name;
-        $category->slug = \Str::slug($request->name);
+        $category->name = $request->input('name');
+        $category->slug = \Str::slug($request->input('name.en'));
         $category->save();
         
         toastr()->success('Category Created Successfully!');
@@ -84,12 +84,12 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => ['required', 'max:200']
+            'name.en' => ['required', 'max:200'],
         ]);
 
         $category = Category::findOrFail($id);
-        $category->name = $request->name;
-        $category->slug = \Str::slug($request->name);
+        $category->name = $request->input('name');
+        $category->slug = \Str::slug($request->input('name.en'));
         $category->save();
         
         toastr()->success('Category Updated Successfully!');

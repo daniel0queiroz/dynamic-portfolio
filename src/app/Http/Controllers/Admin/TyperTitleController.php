@@ -38,11 +38,11 @@ class TyperTitleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => ['required', 'max:200']
+            'title.en' => ['required', 'max:200'],
         ]);
 
         $create = new TyperTitle();
-        $create->title = $request->title;
+        $create->title = $request->input('title');
         $create->save();
         toastr()->success('Created Successfully', 'Congrats');
 
@@ -82,11 +82,11 @@ class TyperTitleController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => ['required', 'max:200']
+            'title.en' => ['required', 'max:200'],
         ]);
 
         $edit = TyperTitle::findOrFail($id);
-        $edit->title = $request->title;
+        $edit->title = $request->input('title');
         $edit->save();
         toastr()->success('Updated Successfully', 'Congrats');
 

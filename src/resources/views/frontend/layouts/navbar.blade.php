@@ -67,6 +67,20 @@
                     </li>
                 @endif
             </ul>
+
+            <ul class="navbar-nav ms-2">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ strtoupper(app()->getLocale()) }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown" style="background-color: #fff;">
+                        <li><a class="dropdown-item {{ app()->getLocale() == 'en' ? 'active' : '' }}" href="{{ route('lang.switch', 'en') }}" style="color: #190844;">English</a></li>
+                        <li><a class="dropdown-item {{ app()->getLocale() == 'es' ? 'active' : '' }}" href="{{ route('lang.switch', 'es') }}" style="color: #190844;">Español</a></li>
+                        <li><a class="dropdown-item {{ app()->getLocale() == 'pt' ? 'active' : '' }}" href="{{ route('lang.switch', 'pt') }}" style="color: #190844;">Português</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>

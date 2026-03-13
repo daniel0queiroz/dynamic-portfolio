@@ -38,15 +38,15 @@ class FeedbackController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'max:50'],
-            'position' => ['nullable', 'max:100'],
-            'description' => ['required', 'max:1000'],
+            'name.en' => ['required', 'max:50'],
+            'position.en' => ['nullable', 'max:100'],
+            'description.en' => ['required', 'max:1000'],
         ]);
 
         $feedback = new Feedback();
-        $feedback->name = $request->name;
-        $feedback->position = $request->position;
-        $feedback->description = $request->description;
+        $feedback->name = $request->input('name');
+        $feedback->position = $request->input('position');
+        $feedback->description = $request->input('description');
         $feedback->save();
 
         toastr('Created Successfully!', 'success');
@@ -87,15 +87,15 @@ class FeedbackController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => ['required', 'max:50'],
-            'position' => ['required', 'max:100'],
-            'description' => ['required', 'max:1000'],
+            'name.en' => ['required', 'max:50'],
+            'position.en' => ['nullable', 'max:100'],
+            'description.en' => ['required', 'max:1000'],
         ]);
 
         $feedback = Feedback::findOrFail($id);
-        $feedback->name = $request->name;
-        $feedback->position = $request->position;
-        $feedback->description = $request->description;
+        $feedback->name = $request->input('name');
+        $feedback->position = $request->input('position');
+        $feedback->description = $request->input('description');
         $feedback->save();
 
         toastr('Updated Successfully!', 'success');

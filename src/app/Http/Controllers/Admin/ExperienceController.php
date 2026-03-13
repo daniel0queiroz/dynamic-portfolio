@@ -73,23 +73,23 @@ class ExperienceController extends Controller
     {
         $request->validate([
             'image' => ['image', 'max:5000'],
-            'title' => ['required', 'max:200'],
-            'description' => ['required', 'max:1000'],
+            'title.en' => ['required', 'max:200'],
+            'description.en' => ['required', 'max:1000'],
             'phone' => ['nullable', 'max:100'],
             'email' => ['nullable', 'max:100', 'email'],
         ]);
-        
+
         $experience = Experience::find($id);
         $imagePath = handleUpload('image', $experience);
 
         Experience::updateOrCreate(
             ['id' => $id],
-            [ 
+            [
                 'image' => (!empty($imagePath) ? $imagePath : $experience->image),
-                'title' => $request->title,
-                'description' => $request->description,
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
                 'phone' => $request->phone,
-                'email' => $request->email
+                'email' => $request->email,
             ]
         );
 

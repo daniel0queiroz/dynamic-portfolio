@@ -23,6 +23,8 @@ class ServiceDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->editColumn('name', fn($row) => $row->getTranslation('name', 'en', false))
+            ->editColumn('description', fn($row) => $row->getTranslation('description', 'en', false))
             ->addColumn('action', function($query){
                 return '<a href="'.route('admin.service.edit', $query->id).'" class="btn btn-primary"><i class="fas fa-edit"></i></a><a href="'.route('admin.service.destroy', $query->id).'" class="btn btn-danger delete-item"><i class="fas fa-trash"></i></a>';
             })

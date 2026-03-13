@@ -26,8 +26,9 @@ class BlogDataTable extends DataTable
             ->addColumn('image', function($query){
                 return '<img style="width:70px" src="'.asset($query->image).'"></img>';
             })
+            ->editColumn('title', fn($row) => $row->getTranslation('title', 'en', false))
             ->addColumn('category', function($query){
-                return $query->getCategory->name;
+                return $query->getCategory->getTranslation('name', 'en', false);
             })
             ->addColumn('created_at', function($query){
                 return date('d-M-Y | H:s', strtotime($query->created_at));

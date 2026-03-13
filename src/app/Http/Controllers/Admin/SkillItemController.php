@@ -38,12 +38,12 @@ class SkillItemController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'max:100'],
+            'name.en' => ['required', 'max:100'],
             'percent' => ['required', 'numeric', 'max:100'],
         ]);
 
         $skill = new SkillItem();
-        $skill->name = $request->name;
+        $skill->name = $request->input('name');
         $skill->percent = $request->percent;
         $skill->save();
 
@@ -85,12 +85,12 @@ class SkillItemController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => ['required', 'max:100'],
+            'name.en' => ['required', 'max:100'],
             'percent' => ['required', 'numeric', 'max:100'],
         ]);
 
         $skill = SkillItem::findOrFail($id);
-        $skill->name = $request->name;
+        $skill->name = $request->input('name');
         $skill->percent = $request->percent;
         $skill->save();
 

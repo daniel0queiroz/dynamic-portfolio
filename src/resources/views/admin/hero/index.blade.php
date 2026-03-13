@@ -4,7 +4,7 @@
     <section class="section">
           <div class="section-header">
             <div class="section-header-back">
-              <a href="features-posts.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+              <a href="javascript:history.back()" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
             <h1>Hero Section</h1>
           </div>
@@ -21,22 +21,37 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
-                        <div class="col-sm-12 col-md-7">
-                            <input type="text" name="title" class="form-control" value="{{$hero?->title}}">
-                        </div>
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
+                            <div class="col-sm-12 col-md-7">
+                                <small class="text-muted">English <span class="text-danger">*</span></small>
+                                <input type="text" name="title[en]" class="form-control mb-2" value="{{$hero?->getTranslation('title','en',false)}}">
+                                <small class="text-muted">Español</small>
+                                <input type="text" name="title[es]" class="form-control mb-2" value="{{$hero?->getTranslation('title','es',false)}}">
+                                <small class="text-muted">Português</small>
+                                <input type="text" name="title[pt]" class="form-control" value="{{$hero?->getTranslation('title','pt',false)}}">
+                            </div>
                         </div>
                         <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Subtitle</label>
-                        <div class="col-sm-12 col-md-7">
-                            <textarea name="sub_title" id="" class="form-control" style="height: 100px">{{$hero?->sub_title}}</textarea>
-                        </div>
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Subtitle</label>
+                            <div class="col-sm-12 col-md-7">
+                                <small class="text-muted">English <span class="text-danger">*</span></small>
+                                <textarea name="sub_title[en]" class="form-control mb-2" style="height: 100px">{{$hero?->getTranslation('sub_title','en',false)}}</textarea>
+                                <small class="text-muted">Español</small>
+                                <textarea name="sub_title[es]" class="form-control mb-2" style="height: 100px">{{$hero?->getTranslation('sub_title','es',false)}}</textarea>
+                                <small class="text-muted">Português</small>
+                                <textarea name="sub_title[pt]" class="form-control" style="height: 100px">{{$hero?->getTranslation('sub_title','pt',false)}}</textarea>
+                            </div>
                         </div>
                         <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Button Text</label>
-                        <div class="col-sm-12 col-md-7">
-                            <input type="text" name="btn_text" class="form-control" value="{{$hero?->btn_text}}">
-                        </div>
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Button Text</label>
+                            <div class="col-sm-12 col-md-7">
+                                <small class="text-muted">English</small>
+                                <input type="text" name="btn_text[en]" class="form-control mb-2" value="{{$hero?->getTranslation('btn_text','en',false)}}">
+                                <small class="text-muted">Español</small>
+                                <input type="text" name="btn_text[es]" class="form-control mb-2" value="{{$hero?->getTranslation('btn_text','es',false)}}">
+                                <small class="text-muted">Português</small>
+                                <input type="text" name="btn_text[pt]" class="form-control" value="{{$hero?->getTranslation('btn_text','pt',false)}}">
+                            </div>
                         </div>
                         <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Button Url</label>
