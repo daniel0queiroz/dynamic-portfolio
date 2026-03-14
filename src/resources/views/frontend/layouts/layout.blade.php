@@ -52,6 +52,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 	<script src="{{asset('frontend/assets/js/vendor/modernizr.js')}}"></script>
 	<script src="{{asset('frontend/assets/js/main.js')}}"></script>
+	<script src="{{asset('frontend/assets/js/lang-switch.js')}}"></script>
 	@stack('scripts')
 </body>
 
