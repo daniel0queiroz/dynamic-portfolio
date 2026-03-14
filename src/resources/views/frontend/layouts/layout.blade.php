@@ -20,7 +20,7 @@
 	<link rel="stylesheet" href="{{asset('frontend/assets/css/style-plugin-collection.css')}}">
 	<link rel="stylesheet" href="{{asset('frontend/assets/css/theme.css')}}">
 	<link rel="stylesheet" href="{{asset('frontend/assets/css/responsive.css')}}">
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="{{asset('frontend/assets/css/toastr.min.css')}}">
 </head>
 
 <body>
@@ -46,13 +46,12 @@
 
 
 	<script src="{{asset('frontend/assets/js/vendor/jquery-min.js')}}"></script>
-	<script src="{{asset('frontend/assets/js/bootstrap.bundle.min.js')}}"></script>
-	{{-- <script src="{{asset('frontend/assets/js/contact-form.js')}}"></script> --}}
-	<script src="{{asset('frontend/assets/js/jquery-plugin-collection.js')}}"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-	<script src="{{asset('frontend/assets/js/vendor/modernizr.js')}}"></script>
-	<script src="{{asset('frontend/assets/js/main.js')}}"></script>
-	<script src="{{asset('frontend/assets/js/lang-switch.js')}}"></script>
+	<script src="{{asset('frontend/assets/js/bootstrap.bundle.min.js')}}" defer></script>
+	<script src="{{asset('frontend/assets/js/jquery-plugin-collection.js')}}" defer></script>
+	<script src="{{asset('frontend/assets/js/toastr.min.js')}}" defer></script>
+	<script src="{{asset('frontend/assets/js/vendor/modernizr.js')}}" defer></script>
+	<script src="{{asset('frontend/assets/js/main.js')}}" defer></script>
+	<script src="{{asset('frontend/assets/js/lang-switch.js')}}" defer></script>
 	@stack('scripts')
 </body>
 
