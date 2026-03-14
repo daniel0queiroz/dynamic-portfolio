@@ -25,7 +25,12 @@
 
 <body>
 	<div class="preloader">
-		<img src="{{asset('frontend/assets/images/preloader.gif')}}" alt="">
+		<div class="preloader-inner">
+			<svg class="preloader-ring" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+				<circle class="preloader-ring-bg" cx="50" cy="50" r="42"/>
+				<circle class="preloader-ring-fill" cx="50" cy="50" r="42"/>
+			</svg>
+		</div>
 	</div>
 
     @include('frontend.layouts.navbar')
