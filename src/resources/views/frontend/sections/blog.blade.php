@@ -23,7 +23,7 @@
                             <div class="desc">
                                 <p>{!! Str::limit($blog->description, 150, '...') !!}</p>
                             </div>
-                            <a href="{{route('show.blog', $blog->id)}}" class="button-primary-trans mouse-dir">Read More <span
+                            <a href="{{route('show.blog', $blog->id)}}" class="button-primary-trans mouse-dir">{{ __('ui.buttons.read_more') }} <span
                                     class="dir-part"></span> <i class="fal fa-arrow-right"></i></a>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
         <div class="row">
                 <div class="text-center mt-4">
                 <a href="{{route('blog')}}" class="button-primary-trans mouse-dir">
-                    View More <span class="dir-part"></span> 
+                    {{ __('ui.buttons.view_more') }} <span class="dir-part"></span> 
                     <i class="fal fa-arrow-right"></i>
                 </a>
                 </div>

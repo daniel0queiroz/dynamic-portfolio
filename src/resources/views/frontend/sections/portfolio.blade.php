@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <ul class="filter-menu">
-                    <li class="active" data-filter="*">All Projects</li>
+                    <li class="active" data-filter="*">{{ __('ui.filters.all_projects') }}</li>
                     @foreach ($portfolioCategories as $category)
                         <li data-filter=".{{$category->slug}}">{{$category->name}}</li>
                     @endforeach
@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="text-center">
                 <a href="{{route('portfolio')}}" class="button-primary-trans mouse-dir">
-                    View More <span class="dir-part"></span> 
+                    {{ __('ui.buttons.view_more') }} <span class="dir-part"></span> 
                     <i class="fal fa-arrow-right"></i>
                 </a>
                    </div>
