@@ -19,25 +19,25 @@
                 <li class="nav-item">
                     <a class="nav-link {{ $routeName == 'home' ? 'active' : '' }}"
                         href="{{ $routeName == 'home' ? '#home-page' : url('/') }}">
-                        Home
+                        {{ __('ui.nav.home') }}
                     </a>
                 </li>
 
                 @if ($routeName == 'home')
                     <li class="nav-item">
-                        <a class="nav-link" href="#about-page">About</a>
+                        <a class="nav-link" href="#about-page">{{ __('ui.nav.about') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#portfolio-page">Portfolio</a>
+                        <a class="nav-link" href="#portfolio-page">{{ __('ui.nav.portfolio') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#skills-page">Skills</a>
+                        <a class="nav-link" href="#skills-page">{{ __('ui.nav.skills') }}</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#blog-page">Blogs</a>
+                        <a class="nav-link" href="#blog-page">{{ __('ui.nav.blogs') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact-page">Contact</a>
+                        <a class="nav-link" href="#contact-page">{{ __('ui.nav.contact') }}</a>
                     </li>
                 @endif
 
@@ -45,7 +45,7 @@
                     <li class="nav-item">
                         <a class="nav-link {{ $routeName == 'portfolio' || $routeName == 'show.portfolio' ? 'active' : '' }}"
                             href="{{ route('portfolio') }}">
-                            Portfolio
+                            {{ __('ui.nav.portfolio') }}
                         </a>
                     </li>
                 @endif
@@ -54,7 +54,7 @@
                     <li class="nav-item">
                         <a class="nav-link {{ $routeName == 'blog' || $routeName == 'show.blog' ? 'active' : '' }}"
                             href="{{ route('blog') }}">
-                            Blogs
+                            {{ __('ui.nav.blogs') }}
                         </a>
                     </li>
                 @endif
@@ -62,7 +62,7 @@
                 @if ($routeName == 'privacy-policy')
                     <li class="nav-item">
                         <a class="nav-link {{ $routeName == 'privacy-policy' ? 'active' : '' }}" href="{{ route('privacy-policy') }}">
-                            Privacy Policy
+                            {{ __('ui.nav.privacy') }}
                         </a>
                     </li>
                 @endif

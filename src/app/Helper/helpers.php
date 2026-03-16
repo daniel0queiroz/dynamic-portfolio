@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 /** Handle File Upload */
 
@@ -11,16 +12,19 @@ function handleUpload($inputName, $model = null)
         if (request()->hasFile($inputName)) {
 
             if ($model && $model->{$inputName}) {
-                Storage::disk('uploads')->delete($model->{$inputName});
+                $oldPath = normalizeUploadPath($model->{$inputName});
+                if ($oldPath) {
+                    Storage::disk('uploads')->delete($oldPath);
+                }
             }
 
             $file = request()->file($inputName);
-            $fileName = rand() . $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $fileName = Str::uuid()->toString() . ($extension ? '.' . $extension : '');
 
             Storage::disk('uploads')->putFileAs('', $file, $fileName);
 
-            $appUrl = rtrim(env('APP_URL'), '/');
-            return $appUrl . '/uploads/' . $fileName;
+            return 'uploads/' . $fileName;
         }
     } catch (\Exception $e) {
         throw $e;
@@ -36,10 +40,36 @@ function handleUpload($inputName, $model = null)
 function deleteFileIfExist($fileName)
 {
     try {
-        Storage::disk('uploads')->delete($fileName);
+        $path = normalizeUploadPath($fileName);
+        if ($path) {
+            Storage::disk('uploads')->delete($path);
+        }
     } catch (\Exception $e) {
         throw $e;
     }
+}
+
+/**
+ * Normalize a stored upload path or URL into a disk-relative path.
+ */
+function normalizeUploadPath($value)
+{
+    if (empty($value)) {
+        return null;
+    }
+
+    $path = $value;
+    $parsed = parse_url($value);
+    if (is_array($parsed) && isset($parsed['path'])) {
+        $path = $parsed['path'];
+    }
+
+    $path = ltrim($path, '/');
+    if (Str::startsWith($path, 'uploads/')) {
+        $path = Str::after($path, 'uploads/');
+    }
+
+    return $path ?: null;
 }
 
 /** Get Dynamic Colors */

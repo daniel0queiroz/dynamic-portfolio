@@ -5,13 +5,13 @@
             <div class="container">
                 <div class="row d-flex align-items-center">
                     <div class="col-sm-8">
-                        <h2 class="title">Blog Details</h2>
+                        <h2 class="title">{{ __('ui.titles.blog_details') }}</h2>
                     </div>
                     <div class="col-sm-4">
                         <div class="breadcrumbs">
                             <ul>
-                                <li><a href="#">Home</a></li>
-                                <li>Blogs</li>
+                                <li><a href="#">{{ __('ui.breadcrumbs.home') }}</a></li>
+                                <li>{{ __('ui.breadcrumbs.blogs') }}</li>
                             </ul>
                         </div>
                     </div>
@@ -27,11 +27,11 @@
                         <h2 class="head-title">{{$blog->title}}</h2>
                         <div class="blog-meta">
                             <div class="single-meta">
-                                <div class="meta-title">Published</div>
+                                <div class="meta-title">{{ __('ui.meta.published') }}</div>
                                 <h4 class="meta-value"><a href="javascript:void(0)">{{date('d M, Y', strtotime($blog->created_at))}}</a></h4>
                             </div>
                             <div class="single-meta">
-                                <div class="meta-title">Tag</div>
+                                <div class="meta-title">{{ __('ui.meta.tag') }}</div>
                                 <h4 class="meta-value"><a href="javascript:void(0)">{{$blog->getCategory->name}}</a></h4>
                             </div>
                         </div>

@@ -5,13 +5,13 @@
             <div class="container">
                 <div class="row d-flex align-items-center">
                     <div class="col-sm-7">
-                        <h2 class="title">Blogs</h2>
+                        <h2 class="title">{{ __('ui.titles.blogs') }}</h2>
                     </div>
                     <div class="col-sm-5">
                         <div class="breadcrumbs">
                             <ul>
-                                <li><a href="#">Home</a></li>
-                                <li>Blogs</li>
+                                <li><a href="#">{{ __('ui.breadcrumbs.home') }}</a></li>
+                                <li>{{ __('ui.breadcrumbs.blogs') }}</li>
                             </ul>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                                     <div class="desc">
                                         <p>{!! Str::limit($blog->description, 150, '...') !!}</p>
                                     </div>
-                                    <a href="{{route('show.blog', $blog->id)}}" class="button-primary-trans mouse-dir">Read More <span
+                                    <a href="{{route('show.blog', $blog->id)}}" class="button-primary-trans mouse-dir">{{ __('ui.buttons.read_more') }} <span
                                             class="dir-part"></span> <i class="fal fa-arrow-right"></i></a>
                                 </div>
                             </div>

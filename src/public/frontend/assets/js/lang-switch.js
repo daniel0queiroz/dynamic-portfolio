@@ -46,6 +46,9 @@
         ['.portfolio-area .section-title .desc',           'html'],
         ['.footer-area .text-box > p',                     'text'],
         ['.footer-bottom .copyright p:first-child',        'text'],
+        ['.portfolio-area .filter-menu li.active',         'text'],
+        ['.portfolio-area .button-primary-trans',          'html'],
+        ['#blog-page .text-center .button-primary-trans',  'html'],
     ];
 
     // Multiple elements: [selector, 'text'|'html']
@@ -57,6 +60,8 @@
         ['.portfolio-area .filter-menu li:not(:first-child)',   'text'],
         ['.footer-area .col-lg-2 .nav-menu li a',               'text'],
         ['.footer-area .col-lg-3:last-child .nav-menu li a',    'text'],
+        ['#main_menu_area .navbar-nav.ms-auto .nav-link',       'text'],
+        ['.footer-area .widget-title',                          'text'],
     ];
 
     // ─── Helpers ──────────────────────────────────────────────────────────────
@@ -167,8 +172,34 @@
         if (!link) return;
         var m = (link.getAttribute('href') || '').match(/\/lang\/([a-z]+)/);
         if (!m) return;
+
+        // Only use AJAX swap on the home page. Other pages should reload to
+        // render translated content server-side.
+        if (!document.querySelector('#home-page')) {
+            // Preserve scroll position for a smoother UX after reload.
+            try {
+                sessionStorage.setItem('langSwitchScrollY', String(window.scrollY || 0));
+            } catch (err) {}
+            window.location.href = link.getAttribute('href');
+            return;
+        }
+
         e.preventDefault();
         switchLanguage(m[1]);
+    });
+
+    // ─── Restore scroll position after language reload ───────────────────────
+    document.addEventListener('DOMContentLoaded', function () {
+        if (document.querySelector('#home-page')) return;
+        try {
+            var stored = sessionStorage.getItem('langSwitchScrollY');
+            if (!stored) return;
+            sessionStorage.removeItem('langSwitchScrollY');
+            var y = parseInt(stored, 10);
+            if (!isNaN(y)) {
+                window.scrollTo(0, y);
+            }
+        } catch (err) {}
     });
 
 })(jQuery);
