@@ -26,7 +26,7 @@
                     <div class="col-sm-12">
                         <h2 class="head-title">{{$portfolio->title}}</h2>
                         <figure class="image-block">
-                            <img src="{{asset($portfolio->image)}}" alt="" class="img-fix">
+                            <img src="{{asset($portfolio->image)}}" alt="" class="img-fix" loading="lazy" decoding="async">
                         </figure>
                         <div class="portflio-info d-flex flex-wrap justify-content-evenly text-center">
                             @if(!empty($portfolio->client))

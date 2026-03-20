@@ -115,67 +115,6 @@
         });
     }
 
-    // ─── Main switch function ─────────────────────────────────────────────────
-    async function switchLanguage(locale) {
-        var preloader = document.querySelector('.preloader');
-        if (preloader) {
-            preloader.style.cssText = 'display:flex;opacity:1;';
-        }
-
-        try {
-            await fetch('/lang/' + locale + '?ajax=1', {
-                redirect: 'follow',
-                credentials: 'same-origin'
-            });
-            var url = new URL(window.location.href);
-            url.searchParams.set('lang', locale);
-            url.searchParams.set('ts', Date.now());
-            var resp = await fetch(url.toString(), {
-                credentials: 'same-origin',
-                cache: 'no-store'
-            });
-            var html = await resp.text();
-            var newDoc = new DOMParser().parseFromString(html, 'text/html');
-
-            // Swap single elements
-            singles.forEach(function (rule) {
-                swapEl(
-                    document.querySelector(rule[0]),
-                    newDoc.querySelector(rule[0]),
-                    rule[1]
-                );
-            });
-
-            // Swap multiple elements by index
-            multiples.forEach(function (rule) {
-                var els    = document.querySelectorAll(rule[0]);
-                var newEls = newDoc.querySelectorAll(rule[0]);
-                els.forEach(function (el, i) {
-                    swapEl(el, newEls[i], rule[1]);
-                });
-            });
-
-            // Reinit sliders
-            reinitSlider('.testimonial-slider', testimonialSlickOpts, newDoc);
-            reinitSlider('.blog-slider',        blogSlickOpts,        newDoc);
-
-            // Reinit typer
-            reinitTyper(newDoc);
-
-            // Update navbar locale display
-            updateNavbar(locale);
-
-        } catch (e) {
-            // Fallback: navigate normally
-            window.location.href = '/lang/' + locale;
-            return;
-        }
-
-        if (preloader) {
-            $(preloader).fadeOut(400);
-        }
-    }
-
     // ─── Intercept lang switcher clicks ──────────────────────────────────────
     document.addEventListener('click', function (e) {
         var link = e.target.closest('a[href*="/lang/"]');
@@ -183,32 +122,26 @@
         var m = (link.getAttribute('href') || '').match(/\/lang\/([a-z]+)/);
         if (!m) return;
 
-        // Only use AJAX swap on the home page. Other pages should reload to
-        // render translated content server-side.
-        if (!document.querySelector('#home-page')) {
-            // Preserve scroll position for a smoother UX after reload.
-            try {
-                sessionStorage.setItem('langSwitchScrollY', String(window.scrollY || 0));
-            } catch (err) {}
-            window.location.href = link.getAttribute('href');
-            return;
-        }
+        // Preserve scroll position for a smoother UX after reload.
+        try {
+            sessionStorage.setItem('langSwitchScrollY', String(window.scrollY || 0));
+        } catch (err) {}
 
         e.preventDefault();
-        switchLanguage(m[1]);
+        window.location.href = link.getAttribute('href');
     });
 
     // ─── Restore scroll position after language reload ───────────────────────
     document.addEventListener('DOMContentLoaded', function () {
-        if (document.querySelector('#home-page')) return;
         try {
             var stored = sessionStorage.getItem('langSwitchScrollY');
             if (!stored) return;
             sessionStorage.removeItem('langSwitchScrollY');
             var y = parseInt(stored, 10);
-            if (!isNaN(y)) {
+            if (isNaN(y)) return;
+            requestAnimationFrame(function () {
                 window.scrollTo(0, y);
-            }
+            });
         } catch (err) {}
     });
 

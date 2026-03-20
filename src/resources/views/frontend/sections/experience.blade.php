@@ -3,7 +3,7 @@
         <div class="row d-flex align-items-center">
             <div class="col-lg-6 d-none d-lg-block">
                 <figure class="single-image wow fadeInLeft">
-                    <img src="{{$experience?->image}}" alt="">
+                    <img src="{{$experience?->image}}" alt="" loading="lazy" decoding="async">
                 </figure>
             </div>
             <div class="col-lg-6">
