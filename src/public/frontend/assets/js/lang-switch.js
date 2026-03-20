@@ -58,6 +58,7 @@
         ['.skills-area .bar_group .title',                      'text'],
         ['.portfolio-area .portfolio-content h4.title a',       'text'],
         ['.portfolio-area .filter-menu li',                     'text'],
+        ['.button-primary-trans',                               'html'],
         ['.footer-area .col-lg-2 .nav-menu li a',               'text'],
         ['.footer-area .col-lg-3:last-child .nav-menu li a',    'text'],
         ['#main_menu_area .navbar-nav.ms-auto .nav-link',       'text'],
@@ -126,9 +127,10 @@
                 redirect: 'follow',
                 credentials: 'same-origin'
             });
-            var url = window.location.pathname + window.location.search;
-            var sep = url.indexOf('?') === -1 ? '?' : '&';
-            var resp = await fetch(url + sep + 'ts=' + Date.now(), {
+            var url = new URL(window.location.href);
+            url.searchParams.set('lang', locale);
+            url.searchParams.set('ts', Date.now());
+            var resp = await fetch(url.toString(), {
                 credentials: 'same-origin',
                 cache: 'no-store'
             });
