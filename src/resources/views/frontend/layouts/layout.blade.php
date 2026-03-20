@@ -24,6 +24,7 @@
 	<link rel="stylesheet" href="{{asset('frontend/assets/css/theme.css')}}">
 	<link rel="stylesheet" href="{{asset('frontend/assets/css/responsive.css')}}">
 	<link rel="stylesheet" href="{{asset('frontend/assets/css/toastr.min.css')}}">
+	@stack('head')
 </head>
 
 <body>

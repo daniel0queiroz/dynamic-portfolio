@@ -128,7 +128,10 @@
         } catch (err) {}
 
         e.preventDefault();
-        window.location.href = link.getAttribute('href');
+        var url = new URL(window.location.href);
+        url.searchParams.set('lang', m[1]);
+        url.searchParams.set('ts', Date.now());
+        window.location.href = url.toString();
     });
 
     // ─── Restore scroll position after language reload ───────────────────────
