@@ -133,15 +133,15 @@
 
     // ─── Restore scroll position after language reload ───────────────────────
     document.addEventListener('DOMContentLoaded', function () {
-        if (document.querySelector('#home-page')) return;
         try {
             var stored = sessionStorage.getItem('langSwitchScrollY');
             if (!stored) return;
             sessionStorage.removeItem('langSwitchScrollY');
             var y = parseInt(stored, 10);
-            if (!isNaN(y)) {
+            if (isNaN(y)) return;
+            requestAnimationFrame(function () {
                 window.scrollTo(0, y);
-            }
+            });
         } catch (err) {}
     });
 

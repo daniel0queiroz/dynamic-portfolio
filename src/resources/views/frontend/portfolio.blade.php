@@ -27,7 +27,7 @@
                         <div class="col-xl-4 col-md-6">
                             <div class="single-card">
                                 <figure class="card-image">
-                                    <img src="{{asset($portfolio->image)}}" alt="">
+                                    <img src="{{asset($portfolio->image)}}" alt="" loading="lazy" decoding="async">
                                 </figure>
                                 <div class="card-content">
                                     <h3 class="title"><a href="{{route('show.portfolio', $portfolio->id)}}">{{$portfolio->title}}</a></h3>

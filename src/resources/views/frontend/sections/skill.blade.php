@@ -26,7 +26,7 @@
             </div>
             <div class="col-lg-6 d-none d-lg-block">
                 <figure class="single-image text-right wow fadeInRight">
-                    <img src="{{asset($skill?->image)}}" alt="">
+                    <img src="{{asset($skill?->image)}}" alt="" loading="lazy" decoding="async">
                 </figure>
             </div>
         </div>

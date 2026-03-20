@@ -36,7 +36,7 @@
                             </div>
                         </div>
                         <figure class="image-block">
-                            <img class="img-fix" src="{{asset($blog->image)}}" alt="">
+                            <img class="img-fix" src="{{asset($blog->image)}}" alt="" loading="lazy" decoding="async">
                         </figure>
                         <div class="description">
                             {!! $blog->description !!}

@@ -13,7 +13,7 @@
 					<div class="col-md-12 col-lg-3 widget">
 						<div class="text-box">
 							<figure class="footer-logo">
-								<img src="{{asset($generalSetting?->footer_logo)}}" alt="">
+								<img src="{{asset($generalSetting?->footer_logo)}}" alt="" loading="lazy" decoding="async">
 							</figure>
 							<p>{{$footerInfo?->info}}</p>
 							<ul class="d-flex flex-wrap">

@@ -257,6 +257,68 @@
         line-height: 60px;
     }
 
+    #navbarNav {
+        overflow: visible;
+    }
+
+    .main_menu .navbar-nav.ms-2 {
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        padding: 0 0 10px;
+        position: relative;
+    }
+
+    .main_menu .navbar-nav.ms-2 .nav-item {
+        text-align: center;
+        position: relative;
+    }
+
+    .main_menu .navbar-nav.ms-2 .dropdown-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+    }
+
+    .main_menu .navbar-nav.ms-2 .dropdown-menu {
+        position: absolute;
+        left: 50%;
+        right: auto;
+        top: 100%;
+        transform: translateX(-50%);
+        min-width: 170px;
+        width: max-content;
+        margin: 8px 0 0;
+        padding: 8px 10px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .main_menu .navbar-nav.ms-2 .dropdown-item {
+        display: block;
+        text-align: center;
+        padding: 6px 14px;
+    }
+
+    .main_menu .navbar-nav.ms-2 .dropdown-menu li {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    .main_menu .navbar-nav.ms-2 .dropdown-menu[data-bs-popper] {
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+    }
+
+    .main_menu .navbar-nav.ms-2 .dropdown-menu li a {
+        margin: 0 !important;
+        text-align: center !important;
+        justify-content: center;
+    }
+
     .main_menu .sub_menu {
         width: 90%;
         text-align: center;
