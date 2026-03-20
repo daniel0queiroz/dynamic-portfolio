@@ -7,6 +7,12 @@
         ->all();
 @endphp
 
+@push('head')
+    @if ($hero?->image)
+        <link rel="preload" as="image" href="{{ asset($hero->image) }}">
+    @endif
+@endpush
+
 <header class="header-area parallax-bg"  id="home-page" style="background: url('{{asset($hero?->image)}}') no-repeat scroll top center/cover;">
     <div class="container">
         <div class="row">
