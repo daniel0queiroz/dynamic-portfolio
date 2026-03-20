@@ -14,8 +14,12 @@ class LanguageController extends Controller
             $locale = 'en';
         }
 
-        return redirect()->back()->withCookie(
-            cookie()->forever('locale', $locale)
-        );
+        $cookie = cookie()->forever('locale', $locale);
+
+        if ($request->boolean('ajax')) {
+            return response()->noContent()->withCookie($cookie);
+        }
+
+        return redirect()->back()->withCookie($cookie);
     }
 }

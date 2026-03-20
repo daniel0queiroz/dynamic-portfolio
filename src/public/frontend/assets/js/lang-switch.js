@@ -57,7 +57,7 @@
         ['.service-area .single-service .desc p',               'text'],
         ['.skills-area .bar_group .title',                      'text'],
         ['.portfolio-area .portfolio-content h4.title a',       'text'],
-        ['.portfolio-area .filter-menu li:not(:first-child)',   'text'],
+        ['.portfolio-area .filter-menu li',                     'text'],
         ['.footer-area .col-lg-2 .nav-menu li a',               'text'],
         ['.footer-area .col-lg-3:last-child .nav-menu li a',    'text'],
         ['#main_menu_area .navbar-nav.ms-auto .nav-link',       'text'],
@@ -87,20 +87,22 @@
     }
 
     function reinitTyper(newDoc) {
-        var newTitles = null;
-        newDoc.querySelectorAll('script').forEach(function (s) {
-            var m = s.textContent.match(/\.typer\((\[[\s\S]*?\])\)/);
-            if (m) {
-                try { newTitles = JSON.parse(m[1]); } catch (e) {}
-            }
-        });
-        if (!newTitles) return;
+        var newEl = newDoc.querySelector('.header-area .typer-title');
+        if (!newEl) return;
+        var titles = [];
+        try {
+            titles = JSON.parse(newEl.getAttribute('data-typer-titles') || '[]');
+        } catch (e) {}
         var typerEl = document.querySelector('.header-area .typer-title');
         if (!typerEl) return;
         // Replace element to clear plugin state, then reinit
         var fresh = typerEl.cloneNode(false);
+        fresh.textContent = newEl.textContent || '';
+        fresh.setAttribute('data-typer-titles', newEl.getAttribute('data-typer-titles') || '[]');
         typerEl.parentNode.replaceChild(fresh, typerEl);
-        $(fresh).typer(newTitles);
+        if (titles.length) {
+            $(fresh).typer(titles);
+        }
     }
 
     function updateNavbar(locale) {
@@ -120,9 +122,15 @@
         }
 
         try {
-            var resp = await fetch('/lang/' + locale, {
+            await fetch('/lang/' + locale + '?ajax=1', {
                 redirect: 'follow',
                 credentials: 'same-origin'
+            });
+            var url = window.location.pathname + window.location.search;
+            var sep = url.indexOf('?') === -1 ? '?' : '&';
+            var resp = await fetch(url + sep + 'ts=' + Date.now(), {
+                credentials: 'same-origin',
+                cache: 'no-store'
             });
             var html = await resp.text();
             var newDoc = new DOMParser().parseFromString(html, 'text/html');
