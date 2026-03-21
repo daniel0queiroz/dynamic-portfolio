@@ -35,16 +35,32 @@
 
 @push('scripts')
     <script>
-        window.addEventListener('load', function () {
+        (function initTyperWithRetry() {
             var el = document.querySelector('.header-area .typer-title');
             if (!el) return;
             var titles = [];
             try {
                 titles = JSON.parse(el.getAttribute('data-typer-titles') || '[]');
             } catch (e) {}
-            if (titles.length) {
-                $(el).typer(titles);
+            if (!titles.length) return;
+
+            var attempts = 0;
+            function tryInit() {
+                attempts += 1;
+                if (window.jQuery && jQuery.fn && jQuery.fn.typer) {
+                    jQuery(el).typer(titles);
+                    return;
+                }
+                if (attempts < 30) {
+                    setTimeout(tryInit, 100);
+                }
             }
-        });
+
+            if (document.readyState === 'complete') {
+                tryInit();
+            } else {
+                window.addEventListener('load', tryInit, { once: true });
+            }
+        })();
     </script>
 @endpush

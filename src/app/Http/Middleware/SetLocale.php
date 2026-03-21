@@ -30,6 +30,12 @@ class SetLocale
             $response->withCookie(cookie()->forever('locale', $queryLocale));
         }
 
+        $contentType = $response->headers->get('Content-Type', '');
+        if (stripos($contentType, 'text/html') !== false) {
+            $response->headers->set('Vary', 'Accept-Language, Cookie');
+            $response->headers->set('Cache-Control', 'private, max-age=0, must-revalidate');
+        }
+
         return $response;
     }
 
