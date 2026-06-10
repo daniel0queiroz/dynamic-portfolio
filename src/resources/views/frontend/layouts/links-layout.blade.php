@@ -68,9 +68,10 @@
 
         /* Language switcher */
         .links-lang {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 32px;
+            position: fixed;
+            top: 16px;
+            right: 20px;
+            z-index: 100;
         }
 
         .links-lang .dropdown-toggle {

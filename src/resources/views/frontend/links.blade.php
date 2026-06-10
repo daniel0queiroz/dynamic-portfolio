@@ -14,27 +14,13 @@
 @endsection
 
 @section('content')
-    {{-- Profile header --}}
-    <div class="links-profile">
-        @php $avatarSrc = $setting?->profile_image ?? $about?->image; @endphp
-        @if ($avatarSrc)
-            <img class="links-avatar" src="{{ asset($avatarSrc) }}" alt="{{ $setting?->getTranslation('profile_name', app()->getLocale(), true) }}">
-        @endif
-        <h1 class="links-profile-name">
-            {{ $setting?->getTranslation('profile_name', app()->getLocale(), true) ?? 'Daniel Queiroz' }}
-        </h1>
-        <p class="links-profile-bio">
-            {{ $setting?->getTranslation('profile_bio', app()->getLocale(), true) ?? 'Software Engineer' }}
-        </p>
-    </div>
-
-    {{-- Language switcher --}}
+    {{-- Language switcher — fixed top right --}}
     <div class="links-lang">
         <div class="dropdown">
             <button class="btn dropdown-toggle" id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 {{ strtoupper(app()->getLocale()) }}
             </button>
-            <ul class="dropdown-menu" aria-labelledby="langDropdown">
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
                 <li>
                     <a class="dropdown-item {{ app()->getLocale() == 'en' ? 'active' : '' }}"
                        href="{{ route('lang.switch', 'en') }}">English</a>
@@ -49,6 +35,20 @@
                 </li>
             </ul>
         </div>
+    </div>
+
+    {{-- Profile header --}}
+    <div class="links-profile">
+        @php $avatarSrc = $setting?->profile_image ?? $about?->image; @endphp
+        @if ($avatarSrc)
+            <img class="links-avatar" src="{{ asset($avatarSrc) }}" alt="{{ $setting?->getTranslation('profile_name', app()->getLocale(), true) }}">
+        @endif
+        <h1 class="links-profile-name">
+            {{ $setting?->getTranslation('profile_name', app()->getLocale(), true) ?? 'Daniel Queiroz' }}
+        </h1>
+        <p class="links-profile-bio">
+            {{ $setting?->getTranslation('profile_bio', app()->getLocale(), true) ?? 'Software Engineer' }}
+        </p>
     </div>
 
     {{-- Link cards --}}
