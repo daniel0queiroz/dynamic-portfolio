@@ -7,6 +7,7 @@ use App\Mail\ContactMail;
 use App\Models\About;
 use App\Models\Blog;
 use App\Models\LinkItem;
+use App\Models\LinkPageSetting;
 use App\Models\BlogSectionSetting;
 use App\Models\Category;
 use App\Models\ContactSectionSetting;
@@ -90,14 +91,21 @@ class HomeController extends Controller
         return view('frontend.blog', compact('blogs'));
     }
 
-    public function links()
+    public function links(\Illuminate\Http\Request $request)
     {
+        $setting = Cache::remember('link_page_setting', 3600, fn() => LinkPageSetting::first());
+
+        // Apply admin-configured default locale only when the visitor has no explicit preference
+        if ($setting && !$request->hasCookie('locale') && !$request->has('lang')) {
+            app()->setLocale($setting->default_locale ?? 'en');
+        }
+
         $linkItems = Cache::remember('link_items', 3600, fn() =>
             LinkItem::where('is_active', true)->orderBy('sort_order')->get()
         );
         $about = Cache::remember('about', 3600, fn() => About::first());
 
-        return view('frontend.links', compact('linkItems', 'about'));
+        return view('frontend.links', compact('linkItems', 'about', 'setting'));
     }
 
     public function showPrivacyPolicy()

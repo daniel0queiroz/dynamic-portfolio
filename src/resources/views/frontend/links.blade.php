@@ -16,10 +16,14 @@
     {{-- Profile header --}}
     <div class="links-profile">
         @if ($about?->image)
-            <img class="links-avatar" src="{{ asset($about->image) }}" alt="Dan Queiroz">
+            <img class="links-avatar" src="{{ asset($about->image) }}" alt="{{ $setting?->getTranslation('profile_name', app()->getLocale(), true) }}">
         @endif
-        <h1 class="links-profile-name">Dan Queiroz</h1>
-        <p class="links-profile-bio">Developer &amp; Designer</p>
+        <h1 class="links-profile-name">
+            {{ $setting?->getTranslation('profile_name', app()->getLocale(), true) ?? 'Daniel Queiroz' }}
+        </h1>
+        <p class="links-profile-bio">
+            {{ $setting?->getTranslation('profile_bio', app()->getLocale(), true) ?? 'Software Engineer' }}
+        </p>
     </div>
 
     {{-- Language switcher --}}

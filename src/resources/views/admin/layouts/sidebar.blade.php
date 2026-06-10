@@ -101,7 +101,13 @@
         </ul>
       </li>
       <li class="{{ setSidebarActive(['admin.privacy-policy.*']) }}"><a class="nav-link" href="{{route('admin.privacy-policy.index')}}"><i class="fas fa-file-contract"></i></i></i><span>Privacy Policy</span></a></li>
-      <li class="{{ setSidebarActive(['admin.link-item.*']) }}"><a class="nav-link" href="{{route('admin.link-item.index')}}"><i class="fas fa-link"></i><span>Links Page</span></a></li>
+      <li class="nav-item dropdown {{ setSidebarActive(['admin.link-item.*', 'admin.link-page-setting.*']) }}">
+        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-link"></i> <span>Links Page</span></a>
+        <ul class="dropdown-menu">
+          <li class="{{ setSidebarActive(['admin.link-item.*']) }}"><a class="nav-link" href="{{route('admin.link-item.index')}}">Link Items</a></li>
+          <li class="{{ setSidebarActive(['admin.link-page-setting.*']) }}"><a class="nav-link" href="{{route('admin.link-page-setting.index')}}">Page Settings</a></li>
+        </ul>
+      </li>
 
       <li class="nav-item dropdown {{ setSidebarActive([
         'admin.footer-social.*', 

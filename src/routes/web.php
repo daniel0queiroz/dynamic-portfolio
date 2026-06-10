@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SeoSettingController;
 use App\Http\Controllers\Admin\LinkItemController;
+use App\Http\Controllers\Admin\LinkPageSettingController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SkillItemController;
@@ -135,8 +136,9 @@ Route::group([
     Route::resource('footer-useful-links', FooterUsefulLinkController::class);
     Route::resource('footer-help-links', FooterHelpLinkController::class);
 
-    /** Links Page Route */
+    /** Links Page Routes */
     Route::resource('link-item', LinkItemController::class);
+    Route::resource('link-page-setting', LinkPageSettingController::class);
 
     /** Settings Routes */
     Route::get('settings', SettingController::class)->name('settings.index');
