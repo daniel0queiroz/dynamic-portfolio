@@ -57,7 +57,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Default Language</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <select name="default_locale" class="form-control">
+                                        <select name="default_locale" class="form-control selectric">
                                             <option value="en" {{ $setting->default_locale === 'en' ? 'selected' : '' }}>English</option>
                                             <option value="es" {{ $setting->default_locale === 'es' ? 'selected' : '' }}>Español</option>
                                             <option value="pt" {{ $setting->default_locale === 'pt' ? 'selected' : '' }}>Português</option>
