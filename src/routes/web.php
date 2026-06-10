@@ -22,6 +22,8 @@ use App\Http\Controllers\Admin\PortfolioSectionSettingController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SeoSettingController;
+use App\Http\Controllers\Admin\LinkItemController;
+use App\Http\Controllers\Admin\LinkPageSettingController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SkillItemController;
@@ -61,6 +63,7 @@ Route::get('portfolio-details/{id}', [HomeController::class, 'showPortfolio'])->
 Route::get('blog-details/{id}', [HomeController::class, 'showBlog'])->name('show.blog');
 Route::post('contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('privacy-policy', [HomeController::class, 'showPrivacyPolicy'])->name('privacy-policy');
+Route::get('links', [HomeController::class, 'links'])->name('links');
 
 // ==============================
 // Dashboard Route
@@ -132,6 +135,10 @@ Route::group([
     Route::resource('footer-contact-info', FooterContactInfoController::class);
     Route::resource('footer-useful-links', FooterUsefulLinkController::class);
     Route::resource('footer-help-links', FooterHelpLinkController::class);
+
+    /** Links Page Routes */
+    Route::resource('link-item', LinkItemController::class);
+    Route::resource('link-page-setting', LinkPageSettingController::class);
 
     /** Settings Routes */
     Route::get('settings', SettingController::class)->name('settings.index');

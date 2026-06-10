@@ -11,7 +11,12 @@ class SetLocale
 
     public function handle(Request $request, Closure $next)
     {
-        $locale = $request->cookie('locale');
+        $queryLocale = $request->query('lang');
+        $locale = $queryLocale;
+
+        if (!$locale || !in_array($locale, $this->supported)) {
+            $locale = $request->cookie('locale');
+        }
 
         if (!$locale || !in_array($locale, $this->supported)) {
             $locale = $this->detectFromBrowser($request);
@@ -19,7 +24,19 @@ class SetLocale
 
         app()->setLocale($locale);
 
-        return $next($request);
+        $response = $next($request);
+
+        if ($queryLocale && in_array($queryLocale, $this->supported)) {
+            $response->withCookie(cookie()->forever('locale', $queryLocale));
+        }
+
+        $contentType = $response->headers->get('Content-Type', '');
+        if (stripos($contentType, 'text/html') !== false) {
+            $response->headers->set('Vary', 'Accept-Language, Cookie');
+            $response->headers->set('Cache-Control', 'private, max-age=0, must-revalidate');
+        }
+
+        return $response;
     }
 
     private function detectFromBrowser(Request $request): string

@@ -1138,7 +1138,7 @@ Footer-Area
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #ffffff;
+    background-color: #080420;
     z-index: 999999;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1152,9 +1152,49 @@ Footer-Area
     pointer-events: none;
 }
 
-.preloader img {
-    width: 300px;
+.preloader-inner {
+    position: relative;
+    width: 130px;
+    height: 130px;
 }
+
+.preloader-ring {
+    width: 130px;
+    height: 130px;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+.preloader-ring-bg {
+    fill: none;
+    stroke: rgba(255, 136, 94, 0.15);
+    stroke-width: 3;
+}
+
+.preloader-ring-fill {
+    fill: none;
+    stroke: #ff885e;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 264;
+    stroke-dashoffset: 264;
+    -webkit-animation: preloader-draw 1.6s ease-in-out infinite;
+    animation: preloader-draw 1.6s ease-in-out infinite;
+}
+
+
+@-webkit-keyframes preloader-draw {
+    0%   { stroke-dashoffset: 264; opacity: 1; }
+    50%  { stroke-dashoffset: 0;   opacity: 1; }
+    100% { stroke-dashoffset: -264; opacity: 0; }
+}
+
+@keyframes preloader-draw {
+    0%   { stroke-dashoffset: 264; opacity: 1; }
+    50%  { stroke-dashoffset: 0;   opacity: 1; }
+    100% { stroke-dashoffset: -264; opacity: 0; }
+}
+
 
 /* ------------------------
 12. ScrollUpButton

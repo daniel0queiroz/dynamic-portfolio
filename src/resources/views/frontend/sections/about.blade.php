@@ -3,7 +3,7 @@
         <div class="row d-flex align-items-center">
             <div class="col-lg-6">
                 <figure class="about-image">
-                    <img src="{{asset($about?->image)}}" alt="" class="wow fadeInUp" data-wow-delay="0.3s">
+                    <img src="{{asset($about?->image)}}" alt="" class="wow fadeInUp" data-wow-delay="0.3s" loading="lazy" decoding="async">
                 </figure>
             </div>
             <div class="col-lg-6">

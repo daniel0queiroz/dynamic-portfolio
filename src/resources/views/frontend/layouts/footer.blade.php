@@ -13,7 +13,7 @@
 					<div class="col-md-12 col-lg-3 widget">
 						<div class="text-box">
 							<figure class="footer-logo">
-								<img src="{{asset($generalSetting?->footer_logo)}}" alt="">
+								<img src="{{asset($generalSetting?->footer_logo)}}" alt="" loading="lazy" decoding="async">
 							</figure>
 							<p>{{$footerInfo?->info}}</p>
 							<ul class="d-flex flex-wrap">
@@ -24,7 +24,7 @@
 						</div>
 					</div>
 					<div class="col-md-4 col-lg-2 offset-lg-1 widget">
-						<h3 class="widget-title">Useful Links</h3>
+						<h3 class="widget-title">{{ __('ui.footer.useful_links') }}</h3>
 						<ul class="nav-menu">
 							@foreach ($footerUsefulLinks as $usefulLink)
 								<li><a href="{{$usefulLink->url}}">{{$usefulLink->name}}</a></li>
@@ -32,7 +32,7 @@
 						</ul>
 					</div>
 					<div class="col-md-4 col-lg-3 widget">
-						<h3 class="widget-title">Contact Info</h3>
+						<h3 class="widget-title">{{ __('ui.footer.contact_info') }}</h3>
 						<ul>
 							<li>{{$footerContact?->address}}</li>
 							<li><a href="#">{{$footerContact?->phone}}</a></li>
@@ -40,7 +40,7 @@
 						</ul>
 					</div>
 					<div class="col-md-4 col-lg-3 widget">
-						<h3 class="widget-title">Help</h3>
+						<h3 class="widget-title">{{ __('ui.footer.help') }}</h3>
 						<ul class="nav-menu">
 							@foreach ($footerHelpLinks as $footerHelpLink)
 								<li><a href="{{$footerHelpLink->url}}">{{$footerHelpLink->name}}</a></li>

@@ -15,17 +15,26 @@
 	<meta name="keywords" content="{{@$seoSetting->keywords}}">
 	<title>{{@$seoSetting->title}}</title>
 	<link rel="shortcut icon" type="image/ico" href="{{asset($generalSetting?->favicon)}}" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Poppins:400,700,800&display=swap">
 	<link rel="stylesheet" href="{{asset('frontend/assets/css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{asset('frontend/assets/css/normalize.css')}}">
 	<link rel="stylesheet" href="{{asset('frontend/assets/css/style-plugin-collection.css')}}">
 	<link rel="stylesheet" href="{{asset('frontend/assets/css/theme.css')}}">
 	<link rel="stylesheet" href="{{asset('frontend/assets/css/responsive.css')}}">
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="{{asset('frontend/assets/css/toastr.min.css')}}">
+	@stack('head')
 </head>
 
 <body>
 	<div class="preloader">
-		<img src="{{asset('frontend/assets/images/preloader.gif')}}" alt="">
+		<div class="preloader-inner">
+			<svg class="preloader-ring" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+				<circle class="preloader-ring-bg" cx="50" cy="50" r="42"/>
+				<circle class="preloader-ring-fill" cx="50" cy="50" r="42"/>
+			</svg>
+		</div>
 	</div>
 
     @include('frontend.layouts.navbar')
@@ -41,12 +50,12 @@
 
 
 	<script src="{{asset('frontend/assets/js/vendor/jquery-min.js')}}"></script>
-	<script src="{{asset('frontend/assets/js/bootstrap.bundle.min.js')}}"></script>
-	{{-- <script src="{{asset('frontend/assets/js/contact-form.js')}}"></script> --}}
-	<script src="{{asset('frontend/assets/js/jquery-plugin-collection.js')}}"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-	<script src="{{asset('frontend/assets/js/vendor/modernizr.js')}}"></script>
-	<script src="{{asset('frontend/assets/js/main.js')}}"></script>
+	<script src="{{asset('frontend/assets/js/bootstrap.bundle.min.js')}}" defer></script>
+	<script src="{{asset('frontend/assets/js/jquery-plugin-collection.js')}}" defer></script>
+	<script src="{{asset('frontend/assets/js/toastr.min.js')}}" defer></script>
+	<script src="{{asset('frontend/assets/js/vendor/modernizr.js')}}" defer></script>
+	<script src="{{asset('frontend/assets/js/main.js')}}" defer></script>
+	<script src="{{asset('frontend/assets/js/lang-switch.js')}}" defer></script>
 	@stack('scripts')
 </body>
 

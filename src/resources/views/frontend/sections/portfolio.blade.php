@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <ul class="filter-menu">
-                    <li class="active" data-filter="*">All Projects</li>
+                    <li class="active" data-filter="*">{{ __('ui.filters.all_projects') }}</li>
                     @foreach ($portfolioCategories as $category)
                         <li data-filter=".{{$category->slug}}">{{$category->name}}</li>
                     @endforeach
@@ -27,7 +27,7 @@
                     <div data-wow-delay="0.3s" class="col-md-6 col-lg-4 filter-item {{$item->category->slug}}">
                     <div class="single-portfolio">
                         <figure class="portfolio-image">
-                            <img src="{{asset($item->image)}}" alt="">
+                            <img src="{{asset($item->image)}}" alt="" loading="lazy" decoding="async">
                         </figure>
                         <div class="portfolio-content">
                             <a href="{{asset($item->image)}}" data-lity class="icon"><i
@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="text-center">
                 <a href="{{route('portfolio')}}" class="button-primary-trans mouse-dir">
-                    View More <span class="dir-part"></span> 
+                    {{ __('ui.buttons.view_more') }} <span class="dir-part"></span> 
                     <i class="fal fa-arrow-right"></i>
                 </a>
                    </div>

@@ -5,13 +5,13 @@
             <div class="container">
                 <div class="row d-flex align-items-center">
                     <div class="col-sm-8">
-                        <h2 class="title">Privacy Policy</h2>
+                        <h2 class="title">{{ __('ui.titles.privacy_policy') }}</h2>
                     </div>
                     <div class="col-sm-4">
                         <div class="breadcrumbs">
                             <ul>
-                                <li><a href="#">Home</a></li>
-                                <li>Privacy Policy</li>
+                                <li><a href="#">{{ __('ui.breadcrumbs.home') }}</a></li>
+                                <li>{{ __('ui.breadcrumbs.privacy_policy') }}</li>
                             </ul>
                         </div>
                     </div>

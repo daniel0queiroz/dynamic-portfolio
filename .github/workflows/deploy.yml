@@ -13,6 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install composer dependencies
+        run: |
+          cd src
+          mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views storage/logs
+          composer install --no-dev --optimize-autoloader --no-interaction
+
       - name: Deploy Laravel app files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -27,7 +33,6 @@ jobs:
             **/.git*
             **/.git*/**
             **/node_modules/**
-            **/vendor/**
             **/.env
             **/storage/logs/**
             **/storage/framework/cache/**
