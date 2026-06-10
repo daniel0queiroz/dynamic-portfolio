@@ -20,9 +20,27 @@
                             <h4>Profile &amp; Default Language</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('admin.link-page-setting.update', $setting->id) }}" method="POST">
+                            <form action="{{ route('admin.link-page-setting.update', $setting->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
+
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Profile Picture</label>
+                                    <div class="col-sm-12 col-md-7">
+                                        <div id="image-preview" class="image-preview">
+                                            <label for="image-upload" id="image-label">Choose File</label>
+                                            <input type="file" name="profile_image" id="image-upload" />
+                                        </div>
+                                        @if ($setting->profile_image)
+                                            <div class="mt-2">
+                                                <small class="text-muted">Current picture:</small><br>
+                                                <img src="{{ asset($setting->profile_image) }}" alt="profile"
+                                                     style="width:80px; height:80px; border-radius:50%; object-fit:cover; margin-top:6px; border:2px solid #558bff;">
+                                            </div>
+                                        @endif
+                                        <small class="text-muted">Leave empty to keep current. Square images work best (e.g. 400×400px).</small>
+                                    </div>
+                                </div>
 
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Profile Name</label>
@@ -86,3 +104,18 @@
         </div>
     </section>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+            @if ($setting->profile_image)
+                $('#image-preview').css({
+                    'background-image': 'url("{{ asset($setting->profile_image) }}")',
+                    'background-size': 'cover',
+                    'background-position': 'center center'
+                });
+                $('#image-label').hide();
+            @endif
+        });
+    </script>
+@endpush

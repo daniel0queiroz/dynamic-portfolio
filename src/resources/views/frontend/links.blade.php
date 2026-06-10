@@ -7,16 +7,18 @@
     <meta property="og:title" content="Links | Dan Queiroz">
     <meta property="og:description" content="All links from Dan Queiroz — developer, designer and creator.">
     <meta property="og:url" content="{{ url('/links') }}">
-    @if ($about?->image)
-        <meta property="og:image" content="{{ asset($about->image) }}">
+    @php $ogImage = $setting?->profile_image ?? $about?->image; @endphp
+    @if ($ogImage)
+        <meta property="og:image" content="{{ asset($ogImage) }}">
     @endif
 @endsection
 
 @section('content')
     {{-- Profile header --}}
     <div class="links-profile">
-        @if ($about?->image)
-            <img class="links-avatar" src="{{ asset($about->image) }}" alt="{{ $setting?->getTranslation('profile_name', app()->getLocale(), true) }}">
+        @php $avatarSrc = $setting?->profile_image ?? $about?->image; @endphp
+        @if ($avatarSrc)
+            <img class="links-avatar" src="{{ asset($avatarSrc) }}" alt="{{ $setting?->getTranslation('profile_name', app()->getLocale(), true) }}">
         @endif
         <h1 class="links-profile-name">
             {{ $setting?->getTranslation('profile_name', app()->getLocale(), true) ?? 'Daniel Queiroz' }}

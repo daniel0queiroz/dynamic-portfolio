@@ -28,12 +28,17 @@ class LinkPageSettingController extends Controller
             'profile_name.en'  => ['required', 'max:100'],
             'profile_bio.en'   => ['required', 'max:200'],
             'default_locale'   => ['required', 'in:en,es,pt'],
+            'profile_image'    => ['nullable', 'image', 'max:3000'],
         ]);
 
         $setting = LinkPageSetting::findOrFail($id);
+
+        $imagePath = handleUpload('profile_image', $setting);
+
         $setting->profile_name   = $request->input('profile_name');
         $setting->profile_bio    = $request->input('profile_bio');
         $setting->default_locale = $request->default_locale;
+        $setting->profile_image  = !empty($imagePath) ? $imagePath : $setting->profile_image;
         $setting->save();
 
         toastr()->success('Links page settings updated!', 'Success');

@@ -12,5 +12,5 @@ class LinkPageSetting extends Model
 
     public array $translatable = ['profile_name', 'profile_bio'];
 
-    protected $fillable = ['profile_name', 'profile_bio', 'default_locale'];
+    protected $fillable = ['profile_name', 'profile_bio', 'default_locale', 'profile_image'];
 }
