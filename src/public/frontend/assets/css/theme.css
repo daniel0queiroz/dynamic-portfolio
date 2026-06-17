@@ -1509,6 +1509,20 @@ Footer-Area
     border-radius: 10px;
 }
 
+a.single-service--link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+a.single-service--link:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    color: inherit;
+    text-decoration: none;
+}
+
 .header-text a.button-dark.mouse-dir {
     background: #ff885e;
 }

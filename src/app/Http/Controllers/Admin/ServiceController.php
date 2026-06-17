@@ -45,6 +45,7 @@ class ServiceController extends Controller
         $service = new Service();
         $service->name = $request->input('name');
         $service->description = $request->input('description');
+        $service->link = $request->input('link') ?: null;
         $service->save();
 
         toastr()->success('Created Successfully', 'Congrats');
@@ -92,6 +93,7 @@ class ServiceController extends Controller
         $service = Service::findOrFail($id);
         $service->name = $request->input('name');
         $service->description = $request->input('description');
+        $service->link = $request->input('link') ?: null;
         $service->save();
 
         toastr()->success('Updated Successfully', 'Congrats');

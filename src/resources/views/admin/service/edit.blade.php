@@ -46,6 +46,15 @@
                         </div>
                         
                         </div>
+
+                        <div class="form-group row mb-4">
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Link <small class="text-muted">(optional)</small></label>
+                            <div class="col-sm-12 col-md-7">
+                                <input type="url" name="link" class="form-control" placeholder="https://example.com/offer" value="{{old('link', $service->link)}}">
+                                <small class="text-muted">When set, the service card will be clickable and redirect to this URL.</small>
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                         <div class="col-sm-12 col-md-7">
