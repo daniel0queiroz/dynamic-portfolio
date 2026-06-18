@@ -393,6 +393,7 @@
         ════════════════════════════════════════ */
         .sp-form-section {
             max-width: 560px;
+            margin: 0 auto;
         }
 
         .sp-form-title {
