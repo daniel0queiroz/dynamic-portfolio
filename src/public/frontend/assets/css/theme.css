@@ -1511,15 +1511,21 @@ Footer-Area
 
 a.single-service--link {
     display: block;
-    color: inherit;
+    color: var(--bs-body-color);
     text-decoration: none;
     transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+a.single-service--link .title,
+a.single-service--link .desc p {
+    color: var(--bs-body-color);
+    text-decoration: none;
 }
 
 a.single-service--link:hover {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
-    color: inherit;
+    color: var(--bs-body-color);
     text-decoration: none;
 }
 
