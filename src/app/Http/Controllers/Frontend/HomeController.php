@@ -111,7 +111,7 @@ class HomeController extends Controller
 
     public function servicePage(string $slug)
     {
-        $page = ServicePage::with('faqs')
+        $page = ServicePage::with('faqs', 'leadFormFields')
             ->where('slug', $slug)
             ->where('is_active', true)
             ->firstOrFail();

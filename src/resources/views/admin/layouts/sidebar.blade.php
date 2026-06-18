@@ -109,11 +109,12 @@
         </ul>
       </li>
 
-      <li class="nav-item dropdown {{ setSidebarActive(['admin.service-page.*', 'admin.service-page-faq.*']) }}">
+      <li class="nav-item dropdown {{ setSidebarActive(['admin.service-page.*', 'admin.service-page-faq.*', 'admin.lead-form-field.*', 'admin.leads.*']) }}">
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-file-alt"></i> <span>Landing Pages</span></a>
         <ul class="dropdown-menu">
-          <li class="{{ setSidebarActive(['admin.service-page.*', 'admin.service-page-faq.*']) }}"><a class="nav-link" href="{{route('admin.service-page.index')}}">All Pages</a></li>
+          <li class="{{ setSidebarActive(['admin.service-page.*', 'admin.service-page-faq.*', 'admin.lead-form-field.*']) }}"><a class="nav-link" href="{{route('admin.service-page.index')}}">All Pages</a></li>
           <li><a class="nav-link" href="{{route('admin.service-page.create')}}">Create New</a></li>
+          <li class="{{ setSidebarActive(['admin.leads.*']) }}"><a class="nav-link" href="{{route('admin.leads.index')}}">Leads</a></li>
         </ul>
       </li>
 

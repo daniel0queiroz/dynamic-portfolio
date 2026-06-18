@@ -25,8 +25,11 @@ use App\Http\Controllers\Admin\SeoSettingController;
 use App\Http\Controllers\Admin\LinkItemController;
 use App\Http\Controllers\Admin\LinkPageSettingController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\LeadAdminController;
+use App\Http\Controllers\Admin\LeadFormFieldController;
 use App\Http\Controllers\Admin\ServicePageController;
 use App\Http\Controllers\Admin\ServicePageFaqController;
+use App\Http\Controllers\Frontend\LeadController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SkillItemController;
 use App\Http\Controllers\Admin\SkillSectionSettingController;
@@ -67,6 +70,7 @@ Route::post('contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('privacy-policy', [HomeController::class, 'showPrivacyPolicy'])->name('privacy-policy');
 Route::get('links', [HomeController::class, 'links'])->name('links');
 Route::get('service/{slug}', [HomeController::class, 'servicePage'])->name('service-page.show');
+Route::post('service/{slug}/lead', [LeadController::class, 'store'])->name('lead.store');
 
 // ==============================
 // Dashboard Route
@@ -146,6 +150,9 @@ Route::group([
     /** Service Landing Pages */
     Route::resource('service-page', ServicePageController::class);
     Route::resource('service-page-faq', ServicePageFaqController::class);
+    Route::resource('lead-form-field', LeadFormFieldController::class);
+    Route::resource('leads', LeadAdminController::class)->only(['index', 'show', 'destroy']);
+    Route::get('leads-export', [LeadAdminController::class, 'export'])->name('leads.export');
 
     /** Settings Routes */
     Route::get('settings', SettingController::class)->name('settings.index');

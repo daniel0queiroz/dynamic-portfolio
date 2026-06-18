@@ -31,13 +31,17 @@ class ServicePageController extends Controller
         ]);
 
         $page = new ServicePage();
-        $page->slug         = $request->input('slug');
-        $page->title        = $request->input('title');
-        $page->subtitle     = $request->input('subtitle');
-        $page->video_url    = $request->input('video_url') ?: null;
-        $page->is_active    = $request->boolean('is_active', true);
-        $page->image        = handleUpload('image') ?: null;
-        $page->mobile_image = handleUpload('mobile_image') ?: null;
+        $page->slug                 = $request->input('slug');
+        $page->title                = $request->input('title');
+        $page->subtitle             = $request->input('subtitle');
+        $page->video_url            = $request->input('video_url') ?: null;
+        $page->form_title           = $request->input('form_title') ?: null;
+        $page->form_subtitle        = $request->input('form_subtitle') ?: null;
+        $page->cta_label            = $request->input('cta_label') ?: null;
+        $page->form_success_message = $request->input('form_success_message') ?: null;
+        $page->is_active            = $request->boolean('is_active', true);
+        $page->image                = handleUpload('image') ?: null;
+        $page->mobile_image         = handleUpload('mobile_image') ?: null;
         $page->save();
 
         toastr()->success('Landing page created successfully!', 'Congrats');
@@ -49,7 +53,7 @@ class ServicePageController extends Controller
 
     public function edit($id)
     {
-        $page = ServicePage::with('faqs')->findOrFail($id);
+        $page = ServicePage::with('faqs', 'leadFormFields')->findOrFail($id);
         return view('admin.service-page.edit', compact('page'));
     }
 
@@ -66,11 +70,15 @@ class ServicePageController extends Controller
             'video_url'    => ['nullable', 'url', 'max:500'],
         ]);
 
-        $page->slug      = $request->input('slug');
-        $page->title     = $request->input('title');
-        $page->subtitle  = $request->input('subtitle');
-        $page->video_url = $request->input('video_url') ?: null;
-        $page->is_active = $request->boolean('is_active');
+        $page->slug                 = $request->input('slug');
+        $page->title                = $request->input('title');
+        $page->subtitle             = $request->input('subtitle');
+        $page->video_url            = $request->input('video_url') ?: null;
+        $page->form_title           = $request->input('form_title') ?: null;
+        $page->form_subtitle        = $request->input('form_subtitle') ?: null;
+        $page->cta_label            = $request->input('cta_label') ?: null;
+        $page->form_success_message = $request->input('form_success_message') ?: null;
+        $page->is_active            = $request->boolean('is_active');
 
         $desktopPath = handleUpload('image', $page);
         if ($desktopPath) {
