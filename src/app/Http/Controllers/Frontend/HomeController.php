@@ -19,6 +19,7 @@ use App\Models\PortfolioItem;
 use App\Models\PortfolioSectionSetting;
 use App\Models\PrivacyPolicy;
 use App\Models\Service;
+use App\Models\ServicePage;
 use App\Models\SkillItem;
 use App\Models\SkillSectionSetting;
 use App\Models\TyperTitle;
@@ -106,6 +107,16 @@ class HomeController extends Controller
         $about = Cache::remember('about', 3600, fn() => About::first());
 
         return view('frontend.links', compact('linkItems', 'about', 'setting'));
+    }
+
+    public function servicePage(string $slug)
+    {
+        $page = ServicePage::with('faqs')
+            ->where('slug', $slug)
+            ->where('is_active', true)
+            ->firstOrFail();
+
+        return view('frontend.service-page', compact('page'));
     }
 
     public function showPrivacyPolicy()

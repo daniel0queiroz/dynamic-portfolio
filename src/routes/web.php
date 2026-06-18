@@ -25,6 +25,8 @@ use App\Http\Controllers\Admin\SeoSettingController;
 use App\Http\Controllers\Admin\LinkItemController;
 use App\Http\Controllers\Admin\LinkPageSettingController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\ServicePageController;
+use App\Http\Controllers\Admin\ServicePageFaqController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SkillItemController;
 use App\Http\Controllers\Admin\SkillSectionSettingController;
@@ -64,6 +66,7 @@ Route::get('blog-details/{id}', [HomeController::class, 'showBlog'])->name('show
 Route::post('contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('privacy-policy', [HomeController::class, 'showPrivacyPolicy'])->name('privacy-policy');
 Route::get('links', [HomeController::class, 'links'])->name('links');
+Route::get('service/{slug}', [HomeController::class, 'servicePage'])->name('service-page.show');
 
 // ==============================
 // Dashboard Route
@@ -139,6 +142,10 @@ Route::group([
     /** Links Page Routes */
     Route::resource('link-item', LinkItemController::class);
     Route::resource('link-page-setting', LinkPageSettingController::class);
+
+    /** Service Landing Pages */
+    Route::resource('service-page', ServicePageController::class);
+    Route::resource('service-page-faq', ServicePageFaqController::class);
 
     /** Settings Routes */
     Route::get('settings', SettingController::class)->name('settings.index');
