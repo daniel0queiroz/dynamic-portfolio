@@ -39,6 +39,8 @@ class ServicePageController extends Controller
         $page->form_subtitle        = $request->input('form_subtitle') ?: null;
         $page->cta_label            = $request->input('cta_label') ?: null;
         $page->form_success_message = $request->input('form_success_message') ?: null;
+        $page->lead_form_enabled    = $request->boolean('lead_form_enabled', true);
+        $page->faq_enabled          = $request->boolean('faq_enabled', true);
         $page->is_active            = $request->boolean('is_active', true);
         $page->image                = handleUpload('image') ?: null;
         $page->mobile_image         = handleUpload('mobile_image') ?: null;
@@ -78,6 +80,8 @@ class ServicePageController extends Controller
         $page->form_subtitle        = $request->input('form_subtitle') ?: null;
         $page->cta_label            = $request->input('cta_label') ?: null;
         $page->form_success_message = $request->input('form_success_message') ?: null;
+        $page->lead_form_enabled    = $request->boolean('lead_form_enabled');
+        $page->faq_enabled          = $request->boolean('faq_enabled');
         $page->is_active            = $request->boolean('is_active');
 
         $desktopPath = handleUpload('image', $page);

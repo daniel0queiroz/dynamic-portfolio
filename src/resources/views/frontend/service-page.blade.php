@@ -8,7 +8,8 @@
     $mobileBg   = $page->mobile_image ? asset($page->mobile_image) : $desktopBg;
     $ctaLabel   = $page->getTranslation('cta_label', $locale, true);
     $formTitle  = $page->getTranslation('form_title', $locale, true);
-    $hasForm    = $page->leadFormFields->isNotEmpty();
+    $hasForm    = $page->lead_form_enabled && $page->leadFormFields->isNotEmpty();
+    $hasFaqs    = $page->faq_enabled && $page->faqs->isNotEmpty();
 
     $embedUrl = null;
     if ($page->video_url) {
@@ -130,7 +131,7 @@
         @endif
 
         {{-- FAQ accordion --}}
-        @if ($page->faqs->isNotEmpty())
+        @if ($hasFaqs)
             <hr class="sp-divider">
 
             <div class="sp-faq-section sp-animate sp-animate-delay-3">
