@@ -16,7 +16,8 @@ class LinkItemController extends Controller
 
     public function create()
     {
-        return view('admin.link-item.create');
+        $nextSortOrder = (int) LinkItem::max('sort_order') + 1;
+        return view('admin.link-item.create', compact('nextSortOrder'));
     }
 
     public function store(Request $request)

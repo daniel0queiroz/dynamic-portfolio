@@ -14,7 +14,8 @@ class LeadFormFieldController extends Controller
     public function create(Request $request)
     {
         $page = ServicePage::findOrFail($request->query('service_page_id'));
-        return view('admin.lead-form-field.create', compact('page'));
+        $nextSortOrder = (int) LeadFormField::where('service_page_id', $page->id)->max('sort_order') + 1;
+        return view('admin.lead-form-field.create', compact('page', 'nextSortOrder'));
     }
 
     public function store(Request $request)

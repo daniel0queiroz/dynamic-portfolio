@@ -23,6 +23,10 @@
     <style>
         *, *::before, *::after { box-sizing: border-box; }
 
+        html {
+            overflow-x: hidden;
+        }
+
         body {
             margin: 0;
             min-height: 100vh;
@@ -152,6 +156,7 @@
             position: relative;
             text-align: center;
             padding: 100px 20px 52px;
+            overflow: hidden;
         }
 
         .sp-hero-text::before {
