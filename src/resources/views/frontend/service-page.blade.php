@@ -11,11 +11,13 @@
     $hasForm    = $page->lead_form_enabled && $page->leadFormFields->isNotEmpty();
     $hasFaqs    = $page->faq_enabled && $page->faqs->isNotEmpty();
 
+    $videoUrl = $page->getVideoUrlForLocale($locale);
+
     $embedUrl = null;
-    if ($page->video_url) {
-        if (preg_match('/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_\-]{11})/', $page->video_url, $m)) {
+    if ($videoUrl) {
+        if (preg_match('/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_\-]{11})/', $videoUrl, $m)) {
             $embedUrl = 'https://www.youtube.com/embed/' . $m[1] . '?rel=0&modestbranding=1';
-        } elseif (preg_match('/vimeo\.com\/(\d+)/', $page->video_url, $m)) {
+        } elseif (preg_match('/vimeo\.com\/(\d+)/', $videoUrl, $m)) {
             $embedUrl = 'https://player.vimeo.com/video/' . $m[1] . '?dnt=1';
         }
     }
@@ -108,7 +110,7 @@
     <div class="sp-content">
 
         {{-- Video --}}
-        @if ($page->video_url)
+        @if ($videoUrl)
             <div class="sp-animate sp-animate-delay-2">
                 @if ($embedUrl)
                     <div class="sp-video-wrapper">
@@ -120,7 +122,7 @@
                         </iframe>
                     </div>
                 @else
-                    <a href="{{ $page->video_url }}" target="_blank" rel="noopener noreferrer" class="sp-video-link">
+                    <a href="{{ $videoUrl }}" target="_blank" rel="noopener noreferrer" class="sp-video-link">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
                             <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM6.5 5.5v5l5-2.5-5-2.5z"/>
                         </svg>

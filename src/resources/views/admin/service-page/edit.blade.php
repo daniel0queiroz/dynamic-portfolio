@@ -127,8 +127,13 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Video URL</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input type="url" name="video_url" class="form-control" placeholder="https://www.youtube.com/watch?v=..." value="{{ old('video_url', $page->video_url) }}">
-                                        <small class="text-muted">YouTube or Vimeo URL. Leave blank to hide the video section.</small>
+                                        <small class="text-muted">English</small>
+                                        <input type="url" name="video_url[en]" class="form-control mb-2" placeholder="https://www.youtube.com/watch?v=..." value="{{ old('video_url.en', $page->getTranslation('video_url', 'en', false)) }}">
+                                        <small class="text-muted">Español</small>
+                                        <input type="url" name="video_url[es]" class="form-control mb-2" placeholder="https://www.youtube.com/watch?v=..." value="{{ old('video_url.es', $page->getTranslation('video_url', 'es', false)) }}">
+                                        <small class="text-muted">Português</small>
+                                        <input type="url" name="video_url[pt]" class="form-control" placeholder="https://www.youtube.com/watch?v=..." value="{{ old('video_url.pt', $page->getTranslation('video_url', 'pt', false)) }}">
+                                        <small class="text-muted d-block mt-1">YouTube or Vimeo URL. Leave all blank to hide the video section, or leave some blank to reuse whichever one is filled in as the default.</small>
                                     </div>
                                 </div>
 
@@ -177,7 +182,9 @@
                                 <input type="hidden" name="subtitle[en]" value="{{ $page->getTranslation('subtitle', 'en', false) }}">
                                 <input type="hidden" name="subtitle[es]" value="{{ $page->getTranslation('subtitle', 'es', false) }}">
                                 <input type="hidden" name="subtitle[pt]" value="{{ $page->getTranslation('subtitle', 'pt', false) }}">
-                                <input type="hidden" name="video_url" value="{{ $page->video_url }}">
+                                <input type="hidden" name="video_url[en]" value="{{ $page->getTranslation('video_url', 'en', false) }}">
+                                <input type="hidden" name="video_url[es]" value="{{ $page->getTranslation('video_url', 'es', false) }}">
+                                <input type="hidden" name="video_url[pt]" value="{{ $page->getTranslation('video_url', 'pt', false) }}">
                                 <input type="hidden" name="is_active" value="{{ $page->is_active ? 1 : 0 }}">
                                 <input type="hidden" name="faq_enabled" value="{{ $page->faq_enabled ? 1 : 0 }}">
 
@@ -368,7 +375,9 @@
                                 <input type="hidden" name="subtitle[en]" value="{{ $page->getTranslation('subtitle', 'en', false) }}">
                                 <input type="hidden" name="subtitle[es]" value="{{ $page->getTranslation('subtitle', 'es', false) }}">
                                 <input type="hidden" name="subtitle[pt]" value="{{ $page->getTranslation('subtitle', 'pt', false) }}">
-                                <input type="hidden" name="video_url" value="{{ $page->video_url }}">
+                                <input type="hidden" name="video_url[en]" value="{{ $page->getTranslation('video_url', 'en', false) }}">
+                                <input type="hidden" name="video_url[es]" value="{{ $page->getTranslation('video_url', 'es', false) }}">
+                                <input type="hidden" name="video_url[pt]" value="{{ $page->getTranslation('video_url', 'pt', false) }}">
                                 <input type="hidden" name="is_active" value="{{ $page->is_active ? 1 : 0 }}">
                                 <input type="hidden" name="form_title[en]" value="{{ $page->getTranslation('form_title', 'en', false) }}">
                                 <input type="hidden" name="form_title[es]" value="{{ $page->getTranslation('form_title', 'es', false) }}">

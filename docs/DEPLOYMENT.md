@@ -10,3 +10,5 @@ Run these scripts manually in phpMyAdmin when deploying corresponding code chang
    - Converts `blogs.title` and `blogs.description` to JSON and wraps existing values.
 2. `docs/db-fixes/2026-06-23_service_pages_section_toggles.sql`
    - Adds `lead_form_enabled` and `faq_enabled` columns to `service_pages`.
+3. `docs/db-fixes/2026-07-21_service_pages_video_url_translatable.sql`
+   - Converts `service_pages.video_url` to JSON so it can hold a separate link per language (EN/ES/PT).

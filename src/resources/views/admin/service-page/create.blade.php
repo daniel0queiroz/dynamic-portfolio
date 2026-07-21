@@ -79,8 +79,13 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Video URL</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input type="url" name="video_url" class="form-control" placeholder="https://www.youtube.com/watch?v=..." value="{{ old('video_url') }}">
-                                        <small class="text-muted">YouTube or Vimeo URL. Will be embedded as the main video section.</small>
+                                        <small class="text-muted">English</small>
+                                        <input type="url" name="video_url[en]" class="form-control mb-2" placeholder="https://www.youtube.com/watch?v=..." value="{{ old('video_url.en') }}">
+                                        <small class="text-muted">Español</small>
+                                        <input type="url" name="video_url[es]" class="form-control mb-2" placeholder="https://www.youtube.com/watch?v=..." value="{{ old('video_url.es') }}">
+                                        <small class="text-muted">Português</small>
+                                        <input type="url" name="video_url[pt]" class="form-control" placeholder="https://www.youtube.com/watch?v=..." value="{{ old('video_url.pt') }}">
+                                        <small class="text-muted d-block mt-1">YouTube or Vimeo URL, embedded as the main video section. Leave languages blank to reuse whichever one is filled in as the default.</small>
                                     </div>
                                 </div>
 
