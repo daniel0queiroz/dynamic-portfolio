@@ -27,14 +27,16 @@ class ServicePageController extends Controller
             'subtitle.en'  => ['required', 'max:1000'],
             'image'        => ['nullable', 'image', 'max:5000'],
             'mobile_image' => ['nullable', 'image', 'max:5000'],
-            'video_url'    => ['nullable', 'url', 'max:500'],
+            'video_url.en' => ['nullable', 'url', 'max:500'],
+            'video_url.es' => ['nullable', 'url', 'max:500'],
+            'video_url.pt' => ['nullable', 'url', 'max:500'],
         ]);
 
         $page = new ServicePage();
         $page->slug                 = $request->input('slug');
         $page->title                = $request->input('title');
         $page->subtitle             = $request->input('subtitle');
-        $page->video_url            = $request->input('video_url') ?: null;
+        $page->video_url            = array_filter($request->input('video_url', []));
         $page->form_title           = $request->input('form_title') ?: null;
         $page->form_subtitle        = $request->input('form_subtitle') ?: null;
         $page->cta_label            = $request->input('cta_label') ?: null;
@@ -69,13 +71,15 @@ class ServicePageController extends Controller
             'subtitle.en'  => ['required', 'max:1000'],
             'image'        => ['nullable', 'image', 'max:5000'],
             'mobile_image' => ['nullable', 'image', 'max:5000'],
-            'video_url'    => ['nullable', 'url', 'max:500'],
+            'video_url.en' => ['nullable', 'url', 'max:500'],
+            'video_url.es' => ['nullable', 'url', 'max:500'],
+            'video_url.pt' => ['nullable', 'url', 'max:500'],
         ]);
 
         $page->slug                 = $request->input('slug');
         $page->title                = $request->input('title');
         $page->subtitle             = $request->input('subtitle');
-        $page->video_url            = $request->input('video_url') ?: null;
+        $page->video_url            = array_filter($request->input('video_url', []));
         $page->form_title           = $request->input('form_title') ?: null;
         $page->form_subtitle        = $request->input('form_subtitle') ?: null;
         $page->cta_label            = $request->input('cta_label') ?: null;
