@@ -30,6 +30,10 @@ class ServicePageController extends Controller
             'video_url.en' => ['nullable', 'url', 'max:500'],
             'video_url.es' => ['nullable', 'url', 'max:500'],
             'video_url.pt' => ['nullable', 'url', 'max:500'],
+            'whatsapp_number'    => ['nullable', 'max:30'],
+            'whatsapp_message.en' => ['nullable', 'max:1000'],
+            'whatsapp_message.es' => ['nullable', 'max:1000'],
+            'whatsapp_message.pt' => ['nullable', 'max:1000'],
         ]);
 
         $page = new ServicePage();
@@ -43,6 +47,9 @@ class ServicePageController extends Controller
         $page->form_success_message = $request->input('form_success_message') ?: null;
         $page->lead_form_enabled    = $request->boolean('lead_form_enabled', true);
         $page->faq_enabled          = $request->boolean('faq_enabled', true);
+        $page->whatsapp_enabled     = $request->boolean('whatsapp_enabled');
+        $page->whatsapp_number      = $request->input('whatsapp_number') ?: null;
+        $page->whatsapp_message     = array_filter($request->input('whatsapp_message', []));
         $page->is_active            = $request->boolean('is_active', true);
         $page->image                = handleUpload('image') ?: null;
         $page->mobile_image         = handleUpload('mobile_image') ?: null;
@@ -74,6 +81,10 @@ class ServicePageController extends Controller
             'video_url.en' => ['nullable', 'url', 'max:500'],
             'video_url.es' => ['nullable', 'url', 'max:500'],
             'video_url.pt' => ['nullable', 'url', 'max:500'],
+            'whatsapp_number'    => ['nullable', 'max:30'],
+            'whatsapp_message.en' => ['nullable', 'max:1000'],
+            'whatsapp_message.es' => ['nullable', 'max:1000'],
+            'whatsapp_message.pt' => ['nullable', 'max:1000'],
         ]);
 
         $page->slug                 = $request->input('slug');
@@ -86,6 +97,9 @@ class ServicePageController extends Controller
         $page->form_success_message = $request->input('form_success_message') ?: null;
         $page->lead_form_enabled    = $request->boolean('lead_form_enabled');
         $page->faq_enabled          = $request->boolean('faq_enabled');
+        $page->whatsapp_enabled     = $request->boolean('whatsapp_enabled');
+        $page->whatsapp_number      = $request->input('whatsapp_number') ?: null;
+        $page->whatsapp_message     = array_filter($request->input('whatsapp_message', []));
         $page->is_active            = $request->boolean('is_active');
 
         $desktopPath = handleUpload('image', $page);

@@ -10,7 +10,7 @@ class ServicePage extends Model
 {
     use HasFactory, HasTranslations;
 
-    public array $translatable = ['title', 'subtitle', 'video_url', 'form_title', 'form_subtitle', 'cta_label', 'form_success_message'];
+    public array $translatable = ['title', 'subtitle', 'video_url', 'form_title', 'form_subtitle', 'cta_label', 'form_success_message', 'whatsapp_message'];
 
     /**
      * Video URL for the given locale, falling back to whichever language
@@ -20,6 +20,22 @@ class ServicePage extends Model
     {
         foreach (array_unique([$locale, 'en', 'es', 'pt']) as $fallbackLocale) {
             $value = $this->getTranslation('video_url', $fallbackLocale, false);
+            if ($value) {
+                return $value;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * WhatsApp pre-filled message for the given locale, falling back to whichever
+     * language was filled in first (en, then es, then pt) if this locale is blank.
+     */
+    public function getWhatsappMessageForLocale(string $locale): ?string
+    {
+        foreach (array_unique([$locale, 'en', 'es', 'pt']) as $fallbackLocale) {
+            $value = $this->getTranslation('whatsapp_message', $fallbackLocale, false);
             if ($value) {
                 return $value;
             }

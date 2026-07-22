@@ -14,3 +14,5 @@ Run these scripts manually in phpMyAdmin when deploying corresponding code chang
    - Converts `service_pages.video_url` to JSON so it can hold a separate link per language (EN/ES/PT).
 4. `docs/db-fixes/2026-07-22_whatsapp_settings.sql`
    - Creates `whatsapp_settings` (floating WhatsApp button toggle, phone number, per-language pre-filled message) and seeds its single row. Acts as the site-wide/homepage default.
+5. `docs/db-fixes/2026-07-22_service_pages_whatsapp.sql`
+   - Adds `whatsapp_enabled`, `whatsapp_number`, `whatsapp_message` columns to `service_pages` so each landing page can override the WhatsApp button with its own number/message per language.

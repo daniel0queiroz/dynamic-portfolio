@@ -1,11 +1,22 @@
 @php
     $whatsappSetting = cache()->remember('whatsapp_setting', 3600, fn() => \App\Models\WhatsappSetting::first());
+
+    // A landing page's own WhatsApp settings (if enabled) take priority over the
+    // site-wide default, so each service can have its own number/message.
+    if (isset($page) && $page->whatsapp_enabled && $page->whatsapp_number) {
+        $whatsappPhoneNumber = $page->whatsapp_number;
+        $whatsappMessage = $page->getWhatsappMessageForLocale(app()->getLocale());
+    } elseif ($whatsappSetting?->is_enabled && $whatsappSetting->phone_number) {
+        $whatsappPhoneNumber = $whatsappSetting->phone_number;
+        $whatsappMessage = $whatsappSetting->getMessageForLocale(app()->getLocale());
+    } else {
+        $whatsappPhoneNumber = null;
+    }
 @endphp
 
-@if ($whatsappSetting?->is_enabled && $whatsappSetting->phone_number)
+@if ($whatsappPhoneNumber)
     @php
-        $whatsappNumber = preg_replace('/\D/', '', $whatsappSetting->phone_number);
-        $whatsappMessage = $whatsappSetting->getMessageForLocale(app()->getLocale());
+        $whatsappNumber = preg_replace('/\D/', '', $whatsappPhoneNumber);
         $whatsappUrl = 'https://wa.me/' . $whatsappNumber . ($whatsappMessage ? '?text=' . urlencode($whatsappMessage) : '');
     @endphp
 
