@@ -41,7 +41,7 @@
     <div class="links-profile">
         @php $avatarSrc = $setting?->profile_image ?? $about?->image; @endphp
         @if ($avatarSrc)
-            <img class="links-avatar" src="{{ asset($avatarSrc) }}" alt="{{ $setting?->getTranslation('profile_name', app()->getLocale(), true) }}">
+            <img class="links-avatar" src="{{ asset($avatarSrc) }}" alt="{{ $setting?->getTranslation('profile_name', app()->getLocale(), true) }}" width="88" height="88" loading="eager" fetchpriority="high" decoding="async">
         @endif
         <h1 class="links-profile-name">
             {{ $setting?->getTranslation('profile_name', app()->getLocale(), true) ?? 'Daniel Queiroz' }}
@@ -56,8 +56,10 @@
         <a href="{{ $item->url }}"
            target="_blank"
            rel="noopener noreferrer"
-           class="link-card"
-           style="background-image: url('{{ asset($item->thumbnail) }}')">
+           class="link-card">
+            @if ($item->thumbnail)
+                <img src="{{ asset($item->thumbnail) }}" alt="" class="link-card-img" width="480" height="130" loading="lazy" decoding="async">
+            @endif
             <div class="link-card-overlay">
                 <span class="link-card-name">
                     {{ $item->getTranslation('name', app()->getLocale(), true) }}

@@ -123,8 +123,6 @@
             position: relative;
             height: 130px;
             background-color: #1a1630;
-            background-size: cover;
-            background-position: center;
             border: 2px solid rgba(255, 255, 255, 0.75);
             transition: transform 0.18s ease, box-shadow 0.18s ease;
         }
@@ -133,6 +131,15 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             text-decoration: none;
+        }
+
+        .link-card-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
         }
 
         .link-card-overlay {
