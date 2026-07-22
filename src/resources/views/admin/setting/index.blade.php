@@ -42,6 +42,18 @@
                   </div>
                 </div>
               </div>
+              <div class="col-lg-6">
+                <div class="card card-large-icons">
+                  <div class="card-icon bg-primary text-white">
+                    <i class="fab fa-whatsapp"></i>
+                  </div>
+                  <div class="card-body">
+                    <h4>WhatsApp Button</h4>
+                    <p>Site-wide default for the floating WhatsApp button (e.g. homepage). Individual service landing pages can override this with their own number and message.</p>
+                    <a href="{{route('admin.whatsapp-setting.index')}}" class="card-cta">Change Setting <i class="fas fa-chevron-right"></i></a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>

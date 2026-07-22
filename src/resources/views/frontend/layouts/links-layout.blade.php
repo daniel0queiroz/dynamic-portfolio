@@ -194,5 +194,7 @@
     <script src="{{ asset('frontend/assets/js/vendor/jquery-min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/lang-switch.js') }}"></script>
+
+    @include('frontend.layouts.whatsapp-button')
 </body>
 </html>
