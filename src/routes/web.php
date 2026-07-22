@@ -34,6 +34,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SkillItemController;
 use App\Http\Controllers\Admin\SkillSectionSettingController;
 use App\Http\Controllers\Admin\TyperTitleController;
+use App\Http\Controllers\Admin\WhatsappSettingController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
@@ -158,4 +159,5 @@ Route::group([
     Route::get('settings', SettingController::class)->name('settings.index');
     Route::resource('general-setting', GeneralSettingController::class);
     Route::resource('seo-setting', SeoSettingController::class);
+    Route::resource('whatsapp-setting', WhatsappSettingController::class)->only(['index', 'update']);
 });

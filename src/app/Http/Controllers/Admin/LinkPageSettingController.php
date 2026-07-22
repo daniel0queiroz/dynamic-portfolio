@@ -33,7 +33,8 @@ class LinkPageSettingController extends Controller
 
         $setting = LinkPageSetting::findOrFail($id);
 
-        $imagePath = handleUpload('profile_image', $setting);
+        // Shown at 88px on /links but also used as the page's og:image, so keep it social-preview sized.
+        $imagePath = handleUpload('profile_image', $setting, 800, 800);
 
         $setting->profile_name   = $request->input('profile_name');
         $setting->profile_bio    = $request->input('profile_bio');

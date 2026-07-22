@@ -29,7 +29,8 @@ class LinkItemController extends Controller
             'sort_order' => ['nullable', 'integer', 'min:0'],
         ]);
 
-        $thumbnailPath = handleUpload('thumbnail');
+        // Cards render at ~480x130 CSS px; 960x600 covers retina without shipping full-res originals.
+        $thumbnailPath = handleUpload('thumbnail', null, 960, 600);
 
         $item = new LinkItem();
         $item->name       = $request->input('name');
@@ -63,7 +64,7 @@ class LinkItemController extends Controller
 
         $linkItem = LinkItem::findOrFail($id);
 
-        $thumbnailPath = handleUpload('thumbnail', $linkItem);
+        $thumbnailPath = handleUpload('thumbnail', $linkItem, 960, 600);
 
         $linkItem->name       = $request->input('name');
         $linkItem->url        = $request->url;

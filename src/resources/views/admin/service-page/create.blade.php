@@ -195,6 +195,45 @@
                                     </p>
                                 </div>
 
+                                <hr class="mb-4">
+
+                                {{-- Enable WhatsApp Button --}}
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">WhatsApp Button</label>
+                                    <div class="col-sm-12 col-md-7">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" name="whatsapp_enabled" value="1" class="custom-control-input" id="whatsappEnabled" {{ old('whatsapp_enabled') ? 'checked' : '' }}>
+                                            <label class="custom-control-label" for="whatsappEnabled">Enable floating WhatsApp button on this page</label>
+                                        </div>
+                                        <small class="text-muted">Overrides the site-wide WhatsApp setting for this landing page only. Leave off to use the global setting (if enabled) or hide the button.</small>
+                                    </div>
+                                </div>
+
+                                <div id="whatsappFieldsGroup">
+                                    {{-- WhatsApp Number --}}
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">WhatsApp Number</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text" name="whatsapp_number" class="form-control" placeholder="+55 11 91234-5678" value="{{ old('whatsapp_number') }}">
+                                            <small class="text-muted">Include the country code. Formatting characters are ignored when building the link.</small>
+                                        </div>
+                                    </div>
+
+                                    {{-- WhatsApp Pre-filled Message --}}
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Pre-filled Message</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <small class="text-muted">English</small>
+                                            <textarea name="whatsapp_message[en]" class="form-control mb-2" rows="2">{{ old('whatsapp_message.en') }}</textarea>
+                                            <small class="text-muted">Español</small>
+                                            <textarea name="whatsapp_message[es]" class="form-control mb-2" rows="2">{{ old('whatsapp_message.es') }}</textarea>
+                                            <small class="text-muted">Português</small>
+                                            <textarea name="whatsapp_message[pt]" class="form-control" rows="2">{{ old('whatsapp_message.pt') }}</textarea>
+                                            <small class="text-muted d-block mt-1">Text pre-filled in WhatsApp when a visitor taps the button, based on the page's language.</small>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                     <div class="col-sm-12 col-md-7">
@@ -220,5 +259,6 @@
         }
         bindSectionToggle('leadFormEnabled', 'leadFormFieldsGroup');
         bindSectionToggle('faqEnabled', 'faqFieldsGroup');
+        bindSectionToggle('whatsappEnabled', 'whatsappFieldsGroup');
     </script>
 @endsection

@@ -2,11 +2,18 @@
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 /** Handle File Upload */
 
+/**
+ * Extensions we know how to re-encode. Anything else (pdf, ico, svg, etc.)
+ * is stored as-is, untouched.
+ */
+const OPTIMIZABLE_IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp'];
 
-function handleUpload($inputName, $model = null)
+function handleUpload($inputName, $model = null, $maxWidth = 1920, $maxHeight = 1920, $quality = 82)
 {
     try {
         if (request()->hasFile($inputName)) {
@@ -19,10 +26,34 @@ function handleUpload($inputName, $model = null)
             }
 
             $file = request()->file($inputName);
-            $extension = $file->getClientOriginalExtension();
+            $extension = strtolower($file->getClientOriginalExtension());
             $fileName = Str::uuid()->toString() . ($extension ? '.' . $extension : '');
 
-            Storage::disk('uploads')->putFileAs('', $file, $fileName);
+            $optimized = null;
+            if ($maxWidth && in_array($extension, OPTIMIZABLE_IMAGE_EXTENSIONS, true)) {
+                try {
+                    $manager = new ImageManager(new Driver());
+                    $encoded = (string) $manager->read($file->getRealPath())
+                        ->scaleDown($maxWidth, $maxHeight)
+                        ->encodeByExtension($extension, quality: $quality);
+
+                    // Only keep the re-encoded version if it actually saved bytes —
+                    // GD can bloat already-optimized/graphic-heavy PNGs otherwise.
+                    if (strlen($encoded) < $file->getSize()) {
+                        $optimized = $encoded;
+                    }
+                } catch (\Throwable $e) {
+                    // Unsupported codec (e.g. GD built without JPEG/WebP) or unreadable
+                    // image — fall back to storing the original untouched.
+                    $optimized = null;
+                }
+            }
+
+            if ($optimized !== null) {
+                Storage::disk('uploads')->put($fileName, $optimized);
+            } else {
+                Storage::disk('uploads')->putFileAs('', $file, $fileName);
+            }
 
             return 'uploads/' . $fileName;
         }

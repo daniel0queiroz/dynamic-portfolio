@@ -12,3 +12,7 @@ Run these scripts manually in phpMyAdmin when deploying corresponding code chang
    - Adds `lead_form_enabled` and `faq_enabled` columns to `service_pages`.
 3. `docs/db-fixes/2026-07-21_service_pages_video_url_translatable.sql`
    - Converts `service_pages.video_url` to JSON so it can hold a separate link per language (EN/ES/PT).
+4. `docs/db-fixes/2026-07-22_whatsapp_settings.sql`
+   - Creates `whatsapp_settings` (floating WhatsApp button toggle, phone number, per-language pre-filled message) and seeds its single row. Acts as the site-wide/homepage default.
+5. `docs/db-fixes/2026-07-22_service_pages_whatsapp.sql`
+   - Adds `whatsapp_enabled`, `whatsapp_number`, `whatsapp_message` columns to `service_pages` so each landing page can override the WhatsApp button with its own number/message per language.
