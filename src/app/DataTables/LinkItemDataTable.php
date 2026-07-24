@@ -15,6 +15,7 @@ class LinkItemDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addColumn('reorder', fn($row) => '<i class="fas fa-grip-vertical text-muted"></i>')
             ->editColumn('name', fn($row) => $row->getTranslation('name', 'en', false))
             ->editColumn('is_active', fn($row) => $row->is_active
                 ? '<span class="badge badge-success">Active</span>'
@@ -23,7 +24,7 @@ class LinkItemDataTable extends DataTable
                 '<a href="' . route('admin.link-item.edit', $row->id) . '" class="btn btn-primary"><i class="fas fa-edit"></i></a>' .
                 '<a href="' . route('admin.link-item.destroy', $row->id) . '" class="btn btn-danger delete-item ml-1"><i class="fas fa-trash"></i></a>'
             )
-            ->rawColumns(['is_active', 'action'])
+            ->rawColumns(['reorder', 'is_active', 'action'])
             ->setRowId('id');
     }
 
@@ -38,7 +39,7 @@ class LinkItemDataTable extends DataTable
             ->setTableId('link-item-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->orderBy(0)
+            ->orderBy(2)
             ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
@@ -53,6 +54,14 @@ class LinkItemDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::computed('reorder')
+                ->title('')
+                ->orderable(false)
+                ->searchable(false)
+                ->exportable(false)
+                ->printable(false)
+                ->addClass('reorder-handle text-center')
+                ->width(30),
             Column::make('id')->width(60),
             Column::make('sort_order')->width(80)->title('Order'),
             Column::make('name')->width(300),

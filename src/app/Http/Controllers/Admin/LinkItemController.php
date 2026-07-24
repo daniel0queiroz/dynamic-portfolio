@@ -84,4 +84,18 @@ class LinkItemController extends Controller
         deleteFileIfExist($linkItem->thumbnail);
         $linkItem->delete();
     }
+
+    public function reorder(Request $request)
+    {
+        $request->validate([
+            'order'   => ['required', 'array'],
+            'order.*' => ['integer', 'exists:link_items,id'],
+        ]);
+
+        foreach ($request->input('order') as $index => $id) {
+            LinkItem::where('id', $id)->update(['sort_order' => $index]);
+        }
+
+        return response()->json(['status' => 'success']);
+    }
 }

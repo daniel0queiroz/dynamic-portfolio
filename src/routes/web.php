@@ -145,6 +145,7 @@ Route::group([
     Route::resource('footer-help-links', FooterHelpLinkController::class);
 
     /** Links Page Routes */
+    Route::post('link-item/reorder', [LinkItemController::class, 'reorder'])->name('link-item.reorder');
     Route::resource('link-item', LinkItemController::class);
     Route::resource('link-page-setting', LinkPageSettingController::class);
 
