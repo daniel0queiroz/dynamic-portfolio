@@ -43,6 +43,7 @@ class TyperTitleController extends Controller
 
         $create = new TyperTitle();
         $create->title = $request->input('title');
+        $create->sort_order = (int) TyperTitle::max('sort_order') + 1;
         $create->save();
         toastr()->success('Created Successfully', 'Congrats');
 
@@ -103,5 +104,19 @@ class TyperTitleController extends Controller
     {
         $title = TyperTitle::findOrFail($id);
         $title->delete();
+    }
+
+    public function reorder(Request $request)
+    {
+        $request->validate([
+            'order'   => ['required', 'array'],
+            'order.*' => ['integer', 'exists:typer_titles,id'],
+        ]);
+
+        foreach ($request->input('order') as $index => $id) {
+            TyperTitle::where('id', $id)->update(['sort_order' => $index]);
+        }
+
+        return response()->json(['status' => 'success']);
     }
 }

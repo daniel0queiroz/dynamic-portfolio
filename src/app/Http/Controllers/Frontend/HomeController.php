@@ -32,7 +32,7 @@ class HomeController extends Controller
     public function index() 
     {
         $hero = Cache::remember('hero', 3600, fn() => Hero::first());
-        $typerTitles = Cache::remember('typer_titles', 3600, fn() => TyperTitle::all());
+        $typerTitles = Cache::remember('typer_titles', 3600, fn() => TyperTitle::orderBy('sort_order')->get());
         $services = Cache::remember('services', 3600, fn() => Service::orderBy('sort_order')->get());
         $about = Cache::remember('about', 3600, fn() => About::first());
         $portfolioTitle = Cache::remember('portfolio_title', 3600, fn() => PortfolioSectionSetting::first());

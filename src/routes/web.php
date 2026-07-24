@@ -102,6 +102,7 @@ Route::group([
 
     /** Hero Route */
     Route::resource('hero', HeroController::class);
+    Route::post('typer-title/reorder', [TyperTitleController::class, 'reorder'])->name('typer-title.reorder');
     Route::resource('typer-title', TyperTitleController::class);
 
     /** Service Route */

@@ -28,3 +28,5 @@ Run these scripts manually in phpMyAdmin when deploying corresponding code chang
     - Adds `sort_order` column to `services` for drag-and-drop reordering.
 11. `docs/db-fixes/2026-07-24_skill_items_sort_order.sql`
     - Adds `sort_order` column to `skill_items` for drag-and-drop reordering.
+12. `docs/db-fixes/2026-07-24_typer_titles_sort_order.sql`
+    - Adds `sort_order` column to `typer_titles` for drag-and-drop reordering.
