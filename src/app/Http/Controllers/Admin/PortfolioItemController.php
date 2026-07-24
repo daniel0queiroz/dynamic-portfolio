@@ -57,6 +57,7 @@ class PortfolioItemController extends Controller
         $portfolioItem->category_id = $request->category_id;
         $portfolioItem->client = $request->input('client');
         $portfolioItem->website = $request->filled('website') ? $request->website : null;
+        $portfolioItem->sort_order = (int) PortfolioItem::max('sort_order') + 1;
         $portfolioItem->save();
 
         toastr()->success('Profile Item Created Successfully!', 'Success');
@@ -135,5 +136,19 @@ class PortfolioItemController extends Controller
         $portfolioItem = PortfolioItem::findOrFail($id);
         deleteFileIfExist($portfolioItem->image);
         $portfolioItem->delete();
+    }
+
+    public function reorder(Request $request)
+    {
+        $request->validate([
+            'order'   => ['required', 'array'],
+            'order.*' => ['integer', 'exists:portfolio_items,id'],
+        ]);
+
+        foreach ($request->input('order') as $index => $id) {
+            PortfolioItem::where('id', $id)->update(['sort_order' => $index]);
+        }
+
+        return response()->json(['status' => 'success']);
     }
 }

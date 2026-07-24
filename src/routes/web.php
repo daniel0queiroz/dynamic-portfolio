@@ -112,6 +112,7 @@ Route::group([
 
     /** Portfolio Routes */
     Route::resource('category', CategoryController::class);
+    Route::post('portfolio-item/reorder', [PortfolioItemController::class, 'reorder'])->name('portfolio-item.reorder');
     Route::resource('portfolio-item', PortfolioItemController::class);
     Route::resource('portfolio-section-setting', PortfolioSectionSettingController::class);
 

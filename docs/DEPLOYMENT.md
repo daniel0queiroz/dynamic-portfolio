@@ -22,3 +22,5 @@ Run these scripts manually in phpMyAdmin when deploying corresponding code chang
    - Adds `sort_order` column to `footer_social_links` for drag-and-drop reordering.
 8. `docs/db-fixes/2026-07-24_footer_useful_links_sort_order.sql`
    - Adds `sort_order` column to `footer_useful_links` for drag-and-drop reordering.
+9. `docs/db-fixes/2026-07-24_portfolio_items_sort_order.sql`
+   - Adds `sort_order` column to `portfolio_items` for drag-and-drop reordering.

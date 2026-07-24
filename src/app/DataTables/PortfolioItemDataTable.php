@@ -23,6 +23,7 @@ class PortfolioItemDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addColumn('reorder', fn($row) => '<i class="fas fa-grip-vertical text-muted"></i>')
             ->addColumn('image', function($query){
                 return '<img style="width:70px" src="'.asset($query->image).'"></img>';
             })
@@ -36,7 +37,7 @@ class PortfolioItemDataTable extends DataTable
             ->addColumn('action', function($query){
                 return '<a href="'.route('admin.portfolio-item.edit', $query->id).'" class="btn btn-primary"><i class="fas fa-edit"></i></a><a href="'.route('admin.portfolio-item.destroy', $query->id).'" class="btn btn-danger delete-item"><i class="fas fa-trash"></i></a>';
             })
-            ->rawColumns(['image', 'action'])
+            ->rawColumns(['reorder', 'image', 'action'])
             ->setRowId('id');
     }
 
@@ -48,7 +49,7 @@ class PortfolioItemDataTable extends DataTable
      */
     public function query(PortfolioItem $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('sort_order');
     }
 
     /**
@@ -63,7 +64,7 @@ class PortfolioItemDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(0)
+                    ->orderBy(2)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -83,7 +84,16 @@ class PortfolioItemDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::computed('reorder')
+                  ->title('')
+                  ->orderable(false)
+                  ->searchable(false)
+                  ->exportable(false)
+                  ->printable(false)
+                  ->addClass('reorder-handle text-center')
+                  ->width(30),
             Column::make('id')->width(100),
+            Column::make('sort_order')->title('Order')->width(80),
             Column::make('image')->width(100),
             Column::make('title'),
             Column::make('category'),
