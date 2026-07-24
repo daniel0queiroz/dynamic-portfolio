@@ -45,6 +45,7 @@ class FooterUsefulLinkController extends Controller
         $link = new FooterUsefulLink();
         $link->name = $request->input('name');
         $link->url = $request->url;
+        $link->sort_order = (int) FooterUsefulLink::max('sort_order') + 1;
         $link->save();
 
         toastr('Created Successfully!', 'success');
@@ -109,5 +110,19 @@ class FooterUsefulLinkController extends Controller
     {
         $link = FooterUsefulLink::findOrFail($id);
         $link->delete();
+    }
+
+    public function reorder(Request $request)
+    {
+        $request->validate([
+            'order'   => ['required', 'array'],
+            'order.*' => ['integer', 'exists:footer_useful_links,id'],
+        ]);
+
+        foreach ($request->input('order') as $index => $id) {
+            FooterUsefulLink::where('id', $id)->update(['sort_order' => $index]);
+        }
+
+        return response()->json(['status' => 'success']);
     }
 }

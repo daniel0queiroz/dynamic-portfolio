@@ -142,6 +142,7 @@ Route::group([
     Route::resource('footer-social', FooterSocialLinkController::class);
     Route::resource('footer-info', FooterInfoController::class);
     Route::resource('footer-contact-info', FooterContactInfoController::class);
+    Route::post('footer-useful-links/reorder', [FooterUsefulLinkController::class, 'reorder'])->name('footer-useful-links.reorder');
     Route::resource('footer-useful-links', FooterUsefulLinkController::class);
     Route::post('footer-help-links/reorder', [FooterHelpLinkController::class, 'reorder'])->name('footer-help-links.reorder');
     Route::resource('footer-help-links', FooterHelpLinkController::class);
