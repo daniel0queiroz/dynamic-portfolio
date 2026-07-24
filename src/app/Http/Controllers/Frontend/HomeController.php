@@ -39,7 +39,7 @@ class HomeController extends Controller
         $portfolioCategories = Cache::remember('portfolio_categories', 3600, fn() => Category::all());
         $portfolioItems = Cache::remember('portfolio_items_home', 3600, fn() => PortfolioItem::with('category')->orderBy('sort_order')->get());
         $skill = Cache::remember('skill_section', 3600, fn() => SkillSectionSetting::first());
-        $skillItems = Cache::remember('skill_items', 3600, fn() => SkillItem::all());
+        $skillItems = Cache::remember('skill_items', 3600, fn() => SkillItem::orderBy('sort_order')->get());
         $experience = Cache::remember('experience', 3600, fn() => Experience::first());
         $feedbacks = Cache::remember('feedbacks', 3600, fn() => Feedback::all());
         $feedbackTitle = Cache::remember('feedback_title', 3600, fn() => FeedbackSectionSetting::first());

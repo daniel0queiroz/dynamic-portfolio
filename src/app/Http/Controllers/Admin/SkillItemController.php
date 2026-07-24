@@ -45,6 +45,7 @@ class SkillItemController extends Controller
         $skill = new SkillItem();
         $skill->name = $request->input('name');
         $skill->percent = $request->percent;
+        $skill->sort_order = (int) SkillItem::max('sort_order') + 1;
         $skill->save();
 
         toastr('Created Successfully!', 'success');
@@ -109,5 +110,19 @@ class SkillItemController extends Controller
     {
         $skill = SkillItem::findOrFail($id);
         $skill->delete();
+    }
+
+    public function reorder(Request $request)
+    {
+        $request->validate([
+            'order'   => ['required', 'array'],
+            'order.*' => ['integer', 'exists:skill_items,id'],
+        ]);
+
+        foreach ($request->input('order') as $index => $id) {
+            SkillItem::where('id', $id)->update(['sort_order' => $index]);
+        }
+
+        return response()->json(['status' => 'success']);
     }
 }

@@ -119,6 +119,7 @@ Route::group([
 
     /** Skill Routes */
     Route::resource('skill-section-setting', SkillSectionSettingController::class);
+    Route::post('skill-item/reorder', [SkillItemController::class, 'reorder'])->name('skill-item.reorder');
     Route::resource('skill-item', SkillItemController::class);
 
     /** Experience Route */
