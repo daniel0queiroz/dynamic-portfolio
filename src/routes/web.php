@@ -105,6 +105,7 @@ Route::group([
     Route::resource('typer-title', TyperTitleController::class);
 
     /** Service Route */
+    Route::post('service/reorder', [ServiceController::class, 'reorder'])->name('service.reorder');
     Route::resource('service', ServiceController::class);
 
     /** About Route */
