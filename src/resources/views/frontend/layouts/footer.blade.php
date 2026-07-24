@@ -1,6 +1,6 @@
 @php
 	$footerInfo = cache()->remember('footer_info', 3600, fn() => \App\Models\FooterInfo::first());
-	$footerIcons = cache()->remember('footer_icons', 3600, fn() => \App\Models\FooterSocialLink::all());
+	$footerIcons = cache()->remember('footer_icons', 3600, fn() => \App\Models\FooterSocialLink::orderBy('sort_order')->get());
 	$footerUsefulLinks = cache()->remember('footer_useful_links', 3600, fn() => \App\Models\FooterUsefulLink::all());
 	$footerContact = cache()->remember('footer_contact', 3600, fn() => \App\Models\FooterContactInfo::first());
 	$footerHelpLinks = cache()->remember('footer_help_links', 3600, fn() => \App\Models\FooterHelpLink::orderBy('sort_order')->get());

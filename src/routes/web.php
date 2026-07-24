@@ -138,6 +138,7 @@ Route::group([
     Route::resource('privacy-policy', PrivacyPolicyController::class);
 
     /** Footer Routes */
+    Route::post('footer-social/reorder', [FooterSocialLinkController::class, 'reorder'])->name('footer-social.reorder');
     Route::resource('footer-social', FooterSocialLinkController::class);
     Route::resource('footer-info', FooterInfoController::class);
     Route::resource('footer-contact-info', FooterContactInfoController::class);

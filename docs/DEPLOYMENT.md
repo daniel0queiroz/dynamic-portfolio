@@ -18,3 +18,5 @@ Run these scripts manually in phpMyAdmin when deploying corresponding code chang
    - Adds `whatsapp_enabled`, `whatsapp_number`, `whatsapp_message` columns to `service_pages` so each landing page can override the WhatsApp button with its own number/message per language.
 6. `docs/db-fixes/2026-07-24_footer_help_links_sort_order.sql`
    - Adds `sort_order` column to `footer_help_links` for drag-and-drop reordering.
+7. `docs/db-fixes/2026-07-24_footer_social_links_sort_order.sql`
+   - Adds `sort_order` column to `footer_social_links` for drag-and-drop reordering.
