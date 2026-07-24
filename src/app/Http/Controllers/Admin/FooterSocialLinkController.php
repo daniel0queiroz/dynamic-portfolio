@@ -45,6 +45,7 @@ class FooterSocialLinkController extends Controller
         $social = new FooterSocialLink();
         $social->icon = $request->icon;
         $social->url = $request->url;
+        $social->sort_order = (int) FooterSocialLink::max('sort_order') + 1;
         $social->save();
 
         toastr('Created Successfully!', 'success');
@@ -109,5 +110,19 @@ class FooterSocialLinkController extends Controller
     {
         $social = FooterSocialLink::findOrFail($id);
         $social->delete();
+    }
+
+    public function reorder(Request $request)
+    {
+        $request->validate([
+            'order'   => ['required', 'array'],
+            'order.*' => ['integer', 'exists:footer_social_links,id'],
+        ]);
+
+        foreach ($request->input('order') as $index => $id) {
+            FooterSocialLink::where('id', $id)->update(['sort_order' => $index]);
+        }
+
+        return response()->json(['status' => 'success']);
     }
 }

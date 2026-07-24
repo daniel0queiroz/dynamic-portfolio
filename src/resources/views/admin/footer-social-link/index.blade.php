@@ -1,5 +1,11 @@
 @extends('admin.layouts.layout')
 
+@push('styles')
+    <style>
+        #footersociallink-table td.reorder-handle { cursor: grab; }
+    </style>
+@endpush
+
 @section('content')
     <section class="section">
           <div class="section-header">
@@ -30,5 +36,40 @@
 @endsection
 
 @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+@endpush
+
+@push('scripts')
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+@endpush
+
+@push('scripts')
+    <script>
+        $(function () {
+            $('#footersociallink-table').on('init.dt', function () {
+                var tbody = document.querySelector('#footersociallink-table tbody');
+
+                Sortable.create(tbody, {
+                    handle: 'td.reorder-handle',
+                    animation: 150,
+                    forceFallback: true,
+                    onEnd: function () {
+                        var order = Array.from(tbody.querySelectorAll('tr')).map(function (tr) {
+                            return tr.id;
+                        });
+
+                        $.post("{{ route('admin.footer-social.reorder') }}", { order: order })
+                            .done(function () {
+                                toastr.success('Order updated!', 'Success');
+                                window.LaravelDataTables['footersociallink-table'].ajax.reload(null, false);
+                            })
+                            .fail(function () {
+                                toastr.error('Could not save the new order.', 'Error');
+                                window.LaravelDataTables['footersociallink-table'].ajax.reload(null, false);
+                            });
+                    },
+                });
+            });
+        });
+    </script>
 @endpush

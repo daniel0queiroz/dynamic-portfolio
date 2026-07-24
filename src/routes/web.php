@@ -102,9 +102,11 @@ Route::group([
 
     /** Hero Route */
     Route::resource('hero', HeroController::class);
+    Route::post('typer-title/reorder', [TyperTitleController::class, 'reorder'])->name('typer-title.reorder');
     Route::resource('typer-title', TyperTitleController::class);
 
     /** Service Route */
+    Route::post('service/reorder', [ServiceController::class, 'reorder'])->name('service.reorder');
     Route::resource('service', ServiceController::class);
 
     /** About Route */
@@ -112,11 +114,13 @@ Route::group([
 
     /** Portfolio Routes */
     Route::resource('category', CategoryController::class);
+    Route::post('portfolio-item/reorder', [PortfolioItemController::class, 'reorder'])->name('portfolio-item.reorder');
     Route::resource('portfolio-item', PortfolioItemController::class);
     Route::resource('portfolio-section-setting', PortfolioSectionSettingController::class);
 
     /** Skill Routes */
     Route::resource('skill-section-setting', SkillSectionSettingController::class);
+    Route::post('skill-item/reorder', [SkillItemController::class, 'reorder'])->name('skill-item.reorder');
     Route::resource('skill-item', SkillItemController::class);
 
     /** Experience Route */
@@ -138,13 +142,17 @@ Route::group([
     Route::resource('privacy-policy', PrivacyPolicyController::class);
 
     /** Footer Routes */
+    Route::post('footer-social/reorder', [FooterSocialLinkController::class, 'reorder'])->name('footer-social.reorder');
     Route::resource('footer-social', FooterSocialLinkController::class);
     Route::resource('footer-info', FooterInfoController::class);
     Route::resource('footer-contact-info', FooterContactInfoController::class);
+    Route::post('footer-useful-links/reorder', [FooterUsefulLinkController::class, 'reorder'])->name('footer-useful-links.reorder');
     Route::resource('footer-useful-links', FooterUsefulLinkController::class);
+    Route::post('footer-help-links/reorder', [FooterHelpLinkController::class, 'reorder'])->name('footer-help-links.reorder');
     Route::resource('footer-help-links', FooterHelpLinkController::class);
 
     /** Links Page Routes */
+    Route::post('link-item/reorder', [LinkItemController::class, 'reorder'])->name('link-item.reorder');
     Route::resource('link-item', LinkItemController::class);
     Route::resource('link-page-setting', LinkPageSettingController::class);
 

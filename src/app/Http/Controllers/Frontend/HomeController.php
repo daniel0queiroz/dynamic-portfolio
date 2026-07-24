@@ -32,14 +32,14 @@ class HomeController extends Controller
     public function index() 
     {
         $hero = Cache::remember('hero', 3600, fn() => Hero::first());
-        $typerTitles = Cache::remember('typer_titles', 3600, fn() => TyperTitle::all());
-        $services = Cache::remember('services', 3600, fn() => Service::all());
+        $typerTitles = Cache::remember('typer_titles', 3600, fn() => TyperTitle::orderBy('sort_order')->get());
+        $services = Cache::remember('services', 3600, fn() => Service::orderBy('sort_order')->get());
         $about = Cache::remember('about', 3600, fn() => About::first());
         $portfolioTitle = Cache::remember('portfolio_title', 3600, fn() => PortfolioSectionSetting::first());
         $portfolioCategories = Cache::remember('portfolio_categories', 3600, fn() => Category::all());
-        $portfolioItems = Cache::remember('portfolio_items_home', 3600, fn() => PortfolioItem::with('category')->latest()->get());
+        $portfolioItems = Cache::remember('portfolio_items_home', 3600, fn() => PortfolioItem::with('category')->orderBy('sort_order')->get());
         $skill = Cache::remember('skill_section', 3600, fn() => SkillSectionSetting::first());
-        $skillItems = Cache::remember('skill_items', 3600, fn() => SkillItem::all());
+        $skillItems = Cache::remember('skill_items', 3600, fn() => SkillItem::orderBy('sort_order')->get());
         $experience = Cache::remember('experience', 3600, fn() => Experience::first());
         $feedbacks = Cache::remember('feedbacks', 3600, fn() => Feedback::all());
         $feedbackTitle = Cache::remember('feedback_title', 3600, fn() => FeedbackSectionSetting::first());
@@ -68,7 +68,7 @@ class HomeController extends Controller
 
     public function portfolio()
     {
-        $portfolios = PortfolioItem::latest()->paginate(9);
+        $portfolios = PortfolioItem::orderBy('sort_order')->paginate(9);
         return view('frontend.portfolio', compact('portfolios'));
     }
 

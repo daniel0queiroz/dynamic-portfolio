@@ -46,6 +46,7 @@ class ServiceController extends Controller
         $service->name = $request->input('name');
         $service->description = $request->input('description');
         $service->link = $request->input('link') ?: null;
+        $service->sort_order = (int) Service::max('sort_order') + 1;
         $service->save();
 
         toastr()->success('Created Successfully', 'Congrats');
@@ -111,5 +112,19 @@ class ServiceController extends Controller
     {
         $service = Service::findOrFail($id);
         $service->delete();
+    }
+
+    public function reorder(Request $request)
+    {
+        $request->validate([
+            'order'   => ['required', 'array'],
+            'order.*' => ['integer', 'exists:services,id'],
+        ]);
+
+        foreach ($request->input('order') as $index => $id) {
+            Service::where('id', $id)->update(['sort_order' => $index]);
+        }
+
+        return response()->json(['status' => 'success']);
     }
 }

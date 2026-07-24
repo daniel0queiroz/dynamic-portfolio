@@ -23,10 +23,12 @@ class SkillItemDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addColumn('reorder', fn($row) => '<i class="fas fa-grip-vertical text-muted"></i>')
             ->editColumn('name', fn($row) => $row->getTranslation('name', 'en', false))
             ->addColumn('action', function($query){
                 return '<a href="'.route('admin.skill-item.edit', $query->id).'" class="btn btn-primary"><i class="fas fa-edit"></i></a><a href="'.route('admin.skill-item.destroy', $query->id).'" class="btn btn-danger delete-item"><i class="fas fa-trash"></i></a>';
             })
+            ->rawColumns(['reorder', 'action'])
             ->setRowId('id');
     }
 
@@ -38,7 +40,7 @@ class SkillItemDataTable extends DataTable
      */
     public function query(SkillItem $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('sort_order');
     }
 
     /**
@@ -53,7 +55,7 @@ class SkillItemDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(0)
+                    ->orderBy(2)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -73,7 +75,16 @@ class SkillItemDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::computed('reorder')
+                  ->title('')
+                  ->orderable(false)
+                  ->searchable(false)
+                  ->exportable(false)
+                  ->printable(false)
+                  ->addClass('reorder-handle text-center')
+                  ->width(30),
             Column::make('id'),
+            Column::make('sort_order')->title('Order'),
             Column::make('name'),
             Column::make('percent'),
             Column::computed('action')

@@ -45,6 +45,7 @@ class FooterHelpLinkController extends Controller
         $link = new FooterHelpLink();
         $link->name = $request->input('name');
         $link->url = $request->url;
+        $link->sort_order = (int) FooterHelpLink::max('sort_order') + 1;
         $link->save();
 
         toastr('Created Successfully!', 'success');
@@ -109,5 +110,19 @@ class FooterHelpLinkController extends Controller
     {
         $link = FooterHelpLink::findOrFail($id);
         $link->delete();
+    }
+
+    public function reorder(Request $request)
+    {
+        $request->validate([
+            'order'   => ['required', 'array'],
+            'order.*' => ['integer', 'exists:footer_help_links,id'],
+        ]);
+
+        foreach ($request->input('order') as $index => $id) {
+            FooterHelpLink::where('id', $id)->update(['sort_order' => $index]);
+        }
+
+        return response()->json(['status' => 'success']);
     }
 }
