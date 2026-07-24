@@ -16,3 +16,5 @@ Run these scripts manually in phpMyAdmin when deploying corresponding code chang
    - Creates `whatsapp_settings` (floating WhatsApp button toggle, phone number, per-language pre-filled message) and seeds its single row. Acts as the site-wide/homepage default.
 5. `docs/db-fixes/2026-07-22_service_pages_whatsapp.sql`
    - Adds `whatsapp_enabled`, `whatsapp_number`, `whatsapp_message` columns to `service_pages` so each landing page can override the WhatsApp button with its own number/message per language.
+6. `docs/db-fixes/2026-07-24_footer_help_links_sort_order.sql`
+   - Adds `sort_order` column to `footer_help_links` for drag-and-drop reordering.
