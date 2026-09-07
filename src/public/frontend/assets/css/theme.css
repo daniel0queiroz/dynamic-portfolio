@@ -87,14 +87,14 @@ Button-Styles
 
 .button-dark {
     display: inline-block;
-    width: 170px;
-    height: 60px;
+    padding: 18px 40px;
     background-color: #190844;
     text-align: center;
-    line-height: 60px;
+    line-height: 1.2;
     font-size: 20px;
     color: #ffffff;
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .button-dark:hover {
