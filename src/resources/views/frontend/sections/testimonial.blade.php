@@ -7,8 +7,9 @@
                     <div class="desc">
                         <p>{{$feedbackTitle?->sub_title}}</p>
                     </div>
-                    <a href="{{ route('testimonial.create') }}" class="button-primary-trans">
-                        {{ $feedbackTitle?->cta_label ?: __('ui.testimonial.add_yours') }}
+                    <a href="{{ route('testimonial.create') }}" class="button-primary-trans mouse-dir mt-3">
+                        {{ $feedbackTitle?->cta_label ?: __('ui.testimonial.add_yours') }} <span class="dir-part"></span>
+                        <i class="fal fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
