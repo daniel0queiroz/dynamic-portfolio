@@ -46,7 +46,7 @@ class FeedbackController extends Controller
         $feedback = new Feedback();
         $feedback->name = $request->input('name');
         $feedback->position = $request->input('position');
-        $feedback->description = $request->input('description');
+        $feedback->description = stripTrailingLineBreaks($request->input('description'));
         $feedback->save();
 
         toastr('Created Successfully!', 'success');
@@ -95,7 +95,7 @@ class FeedbackController extends Controller
         $feedback = Feedback::findOrFail($id);
         $feedback->name = $request->input('name');
         $feedback->position = $request->input('position');
-        $feedback->description = $request->input('description');
+        $feedback->description = stripTrailingLineBreaks($request->input('description'));
         $feedback->save();
 
         toastr('Updated Successfully!', 'success');
