@@ -242,12 +242,7 @@
                 '<a href="#" id="scrollUp"><i class="fal fa-long-arrow-up"></i></a>'
             );
             $("#scrollUp").on("click", function () {
-                $("body,html").animate(
-                    {
-                        scrollTop: 0,
-                    },
-                    500
-                );
+                window.scrollTo({ top: 0, behavior: "smooth" });
                 return false;
             });
             /*-- WoW-Animation-JS --*/
