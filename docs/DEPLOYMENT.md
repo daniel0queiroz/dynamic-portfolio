@@ -32,3 +32,5 @@ Run these scripts manually in phpMyAdmin when deploying corresponding code chang
     - Adds `sort_order` column to `typer_titles` for drag-and-drop reordering.
 13. `docs/db-fixes/2026-09-12_feedback_trailing_br.sql`
     - Content fix (not schema): strips a stray trailing `<br>` from the "Brayam Dias" testimonial's Portuguese description that was pushing the closing quote mark onto its own line.
+14. `docs/db-fixes/2026-09-12_feedback_role_company_cta.sql`
+    - Adds `role`, `company`, `is_active` columns to `feedback` (splits the old `position` field, and gates testimonials behind admin approval) and `cta_label` to `feedback_section_settings` (the "Add Yours" button text). Also migrates the existing "Brayam Dias" row's `position` into the new `role`/`company` columns.

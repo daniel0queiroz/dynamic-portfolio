@@ -39,14 +39,17 @@ class FeedbackController extends Controller
     {
         $request->validate([
             'name.en' => ['required', 'max:50'],
-            'position.en' => ['nullable', 'max:100'],
+            'role.en' => ['nullable', 'max:100'],
+            'company.en' => ['nullable', 'max:100'],
             'description.en' => ['required', 'max:1000'],
         ]);
 
         $feedback = new Feedback();
         $feedback->name = $request->input('name');
-        $feedback->position = $request->input('position');
+        $feedback->role = filterTranslatableInput($request->input('role'));
+        $feedback->company = filterTranslatableInput($request->input('company'));
         $feedback->description = stripTrailingLineBreaks($request->input('description'));
+        $feedback->is_active = $request->boolean('is_active', true);
         $feedback->save();
 
         toastr('Created Successfully!', 'success');
@@ -88,14 +91,17 @@ class FeedbackController extends Controller
     {
         $request->validate([
             'name.en' => ['required', 'max:50'],
-            'position.en' => ['nullable', 'max:100'],
+            'role.en' => ['nullable', 'max:100'],
+            'company.en' => ['nullable', 'max:100'],
             'description.en' => ['required', 'max:1000'],
         ]);
 
         $feedback = Feedback::findOrFail($id);
         $feedback->name = $request->input('name');
-        $feedback->position = $request->input('position');
+        $feedback->role = filterTranslatableInput($request->input('role'));
+        $feedback->company = filterTranslatableInput($request->input('company'));
         $feedback->description = stripTrailingLineBreaks($request->input('description'));
+        $feedback->is_active = $request->boolean('is_active');
         $feedback->save();
 
         toastr('Updated Successfully!', 'success');

@@ -10,7 +10,7 @@ class FeedbackSectionSetting extends Model
 {
     use HasFactory, HasTranslations;
 
-    public array $translatable = ['title', 'sub_title'];
+    public array $translatable = ['title', 'sub_title', 'cta_label'];
 
-    protected $fillable = ['title', 'sub_title'];
+    protected $fillable = ['title', 'sub_title', 'cta_label'];
 }

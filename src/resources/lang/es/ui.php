@@ -46,4 +46,15 @@ return [
         'contact_info' => 'Información de contacto',
         'help' => 'Ayuda',
     ],
+    'testimonial' => [
+        'add_yours' => 'Agrega el Tuyo',
+        'page_title' => 'Comparte Tu Experiencia',
+        'page_subtitle' => '¿Trabajaste conmigo? Deja un testimonio abajo — aparecerá en el sitio tras una breve revisión.',
+        'name' => 'Tu Nombre',
+        'role' => 'Tu Cargo',
+        'company' => 'Empresa',
+        'message' => 'Tu Testimonio',
+        'submit' => 'Enviar',
+        'thank_you' => '¡Gracias! Tu testimonio será revisado y publicado pronto.',
+    ],
 ];

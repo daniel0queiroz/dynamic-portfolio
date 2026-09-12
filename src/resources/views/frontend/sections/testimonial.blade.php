@@ -7,6 +7,9 @@
                     <div class="desc">
                         <p>{{$feedbackTitle?->sub_title}}</p>
                     </div>
+                    <a href="{{ route('testimonial.create') }}" class="button-primary-trans">
+                        {{ $feedbackTitle?->cta_label ?: __('ui.testimonial.add_yours') }}
+                    </a>
                 </div>
             </div>
         </div>
@@ -20,7 +23,9 @@
                                 <i class="fas fa-quote-left"></i>
                             </div>
                             <h5 class="title">{{$feedback->name}}</h5>
-                            <h6 class="position">{{$feedback->position}}</h6>
+                            @if($feedback->role || $feedback->company)
+                                <h6 class="position">{{ implode(' - ', array_filter([$feedback->role, $feedback->company])) }}</h6>
+                            @endif
                         </div>
                         <div class="content">
                             {!! $feedback->description !!}

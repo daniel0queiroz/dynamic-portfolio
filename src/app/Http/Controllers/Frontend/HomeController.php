@@ -41,7 +41,7 @@ class HomeController extends Controller
         $skill = Cache::remember('skill_section', 3600, fn() => SkillSectionSetting::first());
         $skillItems = Cache::remember('skill_items', 3600, fn() => SkillItem::orderBy('sort_order')->get());
         $experience = Cache::remember('experience', 3600, fn() => Experience::first());
-        $feedbacks = Cache::remember('feedbacks', 3600, fn() => Feedback::all());
+        $feedbacks = Cache::remember('feedbacks', 3600, fn() => Feedback::where('is_active', true)->get());
         $feedbackTitle = Cache::remember('feedback_title', 3600, fn() => FeedbackSectionSetting::first());
         $blogs = Cache::remember('blogs_home', 3600, fn() => Blog::latest()->take(5)->get());
         $blogTitle = Cache::remember('blog_title', 3600, fn() => BlogSectionSetting::first());

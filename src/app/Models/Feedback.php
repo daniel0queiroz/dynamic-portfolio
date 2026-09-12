@@ -10,5 +10,9 @@ class Feedback extends Model
 {
     use HasFactory, HasTranslations;
 
-    public array $translatable = ['name', 'position', 'description'];
+    public array $translatable = ['name', 'position', 'role', 'company', 'description'];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 }

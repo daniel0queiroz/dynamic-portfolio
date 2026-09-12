@@ -24,8 +24,11 @@ class FeedbackDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->editColumn('name', fn($row) => $row->getTranslation('name', 'en', false))
-            ->editColumn('position', fn($row) => $row->getTranslation('position', 'en', false))
+            ->editColumn('company', fn($row) => $row->getTranslation('company', 'en', false))
             ->editColumn('description', fn($row) => $row->getTranslation('description', 'en', false))
+            ->editColumn('is_active', fn($row) => $row->is_active
+                ? '<span class="badge badge-success">Published</span>'
+                : '<span class="badge badge-warning">Pending</span>')
             ->addColumn('action', function($query){
                 return '<a href="'.route('admin.feedback.edit', $query->id).'" class="btn btn-primary"><i class="fas fa-edit"></i></a><a href="'.route('admin.feedback.destroy', $query->id).'" class="btn btn-danger delete-item"><i class="fas fa-trash"></i></a>';
             })
@@ -77,8 +80,9 @@ class FeedbackDataTable extends DataTable
         return [
             Column::make('id')->width('100'),
             Column::make('name')->width('300'),
-            Column::make('position')->width('300'),
+            Column::make('company')->width('250'),
             Column::make('description'),
+            Column::make('is_active')->title('Status')->width('120'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
