@@ -24,7 +24,7 @@
                 @if($about?->image)
                     <div class="row justify-content-center">
                         <div class="col-lg-3 col-md-4 col-sm-6">
-                            <figure class="about-image mx-auto" style="margin-right:0; max-width:220px;">
+                            <figure class="about-image mx-auto" style="margin-right:0; margin-bottom:30px; max-width:220px;">
                                 <img src="{{asset($about->image)}}" alt="{{ $about->title }}" loading="lazy" decoding="async">
                             </figure>
                         </div>
