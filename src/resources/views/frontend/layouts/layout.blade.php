@@ -47,7 +47,7 @@
 	</div>
 
 
-	<script src="{{asset('frontend/assets/js/vendor/jquery-min.js')}}" defer></script>
+	<script src="{{asset('frontend/assets/js/vendor/jquery-min.js')}}"></script>
 	<script src="{{asset('frontend/assets/js/bootstrap.bundle.min.js')}}" defer></script>
 	<script src="{{asset('frontend/assets/js/jquery-plugin-collection.js')}}" defer></script>
 	<script src="{{asset('frontend/assets/js/toastr.min.js')}}" defer></script>
