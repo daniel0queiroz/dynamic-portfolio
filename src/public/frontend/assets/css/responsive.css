@@ -219,6 +219,10 @@
 }
 
 @media (max-width: 991.99px) {
+    #navbarNav.collapsing {
+        transition-duration: 0.15s;
+    }
+
     button.navbar-toggler {
         width: 40px;
         height: 40px;

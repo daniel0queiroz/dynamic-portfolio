@@ -5,9 +5,19 @@
         var navbarNav = document.getElementById('navbarNav');
         var mainMenu = document.querySelector('.main_menu');
 
+        // .main_menu's rendered height while the mobile panel is open/closing
+        // is inflated (the panel sits in normal flow inside it), so cache the
+        // true *collapsed* height up front (the menu starts closed on load)
+        // instead of measuring it live at click time.
+        var collapsedHeaderHeight = mainMenu ? mainMenu.offsetHeight : 0;
+        window.addEventListener('resize', function () {
+            if (!navbarNav || !navbarNav.classList.contains('show')) {
+                collapsedHeaderHeight = mainMenu ? mainMenu.offsetHeight : 0;
+            }
+        });
+
         function scrollToTarget(target) {
-            var headerHeight = mainMenu ? mainMenu.offsetHeight : 0;
-            var targetTop = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+            var targetTop = target.getBoundingClientRect().top + window.pageYOffset - collapsedHeaderHeight;
             window.scrollTo({ top: targetTop, behavior: 'smooth' });
         }
 
@@ -23,20 +33,14 @@
 
                 e.preventDefault();
 
-                // On mobile, the collapsed menu panel is fixed on top of the
-                // page — close it first and scroll only once it has finished
-                // collapsing, so it doesn't stay covering the section.
-                var isMobileMenuOpen = navbarNav.classList.contains('show');
-
-                if (isMobileMenuOpen && window.bootstrap) {
-                    navbarNav.addEventListener('hidden.bs.collapse', function onHidden() {
-                        navbarNav.removeEventListener('hidden.bs.collapse', onHidden);
-                        scrollToTarget(target);
-                    });
+                // Close the mobile panel and start scrolling at the same
+                // time — waiting for the close animation to finish first
+                // made the whole interaction feel sluggish.
+                if (navbarNav.classList.contains('show') && window.bootstrap) {
                     bootstrap.Collapse.getOrCreateInstance(navbarNav).hide();
-                } else {
-                    scrollToTarget(target);
                 }
+
+                scrollToTarget(target);
             });
         });
     });
