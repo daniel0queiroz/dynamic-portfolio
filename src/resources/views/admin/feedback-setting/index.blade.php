@@ -57,6 +57,35 @@
                             <small class="text-muted">Text for the button that invites visitors to submit their own testimonial. Leave blank to use the default shown above.</small>
                         </div>
                         </div>
+                        <hr>
+                        <p class="text-muted px-3">Below controls the text on the public <code>/testimonial</code> page (where visitors submit their own testimonial).</p>
+
+                        <div class="form-group row mb-4">
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">"Submit a Testimonial" Page Title</label>
+                        <div class="col-sm-12 col-md-7">
+                            <small class="text-muted">English</small>
+                            <input type="text" name="page_title[en]" class="form-control mb-2" placeholder="Share Your Experience" value="{{$feedbackTitle->getTranslation('page_title','en',false)}}">
+                            <small class="text-muted">Español</small>
+                            <input type="text" name="page_title[es]" class="form-control mb-2" placeholder="Comparte Tu Experiencia" value="{{$feedbackTitle->getTranslation('page_title','es',false)}}">
+                            <small class="text-muted">Português</small>
+                            <input type="text" name="page_title[pt]" class="form-control" placeholder="Compartilhe Sua Experiência" value="{{$feedbackTitle->getTranslation('page_title','pt',false)}}">
+                            <small class="text-muted">Leave blank to use the default shown above.</small>
+                        </div>
+                        </div>
+
+                        <div class="form-group row mb-4">
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">"Submit a Testimonial" Page Subtitle</label>
+                        <div class="col-sm-12 col-md-7">
+                            <small class="text-muted">English</small>
+                            <textarea name="page_subtitle[en]" class="form-control mb-2" style="height: 80px" placeholder="Worked with me? Leave a testimonial below — it will appear on the site after a quick review.">{{$feedbackTitle->getTranslation('page_subtitle','en',false)}}</textarea>
+                            <small class="text-muted">Español</small>
+                            <textarea name="page_subtitle[es]" class="form-control mb-2" style="height: 80px" placeholder="¿Trabajaste conmigo? Deja un testimonio abajo — aparecerá en el sitio tras una breve revisión.">{{$feedbackTitle->getTranslation('page_subtitle','es',false)}}</textarea>
+                            <small class="text-muted">Português</small>
+                            <textarea name="page_subtitle[pt]" class="form-control" style="height: 80px" placeholder="Já trabalhou comigo? Deixe um depoimento abaixo — ele aparecerá no site após uma breve análise.">{{$feedbackTitle->getTranslation('page_subtitle','pt',false)}}</textarea>
+                            <small class="text-muted">Leave blank to use the default shown above.</small>
+                        </div>
+                        </div>
+
                         <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                         <div class="col-sm-12 col-md-7">

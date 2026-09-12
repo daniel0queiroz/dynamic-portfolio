@@ -5,13 +5,13 @@
             <div class="container">
                 <div class="row d-flex align-items-center">
                     <div class="col-sm-8">
-                        <h2 class="title">{{ __('ui.testimonial.page_title') }}</h2>
+                        <h2 class="title">{{ $feedbackTitle?->page_title ?: __('ui.testimonial.page_title') }}</h2>
                     </div>
                     <div class="col-sm-4">
                         <div class="breadcrumbs">
                             <ul>
                                 <li><a href="{{ url('/') }}">{{ __('ui.breadcrumbs.home') }}</a></li>
-                                <li>{{ __('ui.testimonial.page_title') }}</li>
+                                <li>{{ $feedbackTitle?->page_title ?: __('ui.testimonial.page_title') }}</li>
                             </ul>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                     <div class="col-lg-6 offset-lg-3 text-center">
                         <div class="section-title">
                             <div class="desc">
-                                <p>{{ __('ui.testimonial.page_subtitle') }}</p>
+                                <p>{{ $feedbackTitle?->page_subtitle ?: __('ui.testimonial.page_subtitle') }}</p>
                             </div>
                         </div>
                     </div>

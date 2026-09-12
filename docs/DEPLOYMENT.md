@@ -34,3 +34,5 @@ Run these scripts manually in phpMyAdmin when deploying corresponding code chang
     - Content fix (not schema): strips a stray trailing `<br>` from the "Brayam Dias" testimonial's Portuguese description that was pushing the closing quote mark onto its own line.
 14. `docs/db-fixes/2026-09-12_feedback_role_company_cta.sql`
     - Adds `role`, `company`, `is_active` columns to `feedback` (splits the old `position` field, and gates testimonials behind admin approval) and `cta_label` to `feedback_section_settings` (the "Add Yours" button text). Also migrates the existing "Brayam Dias" row's `position` into the new `role`/`company` columns.
+15. `docs/db-fixes/2026-09-12_feedback_page_title_subtitle.sql`
+    - Adds `page_title`/`page_subtitle` columns to `feedback_section_settings` so the `/testimonial` page's heading and subtitle become admin-editable.

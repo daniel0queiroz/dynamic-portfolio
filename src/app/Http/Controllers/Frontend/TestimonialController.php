@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\Feedback;
+use App\Models\FeedbackSectionSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -13,8 +14,9 @@ class TestimonialController extends Controller
     public function create()
     {
         $about = Cache::remember('about', 3600, fn() => About::first());
+        $feedbackTitle = Cache::remember('feedback_title', 3600, fn() => FeedbackSectionSetting::first());
 
-        return view('frontend.testimonial-submit', compact('about'));
+        return view('frontend.testimonial-submit', compact('about', 'feedbackTitle'));
     }
 
     public function store(Request $request)
