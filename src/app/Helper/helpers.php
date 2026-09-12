@@ -130,6 +130,25 @@ function stripTrailingLineBreaks($value)
     return $value;
 }
 
+/**
+ * Drop empty-string locale entries from a translatable field's input array
+ * before assigning it to a model.
+ *
+ * Spatie\Translatable's setTranslations() re-reads getTranslations() (which
+ * filters out empty/null values) on every locale it iterates — so passing an
+ * array with several empty-string locales causes each iteration to "forget"
+ * the previously-set-but-empty ones, leaving only the last-processed locale
+ * in the stored JSON. Filtering first avoids ever feeding it an empty value.
+ */
+function filterTranslatableInput($value)
+{
+    if (!is_array($value)) {
+        return $value;
+    }
+
+    return array_filter($value, fn($v) => filled($v));
+}
+
 /** Get Dynamic Colors */
 
 function getColor($index)

@@ -46,4 +46,15 @@ return [
         'contact_info' => 'Informações de contato',
         'help' => 'Ajuda',
     ],
+    'testimonial' => [
+        'add_yours' => 'Adicione o Seu',
+        'page_title' => 'Compartilhe Sua Experiência',
+        'page_subtitle' => 'Já trabalhou comigo? Deixe um depoimento abaixo — ele aparecerá no site após uma breve análise.',
+        'name' => 'Seu Nome',
+        'role' => 'Seu Cargo',
+        'company' => 'Empresa',
+        'message' => 'Seu Depoimento',
+        'submit' => 'Enviar',
+        'thank_you' => 'Obrigado! Seu depoimento será revisado e publicado em breve.',
+    ],
 ];

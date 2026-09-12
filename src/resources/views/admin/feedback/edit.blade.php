@@ -34,14 +34,26 @@
                         </div>
 
                         <div class="form-group row mb-4">
-                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Position</label>
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Role</label>
                             <div class="col-sm-12 col-md-7">
                                 <small class="text-muted">English</small>
-                                <input type="text" name="position[en]" class="form-control mb-2" value="{{$feedback->getTranslation('position','en',false)}}">
+                                <input type="text" name="role[en]" class="form-control mb-2" value="{{$feedback->getTranslation('role','en',false)}}">
                                 <small class="text-muted">Español</small>
-                                <input type="text" name="position[es]" class="form-control mb-2" value="{{$feedback->getTranslation('position','es',false)}}">
+                                <input type="text" name="role[es]" class="form-control mb-2" value="{{$feedback->getTranslation('role','es',false)}}">
                                 <small class="text-muted">Português</small>
-                                <input type="text" name="position[pt]" class="form-control" value="{{$feedback->getTranslation('position','pt',false)}}">
+                                <input type="text" name="role[pt]" class="form-control" value="{{$feedback->getTranslation('role','pt',false)}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-4">
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Company</label>
+                            <div class="col-sm-12 col-md-7">
+                                <small class="text-muted">English</small>
+                                <input type="text" name="company[en]" class="form-control mb-2" value="{{$feedback->getTranslation('company','en',false)}}">
+                                <small class="text-muted">Español</small>
+                                <input type="text" name="company[es]" class="form-control mb-2" value="{{$feedback->getTranslation('company','es',false)}}">
+                                <small class="text-muted">Português</small>
+                                <input type="text" name="company[pt]" class="form-control" value="{{$feedback->getTranslation('company','pt',false)}}">
                             </div>
                         </div>
 
@@ -57,6 +69,19 @@
                             </div>
                         </div>                        
                         
+                        <div class="form-group row mb-4">
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
+                            <div class="col-sm-12 col-md-7">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" name="is_active" value="1" class="custom-control-input" id="isActive" {{ $feedback->is_active ? 'checked' : '' }}>
+                                    <label class="custom-control-label" for="isActive">Published (visible on the site)</label>
+                                </div>
+                                @unless($feedback->is_active)
+                                    <small class="text-warning">This testimonial was submitted by a visitor and is awaiting your approval.</small>
+                                @endunless
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                         <div class="col-sm-12 col-md-7">

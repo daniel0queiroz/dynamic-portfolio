@@ -46,6 +46,18 @@
 
                         </div>
                         <div class="form-group row mb-4">
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">"Add Yours" Button</label>
+                        <div class="col-sm-12 col-md-7">
+                            <small class="text-muted">English</small>
+                            <input type="text" name="cta_label[en]" class="form-control mb-2" placeholder="Add Yours" value="{{$feedbackTitle->getTranslation('cta_label','en',false)}}">
+                            <small class="text-muted">Español</small>
+                            <input type="text" name="cta_label[es]" class="form-control mb-2" placeholder="Agrega el Tuyo" value="{{$feedbackTitle->getTranslation('cta_label','es',false)}}">
+                            <small class="text-muted">Português</small>
+                            <input type="text" name="cta_label[pt]" class="form-control" placeholder="Adicione o Seu" value="{{$feedbackTitle->getTranslation('cta_label','pt',false)}}">
+                            <small class="text-muted">Text for the button that invites visitors to submit their own testimonial. Leave blank to use the default shown above.</small>
+                        </div>
+                        </div>
+                        <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                         <div class="col-sm-12 col-md-7">
                             <button class="btn btn-primary">Update</button>

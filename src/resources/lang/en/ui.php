@@ -46,4 +46,15 @@ return [
         'contact_info' => 'Contact Info',
         'help' => 'Help',
     ],
+    'testimonial' => [
+        'add_yours' => 'Add Yours',
+        'page_title' => 'Share Your Experience',
+        'page_subtitle' => 'Worked with me? Leave a testimonial below — it will appear on the site after a quick review.',
+        'name' => 'Your Name',
+        'role' => 'Your Role',
+        'company' => 'Company',
+        'message' => 'Your Testimonial',
+        'submit' => 'Submit',
+        'thank_you' => 'Thank you! Your testimonial will be reviewed and published soon.',
+    ],
 ];
