@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Hero;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
 class HeroController extends Controller
 {
@@ -81,17 +80,8 @@ class HeroController extends Controller
         // dd($request->all());
 
         $hero = Hero::first();
-        
-        if($request->hasFile('image')) {
-            if($hero && File::exists(public_path($hero->image))) {
-                File::delete(public_path($hero->image));
-            }
-            $image = $request->file('image');
-            $imageName = rand().$image->getClientOriginalName();
-            $image->move(public_path('/uploads'), $imageName);
 
-            $imagePath = "/uploads/".$imageName;
-        }
+        $imagePath = handleUpload('image', $hero);
 
         Hero::updateOrCreate(
             ['id' => $id],

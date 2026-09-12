@@ -56,11 +56,39 @@
 </section>
 
 @push('scripts')
-    {{-- Load reCAPTCHA script --}}
-    {!! htmlScriptTagJsApi() !!}
-
     <script>
-        $(document).ready(function () {
+        document.addEventListener('DOMContentLoaded', function () {
+
+    // Lazy-load reCAPTCHA only once the visitor reaches/interacts with the contact section,
+    // instead of fetching it unconditionally on every homepage view.
+    var recaptchaSiteKey = @json(config('recaptcha.api_site_key'));
+    var recaptchaJsUrl = @json('https://' . config('recaptcha.api_domain', 'www.google.com') . '/recaptcha/api.js');
+    var recaptchaLoadPromise = null;
+
+    function loadRecaptcha() {
+        if (!recaptchaLoadPromise) {
+            recaptchaLoadPromise = new Promise(function (resolve) {
+                var script = document.createElement('script');
+                script.src = recaptchaJsUrl + '?render=' + recaptchaSiteKey;
+                script.onload = resolve;
+                document.body.appendChild(script);
+            });
+        }
+        return recaptchaLoadPromise;
+    }
+
+    var contactSection = document.getElementById('contact-page');
+    if (contactSection && 'IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    loadRecaptcha();
+                    observer.disconnect();
+                }
+            });
+        }, { rootMargin: '200px' });
+        observer.observe(contactSection);
+    }
 
     $.ajaxSetup({
         headers: {
@@ -71,8 +99,9 @@
     $(document).on('submit', '#contact-form', function (e) {
         e.preventDefault();
 
+        loadRecaptcha().then(function () {
         grecaptcha.ready(function () {
-            grecaptcha.execute('{{ config('recaptcha.api_site_key') }}', { action: 'contact' }).then(function (token) {
+            grecaptcha.execute(recaptchaSiteKey, { action: 'contact' }).then(function (token) {
 
                 // remove previous token if any
                 $('#contact-form').find('input[name="g-recaptcha-response"]').remove();
@@ -115,6 +144,7 @@
                     }
                 });
             });
+        });
         });
     });
 

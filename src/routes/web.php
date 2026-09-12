@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\FooterSocialLinkController;
 use App\Http\Controllers\Admin\FooterUsefulLinkController;
 use App\Http\Controllers\Admin\GeneralSettingController;
 use App\Http\Controllers\Admin\HeroController;
+use App\Http\Controllers\Admin\MaintenanceController;
 use App\Http\Controllers\Admin\PortfolioItemController;
 use App\Http\Controllers\Admin\PortfolioSectionSettingController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
@@ -102,6 +103,9 @@ Route::group([
 
     /** Hero Route */
     Route::resource('hero', HeroController::class);
+
+    /** One-off maintenance: convert existing uploads to WebP (run once after deploying this) */
+    Route::get('maintenance/convert-images-webp', [MaintenanceController::class, 'convertImagesToWebp'])->name('maintenance.convert-images-webp');
     Route::post('typer-title/reorder', [TyperTitleController::class, 'reorder'])->name('typer-title.reorder');
     Route::resource('typer-title', TyperTitleController::class);
 

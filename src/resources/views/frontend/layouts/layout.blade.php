@@ -15,9 +15,7 @@
 	<meta name="keywords" content="{{@$seoSetting->keywords}}">
 	<title>{{@$seoSetting->title}}</title>
 	<link rel="shortcut icon" type="image/ico" href="{{asset($generalSetting?->favicon)}}" />
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Poppins:400,700,800&display=swap">
+	<link rel="stylesheet" href="{{asset('frontend/assets/css/fonts.css')}}">
 	<link rel="stylesheet" href="{{asset('frontend/assets/css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{asset('frontend/assets/css/normalize.css')}}">
 	<link rel="stylesheet" href="{{asset('frontend/assets/css/style-plugin-collection.css')}}">
@@ -49,7 +47,7 @@
 	</div>
 
 
-	<script src="{{asset('frontend/assets/js/vendor/jquery-min.js')}}"></script>
+	<script src="{{asset('frontend/assets/js/vendor/jquery-min.js')}}" defer></script>
 	<script src="{{asset('frontend/assets/js/bootstrap.bundle.min.js')}}" defer></script>
 	<script src="{{asset('frontend/assets/js/jquery-plugin-collection.js')}}" defer></script>
 	<script src="{{asset('frontend/assets/js/toastr.min.js')}}" defer></script>
