@@ -31,7 +31,7 @@
                         <a class="nav-link" href="#portfolio-page">{{ __('ui.nav.portfolio') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#skills-page">{{ __('ui.nav.skills') }}</a>
+                        <a class="nav-link" href="#testimonial-page">{{ __('ui.nav.testimonials') }}</a>
                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="#blog-page">{{ __('ui.nav.blogs') }}</a>

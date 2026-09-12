@@ -6,6 +6,7 @@ return [
         'about' => 'Sobre',
         'portfolio' => 'Portafolio',
         'skills' => 'Habilidades',
+        'testimonials' => 'Testimonios',
         'blogs' => 'Blog',
         'contact' => 'Contacto',
         'privacy' => 'Política de Privacidad',
