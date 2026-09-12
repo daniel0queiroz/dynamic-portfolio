@@ -27,27 +27,33 @@ function handleUpload($inputName, $model = null, $maxWidth = 1920, $maxHeight = 
 
             $file = request()->file($inputName);
             $extension = strtolower($file->getClientOriginalExtension());
-            $fileName = Str::uuid()->toString() . ($extension ? '.' . $extension : '');
+            $uuid = Str::uuid()->toString();
 
+            // Re-encode raster images to WebP (smaller than JPEG/PNG at equivalent
+            // quality) — this is what actually gets served, not just resized originals.
             $optimized = null;
+            $finalExtension = $extension;
             if ($maxWidth && in_array($extension, OPTIMIZABLE_IMAGE_EXTENSIONS, true)) {
                 try {
                     $manager = new ImageManager(new Driver());
                     $encoded = (string) $manager->read($file->getRealPath())
                         ->scaleDown($maxWidth, $maxHeight)
-                        ->encodeByExtension($extension, quality: $quality);
+                        ->toWebp(quality: $quality);
 
                     // Only keep the re-encoded version if it actually saved bytes —
-                    // GD can bloat already-optimized/graphic-heavy PNGs otherwise.
+                    // GD can bloat already-optimized/graphic-heavy images otherwise.
                     if (strlen($encoded) < $file->getSize()) {
                         $optimized = $encoded;
+                        $finalExtension = 'webp';
                     }
                 } catch (\Throwable $e) {
-                    // Unsupported codec (e.g. GD built without JPEG/WebP) or unreadable
+                    // Unsupported codec (e.g. GD built without WebP) or unreadable
                     // image — fall back to storing the original untouched.
                     $optimized = null;
                 }
             }
+
+            $fileName = $uuid . ($finalExtension ? '.' . $finalExtension : '');
 
             if ($optimized !== null) {
                 Storage::disk('uploads')->put($fileName, $optimized);
