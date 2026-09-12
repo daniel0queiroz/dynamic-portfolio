@@ -30,3 +30,5 @@ Run these scripts manually in phpMyAdmin when deploying corresponding code chang
     - Adds `sort_order` column to `skill_items` for drag-and-drop reordering.
 12. `docs/db-fixes/2026-07-24_typer_titles_sort_order.sql`
     - Adds `sort_order` column to `typer_titles` for drag-and-drop reordering.
+13. `docs/db-fixes/2026-09-12_feedback_trailing_br.sql`
+    - Content fix (not schema): strips a stray trailing `<br>` from the "Brayam Dias" testimonial's Portuguese description that was pushing the closing quote mark onto its own line.

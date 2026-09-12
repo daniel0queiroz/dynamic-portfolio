@@ -109,6 +109,27 @@ function normalizeUploadPath($value)
     return $path ?: null;
 }
 
+/**
+ * Strip trailing <br> tags (and the whitespace around them) left over from
+ * rich text editors — otherwise a lone <br> right before a closing tag pushes
+ * any CSS-generated content (e.g. a closing quote mark) onto its own line.
+ */
+function stripTrailingLineBreaks($value)
+{
+    if (is_array($value)) {
+        return array_map('stripTrailingLineBreaks', $value);
+    }
+
+    if (!is_string($value)) {
+        return $value;
+    }
+
+    $value = preg_replace('/(\s|<br\s*\/?>)+(<\/p>)\s*$/i', '$2', $value);
+    $value = preg_replace('/(\s|<br\s*\/?>)+$/i', '', $value);
+
+    return $value;
+}
+
 /** Get Dynamic Colors */
 
 function getColor($index)
