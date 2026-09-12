@@ -54,6 +54,7 @@
 	<script src="{{asset('frontend/assets/js/vendor/modernizr.js')}}" defer></script>
 	<script src="{{asset('frontend/assets/js/main.js')}}" defer></script>
 	<script src="{{asset('frontend/assets/js/lang-switch.js')}}" defer></script>
+	<script src="{{asset('frontend/assets/js/nav-scroll.js')}}" defer></script>
 	@stack('scripts')
 
 	@include('frontend.layouts.whatsapp-button')
