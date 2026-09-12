@@ -21,6 +21,16 @@
 
         <section class="contact-area section-padding" id="testimonial-submit-page">
             <div class="container">
+                @if($about?->image)
+                    <div class="row justify-content-center">
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <figure class="about-image mx-auto" style="margin-right:0; max-width:220px;">
+                                <img src="{{asset($about->image)}}" alt="{{ $about->title }}" loading="lazy" decoding="async">
+                            </figure>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="row">
                     <div class="col-lg-6 offset-lg-3 text-center">
                         <div class="section-title">

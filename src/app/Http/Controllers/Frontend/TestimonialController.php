@@ -3,14 +3,18 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\About;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class TestimonialController extends Controller
 {
     public function create()
     {
-        return view('frontend.testimonial-submit');
+        $about = Cache::remember('about', 3600, fn() => About::first());
+
+        return view('frontend.testimonial-submit', compact('about'));
     }
 
     public function store(Request $request)
