@@ -34,8 +34,13 @@ class TestimonialController extends Controller
             'g-recaptcha-response' => 'required|recaptcha',
         ]);
 
+        // A person's name doesn't change per language — store it identically
+        // across all locales instead of only the visitor's current one, so it
+        // displays correctly no matter which language the page is viewed in.
+        $name = $request->input('name');
+
         $feedback = new Feedback();
-        $feedback->name = $request->input('name');
+        $feedback->name = ['en' => $name, 'es' => $name, 'pt' => $name];
         $feedback->role = $request->filled('role') ? $request->input('role') : null;
         $feedback->company = $request->filled('company') ? $request->input('company') : null;
         $feedback->description = '<p>' . e($request->input('description')) . '</p>';
