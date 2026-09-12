@@ -75,6 +75,8 @@ class FeedbackSectionSettingController extends Controller
             'title.en' => ['required', 'max:100'],
             'sub_title.en' => ['required', 'max:500'],
             'cta_label.en' => ['nullable', 'max:50'],
+            'page_title.en' => ['nullable', 'max:100'],
+            'page_subtitle.en' => ['nullable', 'max:500'],
         ]);
 
         FeedbackSectionSetting::updateOrCreate(
@@ -83,6 +85,8 @@ class FeedbackSectionSettingController extends Controller
                 'title' => $request->input('title'),
                 'sub_title' => $request->input('sub_title'),
                 'cta_label' => filterTranslatableInput($request->input('cta_label')),
+                'page_title' => filterTranslatableInput($request->input('page_title')),
+                'page_subtitle' => filterTranslatableInput($request->input('page_subtitle')),
             ]
         );
 
