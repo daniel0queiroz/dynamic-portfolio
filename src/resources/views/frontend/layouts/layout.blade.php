@@ -37,8 +37,7 @@
 
     @include('frontend.layouts.navbar')
 
-	<div class="main_wrapper" data-bs-spy="scroll" data-bs-target="#main_menu_area" data-bs-root-margin="0px 0px -40%"
-		data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary" tabindex="0">
+	<div class="main_wrapper" tabindex="0">
 
 		@yield('content')
 
