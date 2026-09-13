@@ -43,5 +43,64 @@
                 scrollToTarget(target);
             });
         });
+
+        // ---- Active-link highlighting on scroll ----
+        // Bootstrap's ScrollSpy only reacts to elements that have a matching
+        // nav link. Sections with no nav link of their own (e.g. Skills,
+        // Experience, sitting between Portfolio and Testimonials) create a
+        // "dead zone" where the previous link stays highlighted for the
+        // entire scroll through them. Instead, always highlight whichever
+        // tracked section is closest, switching at the midpoint of any gap.
+        var orderedSections = [];
+        var switchBoundaries = [];
+
+        function recomputeSections() {
+            orderedSections = Array.prototype.map.call(links, function (link) {
+                var hash = link.getAttribute('href');
+                var el = hash.length > 1 ? document.querySelector(hash) : null;
+                if (!el) {
+                    return null;
+                }
+                var top = el.getBoundingClientRect().top + window.pageYOffset;
+                return { link: link, top: top, bottom: top + el.offsetHeight };
+            }).filter(Boolean).sort(function (a, b) {
+                return a.top - b.top;
+            });
+
+            switchBoundaries = [];
+            for (var i = 0; i < orderedSections.length - 1; i++) {
+                switchBoundaries.push((orderedSections[i].bottom + orderedSections[i + 1].top) / 2);
+            }
+        }
+
+        function updateActiveLink() {
+            if (!orderedSections.length) {
+                return;
+            }
+
+            var referencePoint = window.pageYOffset + collapsedHeaderHeight + 1;
+            var index = 0;
+            for (var i = 0; i < switchBoundaries.length; i++) {
+                if (referencePoint >= switchBoundaries[i]) {
+                    index = i + 1;
+                }
+            }
+
+            orderedSections.forEach(function (section, i) {
+                section.link.classList.toggle('active', i === index);
+            });
+        }
+
+        if (links.length) {
+            recomputeSections();
+            updateActiveLink();
+
+            window.addEventListener('scroll', updateActiveLink, { passive: true });
+
+            window.addEventListener('resize', function () {
+                recomputeSections();
+                updateActiveLink();
+            });
+        }
     });
 })();
